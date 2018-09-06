@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pwr.weka.sipprogram.MainAppController">
+   <top>
+      <HBox alignment="TOP_CENTER" fillHeight="false" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Startujemy z tym koksem!!!!" />
+            <FontAwesomeIconView glyphName="DESKTOP" size="24" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

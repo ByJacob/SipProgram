@@ -1,13 +1,9 @@
 package pl.edu.pwr.weka.sipprogram.configuration
 
-import javafx.fxml.FXMLLoader
-import javafx.util.Callback
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.beans.factory.getBean
-import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import java.net.Inet4Address
+import pl.edu.pwr.weka.sipprogram.gui.model.MainAppModel
 import java.util.*
 import javax.sip.ListeningPoint
 import javax.sip.SipFactory
@@ -28,11 +24,10 @@ import javax.sip.message.MessageFactory
 @Configuration
 class Config {
 
+    /*** Beans for models ***/
     @Bean
-    fun getFxmlLoader(context: ApplicationContext): FXMLLoader {
-        val loader = FXMLLoader()
-        loader.controllerFactory = Callback<Class<*>, Any> { context.getBean() }
-        return loader
+    fun getMainAppModel(): MainAppModel {
+        return MainAppModel()
     }
 
     /*** Beans for SIP protocol ***/

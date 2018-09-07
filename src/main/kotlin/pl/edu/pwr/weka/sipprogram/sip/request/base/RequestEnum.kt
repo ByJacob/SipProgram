@@ -1,4 +1,4 @@
-package pl.edu.pwr.weka.sipprogram.sip.request
+package pl.edu.pwr.weka.sipprogram.sip.request.base
 
 /**
  * Project Name: sipprogram

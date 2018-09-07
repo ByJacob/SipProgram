@@ -1,5 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.sip.request
 
+import pl.edu.pwr.weka.sipprogram.sip.request.base.BaseRequest
+import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
 import java.util.*
 import javax.sip.ListeningPoint
 import javax.sip.SipFactory
@@ -22,7 +24,7 @@ class Register(val sipFactory: SipFactory,
                val properties: Properties,
                val serwerURL: String,
                val userLogin: String,
-               val userPassword: String) {
+               val userPassword: String): BaseRequest() {
 
     val METHOD = RequestEnum.REQUEST.name
     var requestUrlAddress = "sip:$serwerURL"

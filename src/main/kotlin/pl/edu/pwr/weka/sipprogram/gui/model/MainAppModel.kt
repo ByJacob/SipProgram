@@ -1,7 +1,6 @@
-package pl.edu.pwr.weka.sipprogram
+package pl.edu.pwr.weka.sipprogram.gui.model
 
 import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
 
 /**
  * Project Name: sipprogram
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Component
  * Date 01.09.2018 12:42
  */
 
-@Component
+
 class MainAppModel {
     private var log = LoggerFactory.getLogger(this.javaClass)
 

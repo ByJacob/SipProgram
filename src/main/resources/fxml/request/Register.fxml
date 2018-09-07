@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="525.0" prefWidth="235.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTextField fx:id="requestJFXTextField" labelFloat="true" promptText="żądanie" />
+      <HBox>
+         <children>
+            <JFXTextField fx:id="localAddressJFXTextField" labelFloat="true" promptText="adres lokalny" HBox.hgrow="SOMETIMES" />
+            <JFXTextField fx:id="localPortJFXTextField" labelFloat="true" promptText="port lokalny" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <JFXTextField fx:id="serverAddressJFXTextField" labelFloat="true" promptText="adres serwera" HBox.hgrow="SOMETIMES" />
+            <JFXTextField fx:id="serverPortJFXTextField" labelFloat="true" promptText="port serwera" />
+         </children>
+      </HBox>
+      <JFXTextField fx:id="userJFXTextField" labelFloat="true" promptText="użytkownik" />
+      <JFXTextField fx:id="callIdJFXTextField" labelFloat="true" promptText="call-ID (identyfikator)" />
+      <JFXTextField fx:id="sequenceNumberJFXTextField" labelFloat="true" promptText="numer sekwencyjny" />
+      <JFXTextArea fx:id="textAreaJFXTextArea" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

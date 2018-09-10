@@ -26,7 +26,7 @@ class Register(val sipFactory: SipFactory,
                val userLogin: String,
                val userPassword: String): BaseRequest() {
 
-    val METHOD = RequestEnum.REQUEST.name
+    override val method: RequestEnum = RequestEnum.REGISTER
     var requestUrlAddress = "sip:$serwerURL"
     var toHeaderAddress = "sip:$userLogin@$serwerURL"
     var toHeaderTag: String? = null
@@ -69,7 +69,7 @@ class Register(val sipFactory: SipFactory,
 
     private fun getCSeqHeader(): CSeqHeader {
         sequenceNumber += 1
-        return sipFactory.createHeaderFactory().createCSeqHeader(sequenceNumber, METHOD)
+        return sipFactory.createHeaderFactory().createCSeqHeader(sequenceNumber, method.name)
     }
 
 }

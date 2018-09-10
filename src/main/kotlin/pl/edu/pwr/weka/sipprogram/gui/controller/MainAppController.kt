@@ -1,22 +1,47 @@
 package pl.edu.pwr.weka.sipprogram.gui.controller
 
 import io.datafx.controller.ViewController
-import org.slf4j.LoggerFactory
+import io.datafx.controller.ViewNode
+import io.datafx.controller.flow.Flow
+import io.datafx.controller.flow.context.FXMLViewFlowContext
+import io.datafx.controller.flow.context.ViewFlowContext
+import javafx.scene.control.Tab
+import javafx.scene.control.TabPane
+import javafx.scene.paint.Color
+import javafx.scene.shape.Rectangle
+import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseController
 import pl.edu.pwr.weka.sipprogram.gui.model.MainAppModel
-import pl.edu.pwr.weka.sipprogram.configuration.ContextWrapper
+import javax.annotation.PostConstruct
+
 
 /**
  * Project Name: sipprogram
  * User: Jakub Rosa
  * Date 01.09.2018 12:17
  */
-@ViewController("/fxml/MainApp.fxml")
-class MainAppController() {
+@ViewController(value = "/fxml/MainApp.fxml", title = "Test123121")
+class MainAppController : BaseController() {
 
-    private var log = LoggerFactory.getLogger(this.javaClass)
-    var model = ContextWrapper.context.getBean(MainAppModel::class.java)
+    @ViewNode
+    lateinit var mainTab1: Tab
 
-    init {
+    @ViewNode
+    lateinit var mainTab2: Tab
+
+    @ViewNode
+    lateinit var mainTabPane: TabPane
+
+    @FXMLViewFlowContext
+    lateinit var flowContext: ViewFlowContext
+
+    var model = MainAppModel()
+
+    @PostConstruct
+    fun init() {
         log.debug("Initialize ${this.javaClass.simpleName}")
+        val flow = Flow(ProcessConnectionController::class.java)
+        val startInTab = flow.createHandler().startInTab()
+        mainTabPane.tabs.clear()
+        mainTabPane.tabs.add(startInTab)
     }
 }

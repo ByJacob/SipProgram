@@ -15,6 +15,6 @@ class ProcessConnectionCell: ListCell<FlowHandler>() {
 
     override fun updateItem(item: FlowHandler, empty: Boolean) {
         val controller = item.currentViewContext.controller as ProcessConnectionController
-        
+
     }
 }

@@ -1,9 +1,6 @@
 package pl.edu.pwr.weka.sipprogram.gui.model
 
-import javafx.collections.FXCollections
-import javafx.collections.ObservableList
 import pl.edu.pwr.weka.sipprogram.gui.fx.ProcessConnectionFx
-import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
 
 /**
  * Project Name: sipprogram
@@ -13,10 +10,8 @@ import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
 class ProcessConnectionModel {
 
     val processConnectionFx = ProcessConnectionFx()
-    val requestList = FXCollections.observableArrayList<RequestEnum>()
 
     init {
-        RequestEnum.values().forEach { requestList.add(it) }
     }
 
 }

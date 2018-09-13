@@ -4,6 +4,10 @@ import com.jfoenix.controls.JFXButton
 import com.jfoenix.controls.JFXComboBox
 import io.datafx.controller.ViewController
 import io.datafx.controller.ViewNode
+import io.datafx.controller.flow.Flow
+import io.datafx.controller.flow.action.ActionMethod
+import io.datafx.controller.flow.action.ActionTrigger
+import javafx.scene.layout.BorderPane
 import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseController
 import pl.edu.pwr.weka.sipprogram.gui.model.ProcessConnectionModel
 import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
@@ -19,16 +23,25 @@ import javax.annotation.PostConstruct
 class ProcessConnectionController : BaseController() {
 
     @ViewNode
-    lateinit var requestListComboBox: JFXComboBox<RequestEnum>
+    lateinit var controllerBorderPane: BorderPane
 
     @ViewNode
+    @ActionTrigger("createRequestForm")
     lateinit var requestListAddButton: JFXButton
+
+    @ViewNode
+    @ActionTrigger("createRequestForm")
+    lateinit var sendButton: JFXButton
 
     val model = ProcessConnectionModel()
 
     @PostConstruct
     fun init() {
-        requestListComboBox.items = model.requestList
-        log.debug(model.requestList.toString())
+    }
+
+    @ActionMethod("createRequestForm")
+    fun createRequestForm(){
+        val flowHandler = Flow(FormRequestController::class.java).createHandler()
+        controllerBorderPane.center = flowHandler.start()
     }
 }

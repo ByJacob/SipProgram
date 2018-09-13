@@ -1,3 +1,51 @@
+.root {
+    -fx-font-family: "Roboto";
+    -fx-font-weight: NORMAL;
+    -primary-color: #1de9b6;
+    -primary-light-color: #6effe8;
+    -primary-dark-color: #00b686;
+    -secondary-color: #ea80fc;
+    -secondary-light-color: #ffb2ff;
+    -secondary-dark-collor: #b64fc8;
+}
+
+.item {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 16 0 16;
+}
+
+.item-three-line {
+    -fx-pref-height: 88;
+    -fx-min-height: 88;
+    -fx-max-height: 88;
+}
+
+.primary-text {
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000da;
+    -fx-pref-height: 28;
+    -fx-min-height: 28;
+    -fx-max-height: 28;
+    -fx-alignment: BOTTOM_LEFT;
+}
+
+.secondary-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #00000099;
+    -fx-pref-height: 20;
+    -fx-min-height: 20;
+    -fx-max-height: 20;
+    -fx-alignment: BOTTOM_LEFT;
+}
+.overline {
+    -fx-font-size: 10px;
+    -fx-text-fill: #00000099;
+    -fx-pref-height: 28;
+    -fx-min-height: 28;
+    -fx-max-height: 28;
+    -fx-alignment: BOTTOM_LEFT;
+}
+
 /*** JFX Decorator ***/
 
 .jfx-decorator {

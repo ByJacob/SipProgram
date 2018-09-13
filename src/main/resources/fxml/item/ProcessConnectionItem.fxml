@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="88.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="overline" alignment="BOTTOM_LEFT" styleClass="overline" text="Overline" />
+      <Label fx:id="primaryText" styleClass="primary-text" text="Primary Text" />
+      <Label fx:id="secondaryText" styleClass="secondary-text" text="Secondary Text" />
+   </children>
+   <styleClass>
+      <String fx:value="item-three-line" />
+      <String fx:value="item" />
+   </styleClass>
+</VBox>

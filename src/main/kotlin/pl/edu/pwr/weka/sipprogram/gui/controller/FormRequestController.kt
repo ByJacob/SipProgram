@@ -43,6 +43,8 @@ class FormRequestController {
     fun init() {
         requestJFXComboBox.itemsProperty()
                 .bindBidirectional(formRequestModel.formRequestFxObjectProperty.get().requestListProperty)
+        formRequestModel.formRequestFxObjectProperty.get().requestProperty
+                .bind(requestJFXComboBox.selectionModel.selectedItemProperty())
         localAddressJFXTextField.textProperty()
                 .bindBidirectional(formRequestModel.formRequestFxObjectProperty.get().localAddressProperty)
         localPortJFXTextField.textProperty()

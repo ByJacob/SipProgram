@@ -14,13 +14,25 @@
     -fx-padding: 0 16 0 16;
 }
 
+.item-one-line {
+    -fx-pref-height: 48;
+    -fx-min-height: 48;
+    -fx-max-height: 48;
+}
+
+.primary-text-one-line {
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000da;
+    -fx-alignment: CENTER_LEFT;
+}
+
 .item-three-line {
     -fx-pref-height: 88;
     -fx-min-height: 88;
     -fx-max-height: 88;
 }
 
-.primary-text {
+.primary-text-three-line {
     -fx-font-size: 16px;
     -fx-text-fill: #000000da;
     -fx-pref-height: 28;
@@ -29,15 +41,15 @@
     -fx-alignment: BOTTOM_LEFT;
 }
 
-.secondary-text {
+.secondary-text-three-line {
     -fx-font-size: 14px;
     -fx-text-fill: #00000099;
-    -fx-pref-height: 20;
-    -fx-min-height: 20;
-    -fx-max-height: 20;
-    -fx-alignment: BOTTOM_LEFT;
+    -fx-pref-height: 32;
+    -fx-min-height: 32;
+    -fx-max-height: 32;
+    -fx-alignment: CENTER_LEFT;
 }
-.overline {
+.overline-three-line {
     -fx-font-size: 10px;
     -fx-text-fill: #00000099;
     -fx-pref-height: 28;

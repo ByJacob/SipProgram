@@ -30,7 +30,10 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <left>
-            <JFXListView depth="1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
+            <JFXListView fx:id="requestsListView" depth="1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" showTooltip="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin></JFXListView>
          </left>
       </BorderPane>
    </children>

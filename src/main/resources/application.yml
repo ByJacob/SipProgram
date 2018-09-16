@@ -1,8 +1,0 @@
-logging:
-  level:
-    pl.edu.pwr.weka.sipprogram: DEBUG
-    gov.nist.javax.sip: DEBUG
-sip:
-  configuration:
-    port: 6060
-    protocol: udp

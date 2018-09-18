@@ -72,3 +72,8 @@
     -fx-border-color: -fx-decorator-color;
     -fx-border-width: 0 4 4 4;
 }
+
+/*** Font Awesome ***/
+.glyph-icon {
+    -fx-font-family: "FontAwesome";
+}

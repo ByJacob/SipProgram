@@ -53,7 +53,8 @@ class MainApp : App() {
             val scene = Scene(decorator, width, height)
             scene.stylesheets.addAll(javaClass.getResource("/css/sipprogram-main.css").toExternalForm(),
                     javaClass.getResource("/css/jfoenix-design.css").toExternalForm(),
-                    javaClass.getResource("/css/jfoenix-fonts.css").toExternalForm())
+                    javaClass.getResource("/css/jfoenix-fonts.css").toExternalForm(),
+                    javaClass.getResource("/styles/glyphs_dark.css").toExternalForm())
             stage.title = "LearnSip"
             stage.scene = scene
             stage.show()

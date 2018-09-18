@@ -72,13 +72,9 @@ class Request {
     var contactAddress = "sip:$userLogin@$localIpAddress:$localPort"
     var expires = 300
 
-    val sipProvider: SipProvider by lazy {
-        getSipStack().createSipProvider(getListeningPoint())
-    }
-
     init {
         properties.setProperty("javax.sip.STACK_NAME", "stack")
-        callId = sipProvider.newCallId.callId
+        callId = getSipProvider().newCallId.callId
     }
 
     fun prepareRequest(): Request {
@@ -97,7 +93,7 @@ class Request {
     }
 
     fun sendRequest() {
-        sipProvider.sendRequest(prepareRequest())
+        getSipProvider().sendRequest(prepareRequest())
         log.debug("Send:" + prepareRequest().toString())
     }
 
@@ -125,6 +121,13 @@ class Request {
 
     private fun getSipStack(): SipStack {
         return sipFactory.createSipStack(properties)
+    }
+
+    private fun getSipProvider(): SipProvider {
+        return if (!getSipStack().sipProviders.hasNext())
+            getSipStack().createSipProvider(getListeningPoint())
+        else
+            getSipStack().sipProviders.next() as SipProvider
     }
 
     private fun getListeningPoint(): ListeningPoint {

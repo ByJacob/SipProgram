@@ -89,7 +89,7 @@ class ProcessConnectionController : BaseController(), ResponseListener {
     }
 
     override fun processResponse(re: ResponseEvent) {
-
+        sendRequest()
     }
 
     private fun prepareStackPaneForCell(item: FlowHandler): StackPane? {

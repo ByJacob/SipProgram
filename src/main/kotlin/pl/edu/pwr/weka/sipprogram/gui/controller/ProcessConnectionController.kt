@@ -48,7 +48,7 @@ class ProcessConnectionController : BaseController(), ResponseListener {
 
     @FXMLViewFlowContext
     lateinit var flowContext: ViewFlowContext
-    lateinit var sipClient: SipClient
+    val sipClient = SipClient()
 
     val model = ProcessConnectionModel()
     val observableList = FXCollections.observableArrayList<StackPane>()
@@ -63,7 +63,6 @@ class ProcessConnectionController : BaseController(), ResponseListener {
                 controllerBorderPane.center = nodeFormFlowList[newValue.id]!!.containerProperty.get().view
             }
         })
-        sipClient = flowContext.applicationContext.getRegisteredObject(SipClient::class.java)
         sipClient.addListener(this)
     }
 
@@ -75,20 +74,21 @@ class ProcessConnectionController : BaseController(), ResponseListener {
     }
 
     @ActionMethod("sendAll")
-    fun sendAllRequests(){
+    fun sendAllRequests() {
         nodeFormFlowIterator = nodeFormFlowList.iterator()
         sendRequest()
     }
 
-    private fun sendRequest(){
-        if(nodeFormFlowIterator.hasNext()){
+    private fun sendRequest() {
+        if (nodeFormFlowIterator.hasNext()) {
             val formRequestController = nodeFormFlowIterator.next().value
                     .currentViewContext.controller as FormRequestController
-            formRequestController.formRequestModel.request.sendRequest()
+            formRequestController.formRequestModel.request.sendRequest(sipClient)
         }
     }
 
     override fun processResponse(re: ResponseEvent) {
+        println(re.response.toString())
         sendRequest()
     }
 
@@ -99,9 +99,11 @@ class ProcessConnectionController : BaseController(), ResponseListener {
         nodeView.id = UUID.randomUUID().toString()
         nodeFormFlowList[nodeView.id] = item
         val cellController = nodeFlow.currentViewContext.controller as ProcessConnectionItemController
+        cellController.primaryText.text = formController.formRequestModel.formRequestFxObjectProperty.get()
+                .requestProperty.get().toString()
         formController.formRequestModel.formRequestFxObjectProperty.get().requestProperty
                 .addListener(ChangeListener { _, _, newValue -> cellController.primaryText.text = newValue.toString() })
-        formController.formRequestModel.formRequestFxObjectProperty.addListener(ChangeListener { observable, oldValue, newValue -> print(newValue) })
+
         return nodeView
     }
 }

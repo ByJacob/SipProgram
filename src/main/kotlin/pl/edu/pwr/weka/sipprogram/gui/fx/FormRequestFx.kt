@@ -23,4 +23,5 @@ class FormRequestFx {
     val userProperty = SimpleStringProperty()
     val callIdProperty = SimpleStringProperty()
     val seqNumberProperty = SimpleStringProperty()
+    val requestTxtStringProperty = SimpleStringProperty()
 }

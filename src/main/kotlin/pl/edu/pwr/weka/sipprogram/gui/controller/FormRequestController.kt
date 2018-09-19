@@ -41,10 +41,17 @@ class FormRequestController {
 
     @PostConstruct
     fun init() {
-        requestJFXComboBox.itemsProperty()
-                .bindBidirectional(formRequestModel.formRequestFxObjectProperty.get().requestListProperty)
+        bindingdAllFields()
+    }
+
+    private fun bindingdAllFields() {
+        requestJFXComboBox.selectionModel.select(RequestEnum.REGISTER)
         formRequestModel.formRequestFxObjectProperty.get().requestProperty
                 .bind(requestJFXComboBox.selectionModel.selectedItemProperty())
+        textAreaJFXTextArea.textProperty()
+                .bind(formRequestModel.formRequestFxObjectProperty.get().requestTxtStringProperty)
+        requestJFXComboBox.itemsProperty()
+                .bindBidirectional(formRequestModel.formRequestFxObjectProperty.get().requestListProperty)
         localAddressJFXTextField.textProperty()
                 .bindBidirectional(formRequestModel.formRequestFxObjectProperty.get().localAddressProperty)
         localPortJFXTextField.textProperty()
@@ -59,7 +66,6 @@ class FormRequestController {
                 .bindBidirectional(formRequestModel.formRequestFxObjectProperty.get().callIdProperty)
         sequenceNumberJFXTextField.textProperty()
                 .bindBidirectional(formRequestModel.formRequestFxObjectProperty.get().seqNumberProperty)
-        formRequestModel.formRequestFxObjectProperty.addListener { t -> println(t.toString()) }
     }
 
 }

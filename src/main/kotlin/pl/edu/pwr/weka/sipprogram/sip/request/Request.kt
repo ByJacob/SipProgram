@@ -5,15 +5,11 @@ import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
 import pl.edu.pwr.weka.sipprogram.util.IdGenerator
 import java.net.InetAddress
 import java.util.*
-import javax.sip.ListeningPoint
-import javax.sip.SipFactory
-import javax.sip.SipProvider
-import javax.sip.SipStack
+import java.util.UUID
+import javax.sip.*
 import javax.sip.address.URI
 import javax.sip.header.*
 import javax.sip.message.Request
-import java.util.UUID
-
 
 
 /**
@@ -29,40 +25,41 @@ class Request {
     var method: RequestEnum = RequestEnum.REGISTER
     var serwerAddress = "192.168.1.108"
         set(value) {
-            requestUrlAddress = "sip:$value:$serwerPort"
-            toHeaderAddress = "sip:$userLogin@$value:$serwerPort"
+            field = value
+            refreshVariable()
         }
     var serwerPort: Int = 5160
         set(value) {
-            requestUrlAddress = "sip:$serwerAddress:$value"
-            toHeaderAddress = "sip:$userLogin@$serwerAddress:$value"
+            field = value
+            refreshVariable()
         }
     var userLogin = "111"
         set(value) {
-            toHeaderAddress = "sip:$value@$serwerAddress:$localPort"
-            contactAddress = "sip:$value@$localIpAddress:$localPort"
+            field = value
+            refreshVariable()
         }
     var userPassword = "111"
-    var targetUser = "222"
+    var targetUser = "111"
         set(value) {
-            fromHeaderAddress = "sip:$value@$localIpAddress:$localPort"
+            field = value
+            refreshVariable()
         }
     var localIpAddress: String = InetAddress.getLocalHost().hostAddress
         set(value) {
-            fromHeaderAddress = "sip:$targetUser@$value:$localPort"
-            contactAddress = "sip:$userLogin@$value:$localPort"
+            field = value
+            refreshVariable()
         }
     var localPort: Int = 8080
         set(value) {
-            fromHeaderAddress = "sip:$targetUser@$localIpAddress:$value"
-            contactAddress = "sip:$userLogin@$localIpAddress:$value"
+            field = value
+            refreshVariable()
         }
     var sipFactory = SipFactory.getInstance()
     var properties = Properties()
-    var requestUrlAddress = "sip:$serwerAddress:$serwerPort"
-    var toHeaderAddress = "sip:$userLogin@$serwerAddress:$serwerPort"
+    var requestUrlAddress = ""
+    var toHeaderAddress = ""
     var toHeaderTag: String = ""
-    var fromHeaderAddress = "sip:$targetUser@$localIpAddress:$localPort"
+    var fromHeaderAddress = ""
     var fromHeaderTag: String = Random().nextInt().toString()
     var callId: String
     var protocol: String = "udp"
@@ -75,6 +72,14 @@ class Request {
     init {
         properties.setProperty("javax.sip.STACK_NAME", "stack")
         callId = getSipProvider().newCallId.callId
+        refreshVariable()
+    }
+
+    private fun refreshVariable() {
+        contactAddress = "sip:$userLogin@$localIpAddress:$localPort"
+        requestUrlAddress = "sip:$serwerAddress:$serwerPort"
+        toHeaderAddress = "sip:$userLogin@$serwerAddress"
+        fromHeaderAddress = "sip:$targetUser@$localIpAddress"
     }
 
     fun prepareRequest(): Request {
@@ -92,7 +97,8 @@ class Request {
         return createRequest
     }
 
-    fun sendRequest() {
+    fun sendRequest(listener: SipListener) {
+        getSipProvider().addSipListener(listener)
         getSipProvider().sendRequest(prepareRequest())
         log.debug("Send:" + prepareRequest().toString())
     }
@@ -139,7 +145,6 @@ class Request {
     }
 
     private fun getCSeqHeader(): CSeqHeader {
-        sequenceNumber += 1
         return sipFactory.createHeaderFactory().createCSeqHeader(sequenceNumber, method.name)
     }
 

@@ -23,7 +23,7 @@ class FormRequestController {
     @ViewNode
     lateinit var localAddressJFXTextField: JFXTextField
     @ViewNode
-    lateinit var localPortJFXTextField: JFXTextField
+    lateinit var localPortJFXTextField: JFXTextField //ToDO add check if lcoal port is free
     @ViewNode
     lateinit var serverAddressJFXTextField: JFXTextField
     @ViewNode

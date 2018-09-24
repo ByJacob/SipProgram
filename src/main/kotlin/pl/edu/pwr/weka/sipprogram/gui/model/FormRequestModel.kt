@@ -40,7 +40,7 @@ class FormRequestModel {
         formRequestFxObjectProperty.get().callIdProperty
                 .addListener { _, _, newValue -> request.callId = newValue; updateTextArea() }
         formRequestFxObjectProperty.get().seqNumberProperty
-                .addListener { _, _, newValue -> request.sequenceNumber = newValue.toInt(); updateTextArea() }
+                .addListener { _, _, newValue -> request.sequenceNumber = newValue.toLong(); updateTextArea() }
     }
 
     private fun updateTextArea() {
@@ -55,6 +55,7 @@ class FormRequestModel {
         formRequestFxObjectProperty.get().serverPortProperty.set(request.serwerPort.toString())
         formRequestFxObjectProperty.get().userProperty.set(request.userLogin)
         formRequestFxObjectProperty.get().callIdProperty.set(request.callId)
+        formRequestFxObjectProperty.get().seqNumberProperty.set(request.sequenceNumber.toString())
         updateTextArea()
     }
 }

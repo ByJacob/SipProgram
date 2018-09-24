@@ -15,9 +15,6 @@
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <JFXTextField fx:id="serwer" alignment="CENTER" labelFloat="true" promptText="SerwerIP:Port" />
-                  <JFXTextField fx:id="local" labelFloat="true" promptText="LocalIP:Port" />
-                  <JFXTextField fx:id="user" labelFloat="true" promptText="Użytkownik" />
-                  <JFXTextField fx:id="password" labelFloat="true" promptText="Hasło" />
                   <JFXButton fx:id="requestListAddButton" buttonType="RAISED" text="Dodaj" />
                   <JFXButton fx:id="sendButton" buttonType="RAISED" text="Wyślij" />
                </children>

@@ -1,5 +1,6 @@
 package pl.edu.pwr.weka.sipprogram.sip.request
 
+import gov.nist.javax.sip.Utils
 import org.slf4j.LoggerFactory
 import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
 import pl.edu.pwr.weka.sipprogram.util.IdGenerator
@@ -24,36 +25,12 @@ class Request {
     val log = LoggerFactory.getLogger(this::class.java)
     var method: RequestEnum = RequestEnum.REGISTER
     var serwerAddress = "192.168.1.108"
-        set(value) {
-            field = value
-            refreshVariable()
-        }
     var serwerPort: Int = 5160
-        set(value) {
-            field = value
-            refreshVariable()
-        }
     var userLogin = "111"
-        set(value) {
-            field = value
-            refreshVariable()
-        }
     var userPassword = "111"
     var targetUser = "111"
-        set(value) {
-            field = value
-            refreshVariable()
-        }
     var localIpAddress: String = InetAddress.getLocalHost().hostAddress
-        set(value) {
-            field = value
-            refreshVariable()
-        }
     var localPort: Int = 8080
-        set(value) {
-            field = value
-            refreshVariable()
-        }
     var sipFactory = SipFactory.getInstance()
     var properties = Properties()
     var requestUrlAddress = ""
@@ -63,7 +40,7 @@ class Request {
     var fromHeaderTag: String = Random().nextInt().toString()
     var callId: String
     var protocol: String = "udp"
-    var sequenceNumber = IdGenerator.generateUniqueId()
+    var sequenceNumber = IdGenerator.generateUniqueId().toLong()
     var branchName = "z9hG4bK" + UUID.randomUUID().toString().replace("-", "")
     var maxForwards = 70
     var contactAddress = "sip:$userLogin@$localIpAddress:$localPort"
@@ -71,11 +48,16 @@ class Request {
 
     init {
         properties.setProperty("javax.sip.STACK_NAME", "stack")
-        callId = getSipProvider().newCallId.callId
+        callId = Utils.getInstance().generateCallIdentifier(localIpAddress)
         refreshVariable()
     }
 
     private fun refreshVariable() {
+        when (method) {
+            RequestEnum.REGISTER -> targetUser = userLogin
+            else -> {
+            }
+        }
         contactAddress = "sip:$userLogin@$localIpAddress:$localPort"
         requestUrlAddress = "sip:$serwerAddress:$serwerPort"
         toHeaderAddress = "sip:$userLogin@$serwerAddress"
@@ -83,6 +65,7 @@ class Request {
     }
 
     fun prepareRequest(): Request {
+        refreshVariable()
         val createRequest = sipFactory.createMessageFactory().createRequest(
                 getRequestURI(),
                 method.name,
@@ -130,13 +113,23 @@ class Request {
     }
 
     private fun getSipProvider(): SipProvider {
-        return if (!getSipStack().sipProviders.hasNext())
-            getSipStack().createSipProvider(getListeningPoint())
-        else
-            getSipStack().sipProviders.next() as SipProvider
+        val sipProviders = getSipStack().sipProviders as Iterator<SipProvider>
+        while (sipProviders.hasNext()) {
+            val nextSipProviders = sipProviders.next()
+            if (nextSipProviders.listeningPoints[0] == getListeningPoint()) {
+                return nextSipProviders
+            }
+        }
+        return getSipStack().createSipProvider(getListeningPoint())
     }
 
     private fun getListeningPoint(): ListeningPoint {
+        val listeningPoints = getSipStack().listeningPoints as Iterator<ListeningPoint>
+        while (listeningPoints.hasNext()) {
+            val nextListening = listeningPoints.next()
+            if (nextListening.ipAddress == localIpAddress && nextListening.port == localPort)
+                return nextListening
+        }
         return getSipStack().createListeningPoint(localIpAddress, localPort, protocol)
     }
 

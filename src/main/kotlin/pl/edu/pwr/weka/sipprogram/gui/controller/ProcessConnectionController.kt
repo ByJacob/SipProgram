@@ -11,6 +11,7 @@ import io.datafx.controller.flow.action.ActionTrigger
 import io.datafx.controller.flow.context.FXMLViewFlowContext
 import io.datafx.controller.flow.context.ViewFlowContext
 import javafx.collections.FXCollections
+import javafx.collections.ListChangeListener
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.StackPane
 import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseController
@@ -71,6 +72,8 @@ class ProcessConnectionController : BaseController(), ResponseListener {
         val formFlowHandler = Flow(FormRequestController::class.java).createHandler()
         controllerBorderPane.center = formFlowHandler.start()
         observableList.add(prepareStackPaneForCell(formFlowHandler))
+        requestsListView.selectionModel.select(observableList.lastIndex)
+        requestsListView.scrollTo(observableList.lastIndex)
     }
 
     @ActionMethod("sendAll")
@@ -88,7 +91,6 @@ class ProcessConnectionController : BaseController(), ResponseListener {
     }
 
     override fun processResponse(re: ResponseEvent) {
-        println(re.response.toString())
         sendRequest()
     }
 

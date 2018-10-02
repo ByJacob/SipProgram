@@ -1,45 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXChipView?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vgap="20.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints />
-         </rowConstraints>
-         <children>
-            <JFXComboBox fx:id="requestJFXComboBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="żądanie" GridPane.columnSpan="2" />
-            <JFXTextField fx:id="localAddressJFXTextField" labelFloat="true" promptText="adres lokalny" GridPane.rowIndex="1" />
-            <JFXTextField fx:id="localPortJFXTextField" labelFloat="true" promptText="port lokalny" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <JFXTextField fx:id="serverAddressJFXTextField" labelFloat="true" promptText="adres serwera" GridPane.rowIndex="2" />
-            <JFXTextField fx:id="serverPortJFXTextField" labelFloat="true" promptText="port serwera" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <JFXTextField fx:id="userJFXTextField" labelFloat="true" promptText="użytkownik" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <JFXTextField fx:id="callIdJFXTextField" labelFloat="true" promptText="call-ID (identyfikator)" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <JFXTextField fx:id="sequenceNumberJFXTextField" labelFloat="true" promptText="numer sekwencyjny" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-         </children>
-      </GridPane>
-      <JFXTextArea fx:id="textAreaJFXTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="191.0" prefWidth="314.0" VBox.vgrow="NEVER">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-      </JFXTextArea>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0">
+               <children>
+                  <JFXComboBox fx:id="requestJFXComboBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="żądanie" />
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0">
+                     <children>
+                        <JFXTextField fx:id="localAddressJFXTextField" labelFloat="true" promptText="adres lokalny" HBox.hgrow="SOMETIMES" />
+                        <JFXTextField fx:id="localPortJFXTextField" labelFloat="true" promptText="port lokalny" />
+                     </children>
+                  </HBox>
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0">
+                     <children>
+                        <JFXTextField fx:id="serverAddressJFXTextField" labelFloat="true" promptText="adres serwera" HBox.hgrow="SOMETIMES" />
+                        <JFXTextField fx:id="serverPortJFXTextField" labelFloat="true" promptText="port serwera" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="20.0">
+                     <children>
+                        <JFXTextField fx:id="userJFXTextField" labelFloat="true" promptText="użytkownik" HBox.hgrow="SOMETIMES" />
+                        <JFXTextField fx:id="passwordJFXTextField" labelFloat="true" promptText="hasło" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="authorizationMainVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0">
+                     <children>
+                        <JFXCheckBox fx:id="authorizationJFXCheckBox" text="Uwierzytelnienie" />
+                        <VBox fx:id="authorizationVBox" minWidth="-Infinity" prefHeight="285.0" prefWidth="275.0" spacing="20.0" style="-fx-background-color: white;">
+                           <children>
+                              <JFXComboBox labelFloat="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Typ Uwierzytelnienia">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <HBox minWidth="-Infinity" prefHeight="29.0" prefWidth="238.0" spacing="20.0">
+                                 <children>
+                                    <JFXTextField fx:id="realmJFXTextField" labelFloat="true" promptText="realm" HBox.hgrow="SOMETIMES" />
+                                    <JFXTextField fx:id="uriJFXTextField" labelFloat="true" promptText="uri" HBox.hgrow="SOMETIMES" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="29.0" prefWidth="175.0" spacing="20.0">
+                                 <children>
+                                    <JFXTextField fx:id="nonceJFXTextField" labelFloat="true" promptText="nonce" HBox.hgrow="SOMETIMES" />
+                                    <JFXTextField fx:id="opaqueJFXTextField" labelFloat="true" promptText="opaque" HBox.hgrow="SOMETIMES" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="29.0" prefWidth="105.0" spacing="20.0">
+                                 <children>
+                                    <JFXTextField fx:id="ncJFXTextField" labelFloat="true" promptText="nc" HBox.hgrow="SOMETIMES" />
+                                    <JFXTextField fx:id="cnonceJFXTextField" labelFloat="true" promptText="cnonce" HBox.hgrow="SOMETIMES" />
+                                 </children>
+                              </HBox>
+                              <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="qop" textAlignment="RIGHT" wrapText="true" />
+                              <JFXChipView fx:id="qopJFXChipView" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow blurType="GAUSSIAN" color="#00000066" offsetX="0.5" />
+                           </effect>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <JFXTextField fx:id="callIdJFXTextField" labelFloat="true" promptText="call-ID (identyfikator)" />
+                  <JFXTextField fx:id="sequenceNumberJFXTextField" labelFloat="true" promptText="numer sekwencyjny" />
+                  <JFXTextArea fx:id="textAreaJFXTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="190.0" prefHeight="190.0" prefWidth="275.0" VBox.vgrow="SOMETIMES" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
-</VBox>
+</AnchorPane>

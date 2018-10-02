@@ -11,7 +11,6 @@ import io.datafx.controller.flow.action.ActionTrigger
 import io.datafx.controller.flow.context.FXMLViewFlowContext
 import io.datafx.controller.flow.context.ViewFlowContext
 import javafx.collections.FXCollections
-import javafx.collections.ListChangeListener
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.StackPane
 import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseController
@@ -21,8 +20,10 @@ import pl.edu.pwr.weka.sipprogram.sip.SipClient
 import pl.edu.pwr.weka.sipprogram.sip.request.base.ResponseListener
 import tornadofx.*
 import java.util.*
+import java.util.concurrent.CountDownLatch
 import javax.annotation.PostConstruct
 import javax.sip.ResponseEvent
+
 
 /**
  * Project Name: sipprogram
@@ -49,6 +50,7 @@ class ProcessConnectionController : BaseController(), ResponseListener {
 
     @FXMLViewFlowContext
     lateinit var flowContext: ViewFlowContext
+    var actualRequest = 0
     val sipClient = SipClient()
 
     val model = ProcessConnectionModel()
@@ -78,11 +80,13 @@ class ProcessConnectionController : BaseController(), ResponseListener {
 
     @ActionMethod("sendAll")
     fun sendAllRequests() {
-        nodeFormFlowIterator = nodeFormFlowList.iterator()
+        nodeFormFlowIterator = nodeFormFlowList.iterator();
+        actualRequest = 0
         sendRequest()
     }
 
     private fun sendRequest() {
+        actualRequest += 1
         if (nodeFormFlowIterator.hasNext()) {
             val formRequestController = nodeFormFlowIterator.next().value
                     .currentViewContext.controller as FormRequestController
@@ -91,7 +95,21 @@ class ProcessConnectionController : BaseController(), ResponseListener {
     }
 
     override fun processResponse(re: ResponseEvent) {
-        sendRequest()
+        val formFlowHandler = Flow(FormRequestController::class.java).createHandler()
+        formFlowHandler.start()
+        mapDateFromResponseToForm(re, formFlowHandler)
+        val tmpIndexRequest = actualRequest
+        val latch = CountDownLatch(1)
+        runAsync {
+            sendRequest()
+        } ui { observableList.add(tmpIndexRequest * 2 - 1, prepareStackPaneForCell(formFlowHandler)) }
+    }
+
+    private fun mapDateFromResponseToForm(re: ResponseEvent, formFlowHandler: FlowHandler) {
+        val formRequestController = formFlowHandler.currentViewContext.controller as FormRequestController
+        formRequestController.formRequestModel.isRequestForm.value = false
+        val headerNames = re.response.headerNames
+        headerNames.forEach { print(it) }
     }
 
     private fun prepareStackPaneForCell(item: FlowHandler): StackPane? {

@@ -109,7 +109,6 @@ class ProcessConnectionController : BaseController(), ResponseListener {
         val formRequestController = formFlowHandler.currentViewContext.controller as FormRequestController
         formRequestController.formRequestModel.isRequestForm.value = false
         val headerNames = re.response.headerNames
-        headerNames.forEach { print(it) }
     }
 
     private fun prepareStackPaneForCell(item: FlowHandler): StackPane? {

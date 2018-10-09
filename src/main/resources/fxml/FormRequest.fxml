@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -44,7 +43,7 @@
                         <JFXCheckBox fx:id="authorizationJFXCheckBox" text="Uwierzytelnienie" />
                         <VBox fx:id="authorizationVBox" minWidth="-Infinity" prefHeight="285.0" prefWidth="275.0" spacing="20.0" style="-fx-background-color: white;">
                            <children>
-                              <JFXComboBox labelFloat="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Typ Uwierzytelnienia">
+                              <JFXComboBox fx:id="typeAuthorizationJFXComboBox" labelFloat="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Typ Uwierzytelnienia">
                                  <VBox.margin>
                                     <Insets top="15.0" />
                                  </VBox.margin>
@@ -52,19 +51,12 @@
                               <HBox minWidth="-Infinity" prefHeight="29.0" prefWidth="238.0" spacing="20.0">
                                  <children>
                                     <JFXTextField fx:id="realmJFXTextField" labelFloat="true" promptText="realm" HBox.hgrow="SOMETIMES" />
-                                    <JFXTextField fx:id="uriJFXTextField" labelFloat="true" promptText="uri" HBox.hgrow="SOMETIMES" />
+                                    <JFXComboBox fx:id="algorithmJFXComboBox" labelFloat="true" promptText="algorithm" HBox.hgrow="SOMETIMES" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="29.0" prefWidth="175.0" spacing="20.0">
                                  <children>
                                     <JFXTextField fx:id="nonceJFXTextField" labelFloat="true" promptText="nonce" HBox.hgrow="SOMETIMES" />
-                                    <JFXTextField fx:id="opaqueJFXTextField" labelFloat="true" promptText="opaque" HBox.hgrow="SOMETIMES" />
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="29.0" prefWidth="105.0" spacing="20.0">
-                                 <children>
-                                    <JFXTextField fx:id="ncJFXTextField" labelFloat="true" promptText="nc" HBox.hgrow="SOMETIMES" />
-                                    <JFXTextField fx:id="cnonceJFXTextField" labelFloat="true" promptText="cnonce" HBox.hgrow="SOMETIMES" />
                                  </children>
                               </HBox>
                               <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="qop" textAlignment="RIGHT" wrapText="true" />

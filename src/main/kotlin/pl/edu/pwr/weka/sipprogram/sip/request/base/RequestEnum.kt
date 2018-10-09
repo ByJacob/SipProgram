@@ -7,7 +7,8 @@ package pl.edu.pwr.weka.sipprogram.sip.request.base
  */
 enum class RequestEnum(name: String) {
     REGISTER("REGISTER"),
-    INVITE("Invite");
+    INVITE("Invite"),
+    ACK("Ack");
 
     override fun toString(): String{
         return name

@@ -1,11 +1,10 @@
 package pl.edu.pwr.weka.sipprogram.gui.fx
 
-import javafx.beans.property.ListProperty
-import javafx.beans.property.SimpleListProperty
-import javafx.beans.property.SimpleObjectProperty
-import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.*
 import javafx.collections.FXCollections
-import javafx.collections.ObservableList
+import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AlgorithmEnum
+import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AuthMethodEnum
+import pl.edu.pwr.weka.sipprogram.sip.auth.enums.QualityOfProtectionEnum
 import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
 
 /**
@@ -21,7 +20,18 @@ class FormRequestFx {
     val serverAddressProperty = SimpleStringProperty()
     val serverPortProperty = SimpleStringProperty()
     val userProperty = SimpleStringProperty()
+    val passwordProperty = SimpleStringProperty()
     val callIdProperty = SimpleStringProperty()
     val seqNumberProperty = SimpleStringProperty()
     val requestTxtStringProperty = SimpleStringProperty()
+    //Auth
+    val authorizationEnabledProperty = SimpleBooleanProperty(false)
+    val typeAuthorizationListProperty = SimpleListProperty<AuthMethodEnum>(FXCollections.observableArrayList())
+    val typeAuthorizationProperty = SimpleObjectProperty<AuthMethodEnum>()
+    val realmNameProperty = SimpleStringProperty()
+    val algorithmPropertyList = SimpleListProperty<AlgorithmEnum>(FXCollections.observableArrayList())
+    val algorithmProperty = SimpleObjectProperty<AlgorithmEnum>()
+    val nonceProperty = SimpleStringProperty()
+    val qopListProperty = SimpleListProperty<QualityOfProtectionEnum>(FXCollections.observableArrayList())
+    val qopsProperty = SimpleListProperty<QualityOfProtectionEnum>(FXCollections.observableArrayList())
 }

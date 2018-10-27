@@ -7,6 +7,7 @@ import pl.edu.pwr.weka.sipprogram.sip.auth.enums.QualityOfProtectionEnum
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.sip.SipFactory
+import javax.sip.header.AuthorizationHeader
 import javax.sip.header.WWWAuthenticateHeader
 
 
@@ -26,7 +27,7 @@ class Authorization {
     var username = "111"
     var password = "111"
 
-    fun takeHeader(sipFactory: SipFactory): WWWAuthenticateHeader {
+    fun takeHeader(sipFactory: SipFactory): AuthorizationHeader {
         val authenticateHeader = sipFactory.createHeaderFactory().createAuthorizationHeader("")
         authenticateHeader.scheme = type.name
         authenticateHeader.realm = realm

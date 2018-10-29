@@ -5,6 +5,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
 import javafx.beans.property.Property
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.collections.FXCollections
+import javafx.scene.control.Label
 import javafx.util.converter.NumberStringConverter
 import kfoenix.jfxcheckbox
 import kfoenix.jfxcombobox
@@ -44,14 +45,62 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
                         bind(formRequestModel.request)
                     }
                 }
-                simpleField("Adres lokalny", InetAddress.getLocalHost().hostAddress, formRequestModel.localAddress)
-                simpleField("Port lokalny", "8080", formRequestModel.localPort)
-                simpleField("Adres serwera", "192.168.1.108", formRequestModel.serverAddress)
-                simpleField("Port Serwera", "5160", formRequestModel.serverPort)
-                simpleField("Użytkownik", "111", formRequestModel.user)
-                simpleField("Hasło", "111", formRequestModel.password)
-                simpleField("call-ID", "abcdef0123456789@1.1.1.1", formRequestModel.callId)
-                simpleField("numer sekwencyjny", "1", formRequestModel.seqNumber)
+                field("Adres lokalny") {
+                    jfxtextfield {
+                        promptText = InetAddress.getLocalHost().hostAddress
+                        bind(formRequestModel.localAddress)
+
+                    }
+                }
+                field("Port lokalny") {
+                    jfxtextfield {
+                        promptText = "8080"
+                        bind(formRequestModel.localPort)
+
+                    }
+                }
+                field("Adres serwera") {
+                    jfxtextfield {
+                        promptText = "192.168.1.108"
+                        bind(formRequestModel.serverAddress)
+
+                    }
+                }
+                field("Port Serwera") {
+                    jfxtextfield {
+                        promptText = "5160"
+                        bind(formRequestModel.serverPort)
+
+                    }
+                }
+                field("Użytkownik") {
+                    jfxtextfield {
+                        promptText = "111"
+                        bind(formRequestModel.user)
+
+                    }
+                }
+                field("Hasło") {
+                    jfxtextfield {
+                        promptText = "111"
+                        bind(formRequestModel.password)
+
+                    }
+                }
+                field("Call-ID") {
+                    jfxtextfield {
+                        promptText = "abcdef0123456789@1.1.1.1"
+                        bind(formRequestModel.callId)
+
+                    }
+                }
+                field("Numer Sekwencyjny") {
+                    jfxtextfield {
+                        promptText = "1"
+                        bind(formRequestModel.seqNumber)
+
+                    }
+                }
             }
             fieldset("Autoryzacja") {
                 jfxcheckbox("Włączona") {
@@ -63,14 +112,26 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
                         bind(formRequestModel.typeAuthorization)
                     }
                 }
-                simpleField("realm", "asterisk", formRequestModel.realmName)
+                field("realm") {
+                    jfxtextfield {
+                        promptText = "asterisk"
+                        bind(formRequestModel.realmName)
+
+                    }
+                }
                 field("algorithm") {
                     jfxcombobox<AlgorithmEnum> {
                         items = algorithmComboBoxItems
                         bind(formRequestModel.algorithm)
                     }
                 }
-                simpleField("nonce", "1234567890abcdef", formRequestModel.nonce)
+                field("nonce") {
+                    jfxtextfield {
+                        promptText = "1234567890abcdef"
+                        bind(formRequestModel.nonce)
+
+                    }
+                }
                 field("qop") {
                     jfxcombobox<QualityOfProtectionEnum> {
                         items = qualityOfProtectionComboBoxItems
@@ -82,22 +143,6 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
                 jfxtextarea {
                     bind(formRequestModel.requestTxtString)
                 }
-            }
-        }
-    }
-
-    private fun simpleField(name: String, pt: String, b: Property<*>) {
-        field(name) {
-            jfxtextfield {
-                isLabelFloat = true
-                promptText = pt
-                @Suppress("UNCHECKED_CAST")
-                when(b.value){
-                    is String -> bind(b as Property<String>)
-                    is Number -> bind(b as Property<Number>, converter = NumberStringConverter())
-                    else -> bind(b as Property<Any>)
-                }
-
             }
         }
     }

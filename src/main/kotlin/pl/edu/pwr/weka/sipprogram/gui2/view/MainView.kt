@@ -14,7 +14,7 @@ class MainView: View() {
     override val root = borderpane {
         top {
             hbox {
-                label("Startujemy z tym koksem!!!!")
+                label("PWR")
                 FontAwesomeIconView(FontAwesomeIcon.DESKTOP).apply {
                     size = 24.toString()
                 }

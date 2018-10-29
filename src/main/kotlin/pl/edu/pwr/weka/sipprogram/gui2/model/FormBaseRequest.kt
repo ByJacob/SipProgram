@@ -18,71 +18,71 @@ import tornadofx.*
 
 class FormBaseRequest {
 
-    val requestProperty = SimpleObjectProperty<RequestEnum>()
+    val requestProperty = SimpleObjectProperty<RequestEnum>(RequestEnum.REGISTER)
     var request by requestProperty
 
-    val localAddressProperty = SimpleStringProperty()
+    val localAddressProperty = SimpleStringProperty("")
     var localAddress by localAddressProperty
 
-    val localPortProperty = SimpleIntegerProperty()
+    val localPortProperty = SimpleIntegerProperty(8080)
     var localPort by localPortProperty
 
-    val serverAddressProperty = SimpleStringProperty()
+    val serverAddressProperty = SimpleStringProperty("")
     var serverAddress by serverAddressProperty
 
-    val serverPortProperty = SimpleIntegerProperty()
+    val serverPortProperty = SimpleIntegerProperty(5160)
     var serverPort by serverPortProperty
 
-    val userProperty = SimpleStringProperty()
+    val userProperty = SimpleStringProperty("")
     var user by userProperty
 
-    val passwordProperty = SimpleStringProperty()
+    val passwordProperty = SimpleStringProperty("")
     var password by passwordProperty
 
-    val callIdProperty = SimpleStringProperty()
+    val callIdProperty = SimpleStringProperty("")
     var callId by callIdProperty
 
-    val seqNumberProperty = SimpleIntegerProperty()
+    val seqNumberProperty = SimpleIntegerProperty(0)
     var seqNumber by seqNumberProperty
 
-    val requestTxtSpringProperty = SimpleStringProperty()
+    val requestTxtSpringProperty = SimpleStringProperty("")
     var requestTxtSpring by requestTxtSpringProperty
     //auth
-    val authorizationEnabledProperty = SimpleBooleanProperty()
+    val authorizationEnabledProperty = SimpleBooleanProperty(false)
     var authorizationEnabled by authorizationEnabledProperty
 
-    val typeAuthorizationProperty = SimpleObjectProperty<AuthMethodEnum>()
+    val typeAuthorizationProperty = SimpleObjectProperty<AuthMethodEnum>(AuthMethodEnum.DIGEST)
     var typeAuthorization by typeAuthorizationProperty
 
-    val realmNameProperty = SimpleStringProperty()
+    val realmNameProperty = SimpleStringProperty("")
     var realmName by realmNameProperty
 
-    val algorithmProperty = SimpleObjectProperty<AlgorithmEnum>()
+    val algorithmProperty = SimpleObjectProperty<AlgorithmEnum>(AlgorithmEnum.MD5)
     var algorithm by algorithmProperty
 
-    val nonceProperty = SimpleStringProperty()
+    val nonceProperty = SimpleStringProperty("")
     var nonce by nonceProperty
 
-    val qopProperty = SimpleObjectProperty<QualityOfProtectionEnum>()
+    val qopProperty = SimpleObjectProperty<QualityOfProtectionEnum>(QualityOfProtectionEnum.EMPTY)
     var qop by qopProperty
 }
 
-class FormBaseRequestModel : ItemViewModel<FormBaseRequest>() {
-    val request = bind(FormBaseRequest::requestProperty)
-    val localAddress = bind(FormBaseRequest::localAddressProperty)
-    val localPort = bind(FormBaseRequest::localPortProperty)
-    val serverAddress = bind(FormBaseRequest::serverAddressProperty)
-    val serverPort = bind(FormBaseRequest::serverPortProperty)
-    val user = bind(FormBaseRequest::userProperty)
-    val password = bind(FormBaseRequest::passwordProperty)
-    val callId = bind(FormBaseRequest::callIdProperty)
-    val seqNumber = bind(FormBaseRequest::seqNumberProperty)
-    val requestTxtString = bind(FormBaseRequest::requestTxtSpringProperty)
-    val authorizationEnabled = bind(FormBaseRequest::authorizationEnabledProperty)
-    val typeAuthorization = bind(FormBaseRequest::typeAuthorizationProperty)
-    val realmName = bind(FormBaseRequest::realmNameProperty)
-    val algorithm = bind(FormBaseRequest::algorithmProperty)
-    val nonce = bind(FormBaseRequest::nonceProperty)
-    val qop = bind(FormBaseRequest::qopProperty)
+class FormBaseRequestModel(var formBaseRequest: FormBaseRequest) : ViewModel() {
+    val request = bind{formBaseRequest.requestProperty}
+    val localAddress = bind{formBaseRequest.localAddressProperty}
+    val localPort = bind{formBaseRequest.localPortProperty}
+    val serverAddress = bind{formBaseRequest.serverAddressProperty}
+    val serverPort = bind{formBaseRequest.serverPortProperty}
+    val user = bind{formBaseRequest.userProperty}
+    val password = bind{formBaseRequest.passwordProperty}
+    val callId = bind{formBaseRequest.callIdProperty}
+    val seqNumber = bind{formBaseRequest.seqNumberProperty}
+    val requestTxtString = bind{formBaseRequest.requestTxtSpringProperty}
+    val authorizationEnabled = bind{formBaseRequest.authorizationEnabledProperty}
+    val typeAuthorization = bind{formBaseRequest.typeAuthorizationProperty}
+    val realmName = bind{formBaseRequest.realmNameProperty}
+    val algorithm = bind{formBaseRequest.algorithmProperty}
+    val nonce = bind{formBaseRequest.nonceProperty}
+    val qop = bind{formBaseRequest.qopProperty}
 }
 

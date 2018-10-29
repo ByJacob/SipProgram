@@ -12,7 +12,9 @@ import tornadofx.*
  */
 
 class PreMainView : View() {
-    override val root = jfxdecorator(MainView::class)
+    override val root = jfxdecorator(MainView::class){
+        isCustomMaximize = true
+    }
 }
 
 class MainApp : App(PreMainView::class, Styles::class) {

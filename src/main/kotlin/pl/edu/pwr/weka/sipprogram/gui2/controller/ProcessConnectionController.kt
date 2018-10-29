@@ -3,6 +3,8 @@ package pl.edu.pwr.weka.sipprogram.gui2.controller
 import javafx.scene.Node
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.StackPane
+import pl.edu.pwr.weka.sipprogram.gui2.model.FormBaseRequest
+import pl.edu.pwr.weka.sipprogram.gui2.model.FormBaseRequestModel
 import pl.edu.pwr.weka.sipprogram.gui2.model.item.PrepareRequestFx
 import pl.edu.pwr.weka.sipprogram.gui2.model.item.ProcessConnectionModel
 import pl.edu.pwr.weka.sipprogram.gui2.view.fragment.FormRequestFragment
@@ -20,7 +22,8 @@ class ProcessConnectionController : Controller() {
     val sipClient = SipClient()
 
     val model = ProcessConnectionModel(PrepareRequestFx(mutableListOf()))
-    val createRequestForm = {}
+    val createRequestForm
+        get() = FormBaseRequestModel(FormBaseRequest())
     val sendAllRequest = {}
 
 }

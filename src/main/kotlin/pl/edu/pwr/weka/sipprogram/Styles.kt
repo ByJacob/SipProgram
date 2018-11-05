@@ -1,6 +1,7 @@
 package pl.edu.pwr.weka.sipprogram
 
 import javafx.scene.paint.Color
+import javafx.scene.text.FontWeight
 import kfoenix.JFXStylesheet
 import tornadofx.*
 
@@ -19,6 +20,10 @@ class Styles : JFXStylesheet() {
     }
 
     init {
+        root {
+            fontFamily = "Roboto"
+            fontWeight = FontWeight.NORMAL
+        }
         jfxDecoratorButtonsContainer {
             backgroundColor += decoratorColor
 

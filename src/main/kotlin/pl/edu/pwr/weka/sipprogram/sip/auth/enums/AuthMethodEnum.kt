@@ -7,7 +7,7 @@ package pl.edu.pwr.weka.sipprogram.sip.auth.enums
  */
 enum class AuthMethodEnum(val prettyName: kotlin.String) {
 
-    BASIC("Basic"), DIGEST("Digest");
+    DIGEST("Digest");
 
     override fun toString(): String {
         return prettyName

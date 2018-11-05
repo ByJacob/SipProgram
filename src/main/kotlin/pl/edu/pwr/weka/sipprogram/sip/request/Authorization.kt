@@ -1,6 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.sip.request
 
 import org.apache.commons.codec.digest.DigestUtils
+import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AlgorithmEnum
 import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AuthMethodEnum
 import pl.edu.pwr.weka.sipprogram.sip.auth.enums.QualityOfProtectionEnum
@@ -8,7 +9,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.sip.SipFactory
 import javax.sip.header.AuthorizationHeader
-import javax.sip.header.WWWAuthenticateHeader
 
 
 /**
@@ -23,19 +23,20 @@ class Authorization {
     var algorithm = AlgorithmEnum.MD5
     var nonce = calculateNonce()
     var opaque = getOpaque(realm, nonce)
-    var qops = mutableListOf<QualityOfProtectionEnum>()
+    var qop = QualityOfProtectionEnum.EMPTY
     var username = "111"
     var password = "111"
 
-    fun takeHeader(sipFactory: SipFactory): AuthorizationHeader {
-        val authenticateHeader = sipFactory.createHeaderFactory().createAuthorizationHeader("")
+    fun takeHeader(): AuthorizationHeader {
+        val authenticateHeader = SipProtocol.headerFactory.createAuthorizationHeader("")
         authenticateHeader.scheme = type.name
         authenticateHeader.realm = realm
         authenticateHeader.algorithm = algorithm.name
         authenticateHeader.nonce = nonce
         opaque = getOpaque(realm, nonce)
         authenticateHeader.opaque = opaque
-        authenticateHeader.qop = qops.joinToString()
+        if (qop != QualityOfProtectionEnum.EMPTY)
+            authenticateHeader.qop = qop.toString()
         var ha1 = DigestUtils.md5Hex("$username:$realm:$password")
         authenticateHeader.response
         return authenticateHeader

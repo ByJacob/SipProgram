@@ -4,6 +4,8 @@ package pl.edu.pwr.weka.sipprogram.sip
 import org.slf4j.LoggerFactory
 import pl.edu.pwr.weka.sipprogram.sip.request.base.ResponseListener
 import javax.sip.*
+import javax.sip.message.Response
+import kotlin.reflect.KProperty
 
 /**
  * Project Name: sipprogram
@@ -13,12 +15,9 @@ import javax.sip.*
  */
 class SipClient : SipListener {
 
-    final val LOGGER = LoggerFactory.getLogger(this::class.java)
-    private val listeners = mutableListOf<ResponseListener>()
-
-    fun addListener(re: ResponseListener){
-        listeners.add(re)
-    }
+    val LOGGER = LoggerFactory.getLogger(this::class.java)
+    val listResponse = mutableListOf<Response>()
+    val listeners = mutableListOf<ResponseListener>()
 
     override fun processIOException(p0: IOExceptionEvent?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -34,6 +33,7 @@ class SipClient : SipListener {
 
     override fun processResponse(responseEvent: ResponseEvent?) {
         val response = responseEvent?.response
+        response?.let { listResponse.add(it) }
         LOGGER.info("Recive response: " + response.toString())
         listeners.forEach{responseListener: ResponseListener ->
             if (responseEvent != null) {

@@ -2,16 +2,14 @@ package pl.edu.pwr.weka.sipprogram.gui2.view.fragment
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
-import javafx.beans.property.Property
-import javafx.beans.property.SimpleIntegerProperty
 import javafx.collections.FXCollections
-import javafx.scene.control.Label
 import javafx.util.converter.NumberStringConverter
 import kfoenix.jfxcheckbox
 import kfoenix.jfxcombobox
 import kfoenix.jfxtextarea
 import kfoenix.jfxtextfield
-import pl.edu.pwr.weka.sipprogram.gui2.model.FormBaseRequestModel
+import pl.edu.pwr.weka.sipprogram.gui2.model.FormRequestModel
+import pl.edu.pwr.weka.sipprogram.gui2.model.mapper.mapToRequest
 import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AlgorithmEnum
 import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AuthMethodEnum
 import pl.edu.pwr.weka.sipprogram.sip.auth.enums.QualityOfProtectionEnum
@@ -26,7 +24,7 @@ import java.net.InetAddress
  */
 class FormRequestFragment : Fragment("FormRequestFragment") {
 
-    val formRequestModel: FormBaseRequestModel by inject()
+    val formRequestModel: FormRequestModel by inject()
 
     override val root = Form()
     val requestComboBoxItems = FXCollections.observableArrayList(RequestEnum.values().toList())
@@ -41,6 +39,7 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
             fieldset("Podstawowe dane", FontAwesomeIconView(FontAwesomeIcon.INFO)) {
                 field("Typ pakietu") {
                     jfxcombobox<RequestEnum> {
+                        maxWidth = Double.MAX_VALUE
                         items = requestComboBoxItems
                         bind(formRequestModel.request)
                     }
@@ -49,13 +48,6 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
                     jfxtextfield {
                         promptText = InetAddress.getLocalHost().hostAddress
                         bind(formRequestModel.localAddress)
-
-                    }
-                }
-                field("Port lokalny") {
-                    jfxtextfield {
-                        promptText = "8080"
-                        bind(formRequestModel.localPort)
 
                     }
                 }
@@ -69,7 +61,7 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
                 field("Port Serwera") {
                     jfxtextfield {
                         promptText = "5160"
-                        bind(formRequestModel.serverPort)
+                        bind(formRequestModel.serverPort, converter = NumberStringConverter("###"))
 
                     }
                 }
@@ -97,53 +89,79 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
                 field("Numer Sekwencyjny") {
                     jfxtextfield {
                         promptText = "1"
-                        bind(formRequestModel.seqNumber)
+                        bind(formRequestModel.seqNumber, converter = NumberStringConverter("###"))
 
                     }
                 }
             }
-            fieldset("Autoryzacja") {
+            fieldset("Autoryzacja", FontAwesomeIconView(FontAwesomeIcon.LOCK)) {
                 jfxcheckbox("Włączona") {
                     bind(formRequestModel.authorizationEnabled)
                 }
-                field("Typ uwierzytelnienia") {
-                    jfxcombobox<AuthMethodEnum> {
-                        items = authMethodComboBoxItems
-                        bind(formRequestModel.typeAuthorization)
-                    }
-                }
-                field("realm") {
-                    jfxtextfield {
-                        promptText = "asterisk"
-                        bind(formRequestModel.realmName)
+                fieldset {
+                    subscribe<EnableAuthorizationEvent> {
+                        clear()
+                        if (it.isEnabled) {
+                            field("Typ uwierzytelnienia") {
+                                jfxcombobox<AuthMethodEnum> {
+                                    maxWidth = Double.MAX_VALUE
+                                    items = authMethodComboBoxItems
+                                    bind(formRequestModel.typeAuthorization)
+                                }
+                            }
+                            field("realm") {
+                                jfxtextfield {
+                                    promptText = "asterisk"
+                                    bind(formRequestModel.realmName)
 
-                    }
-                }
-                field("algorithm") {
-                    jfxcombobox<AlgorithmEnum> {
-                        items = algorithmComboBoxItems
-                        bind(formRequestModel.algorithm)
-                    }
-                }
-                field("nonce") {
-                    jfxtextfield {
-                        promptText = "1234567890abcdef"
-                        bind(formRequestModel.nonce)
+                                }
+                            }
+                            field("algorithm") {
+                                jfxcombobox<AlgorithmEnum> {
+                                    maxWidth = Double.MAX_VALUE
+                                    items = algorithmComboBoxItems
+                                    bind(formRequestModel.algorithm)
+                                }
+                            }
+                            field("nonce") {
+                                jfxtextfield {
+                                    promptText = "1234567890abcdef"
+                                    bind(formRequestModel.nonce)
 
+                                }
+                            }
+                            field("qop") {
+                                jfxcombobox<QualityOfProtectionEnum> {
+                                    maxWidth = Double.MAX_VALUE
+                                    items = qualityOfProtectionComboBoxItems
+                                    bind(formRequestModel.qop)
+                                }
+                            }
+                        }
                     }
-                }
-                field("qop") {
-                    jfxcombobox<QualityOfProtectionEnum> {
-                        items = qualityOfProtectionComboBoxItems
-                        bind(formRequestModel.qop)
+                    runAsync {
+                        fire(EnableAuthorizationEvent(formRequestModel.authorizationEnabled.value))
                     }
                 }
             }
-            fieldset("Wysyłany pakiet") {
+            fieldset("Wysyłany pakiet", FontAwesomeIconView(FontAwesomeIcon.FILE_TEXT)) {
                 jfxtextarea {
+                    minHeight = 250.0
+                    isEditable = false
                     bind(formRequestModel.requestTxtString)
+                    subscribe<FormRequestFragment.UpdateRequestTextAreaEvent> {
+                        formRequestModel.formRequest.requestTxtSpring =
+                                formRequestModel.formRequest.mapToRequest().prepareRequest().toString()
+                    }
                 }
             }
         }
+        runAsync {
+            fire(UpdateRequestTextAreaEvent())
+        }
     }
+
+    class EnableAuthorizationEvent(val isEnabled: Boolean) : FXEvent()
+
+    class UpdateRequestTextAreaEvent: FXEvent()
 }

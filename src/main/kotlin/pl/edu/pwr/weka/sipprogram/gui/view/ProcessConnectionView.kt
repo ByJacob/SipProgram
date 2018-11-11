@@ -1,41 +1,34 @@
-package pl.edu.pwr.weka.sipprogram.gui2.view
+package pl.edu.pwr.weka.sipprogram.gui.view
 
 import com.jfoenix.controls.JFXButton
-import com.jfoenix.controls.JFXListView
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
 import javafx.geometry.Pos
-import javafx.scene.Node
 import javafx.scene.control.ScrollPane
 import kfoenix.jfxbutton
 import kfoenix.jfxlistview
-import kfoenix.jfxtextfield
-import pl.edu.pwr.weka.sipprogram.gui2.controller.ProcessConnectionController
-import pl.edu.pwr.weka.sipprogram.gui2.model.FormRequestModel
-import pl.edu.pwr.weka.sipprogram.gui2.view.fragment.FormRequestFragment
+import pl.edu.pwr.weka.sipprogram.gui.controller.ProcessConnectionController
+import pl.edu.pwr.weka.sipprogram.gui.model.ProcessConnectionModel
+import pl.edu.pwr.weka.sipprogram.gui.view.row.AddHeaderRowView
 import tornadofx.*
 
 class ProcessConnectionView : View("ProcessConnection") {
     val controller: ProcessConnectionController by inject()
-    lateinit var centerContainer: Node
-    lateinit var leftListRequest: JFXListView<FormRequestModel>
+    val model = ProcessConnectionModel()
     override val root = vbox()
 
     init {
         with(root) {
             borderpane {
                 center {
-                    centerContainer = this
                     vbox {
-                        subscribe<OpenFormRequestEvent> {
+                        subscribe<OpenFormRequestEvent> { it ->
                             clear()
                             scrollpane {
                                 isFitToWidth = true
-                                val fragmentScope = Scope()
-                                setInScope(it.model, fragmentScope)
                                 vbarPolicy = ScrollPane.ScrollBarPolicy.ALWAYS
                                 isFitToHeight = true
-                                add(find<FormRequestFragment>(fragmentScope))
+                                add(controller.formRequestFragmentList[it.selectedIndex])
                             }
                         }
                     }
@@ -46,28 +39,14 @@ class ProcessConnectionView : View("ProcessConnection") {
                         borderpaneConstraints {
                             alignment = Pos.CENTER
                         }
-                        jfxtextfield {
-                            alignment = Pos.CENTER
-                            isLabelFloat = true
-                            promptText = "SerwerIP:Port"
-                        }
                         jfxbutton("Dodaj", JFXButton.ButtonType.RAISED) {
                             action {
-                                runAsync {
-                                    controller.createRequestForm
-                                } ui {
-                                    controller.model.processConnection.listFormRequest.add(it)
-                                    fire(OpenFormRequestEvent(it))
-                                    leftListRequest.selectionModel.select(
-                                            controller.model.processConnection.listFormRequest.lastIndex)
-                                }
+                                controller.formRequestFragmentList.add(find(Scope()))
+                                fire(OpenFormRequestEvent(controller.formRequestFragmentList.lastIndex))
                             }
                         }
                         jfxbutton("Wyślij", JFXButton.ButtonType.RAISED) {
                             action {
-                                runAsync {
-                                    controller.sendAllRequest()
-                                }
                             }
                         }
                         paddingAll = 10.0
@@ -75,17 +54,16 @@ class ProcessConnectionView : View("ProcessConnection") {
                 }
                 paddingAll = 20.0
                 left {
-                    jfxlistview(controller.model.listFormRequest) {
-                        leftListRequest = this
+                    jfxlistview(controller.formRequestFragmentList) {
                         borderpaneConstraints {
                             marginBottom = 20.0
                         }
                         isShowTooltip = true
-                        bindSelected(controller.model.selectedFormRequest)
+                        bindSelected(model.formRequestFragment)
                         cellFormat {
-                            graphic = label(it.formRequest.request.toString()) {
+                            graphic = label(it.model.formRequest.method.toString()) {
                                 val iconOne =
-                                        if (it.formRequest.isSendingRequest)
+                                        if (it.model.isSendingRequest.value)
                                             FontAwesomeIconView(FontAwesomeIcon.ARROW_RIGHT)
                                         else
                                             FontAwesomeIconView(FontAwesomeIcon.ARROW_LEFT)
@@ -107,12 +85,7 @@ class ProcessConnectionView : View("ProcessConnection") {
                             }
                         }
                         onUserSelect(clickCount = 1) {
-                            fire(OpenFormRequestEvent(it))
-                        }
-                        subscribe<AddNewElementEvent> {
-                            val index = it.index
-                            val model = it.model
-                            controller.model.processConnection.listFormRequest.add(index, model)
+                            fire(OpenFormRequestEvent(controller.formRequestFragmentList.indexOf(it)))
                         }
                         subscribe<RefreshListFormRequestEvent> {
                             refresh()
@@ -123,9 +96,7 @@ class ProcessConnectionView : View("ProcessConnection") {
         }
     }
 
-    class OpenFormRequestEvent(val model: FormRequestModel) : FXEvent()
+    class OpenFormRequestEvent(val selectedIndex: Int) : FXEvent()
 
     class RefreshListFormRequestEvent : FXEvent()
-
-    class AddNewElementEvent(val index: Int, val model: FormRequestModel) : FXEvent()
 }

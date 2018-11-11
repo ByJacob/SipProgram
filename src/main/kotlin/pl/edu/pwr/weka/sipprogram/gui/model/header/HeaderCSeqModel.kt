@@ -1,0 +1,21 @@
+package pl.edu.pwr.weka.sipprogram.gui.model.header
+
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleObjectProperty
+import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
+import tornadofx.*
+
+class HeaderCSeq(){
+    val numberProperty = SimpleIntegerProperty()
+    var number by numberProperty
+
+    val methodProperty = SimpleObjectProperty<RequestEnum>()
+    var method by methodProperty
+
+}
+
+class HeaderCSeqModel(headerCSeq: HeaderCSeq): ViewModel() {
+    constructor(): this(HeaderCSeq())
+    val number = bind(true){headerCSeq.numberProperty}
+    val method = bind(true){headerCSeq.methodProperty}
+}

@@ -1,4 +1,4 @@
-package pl.edu.pwr.weka.sipprogram.gui2.view
+package pl.edu.pwr.weka.sipprogram.gui.view
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
@@ -10,7 +10,7 @@ import tornadofx.*
  * User: Jakub Rosa
  * Date 22.10.2018 21:14
  */
-class MainView: View() {
+class MainView : View() {
     override val root = borderpane {
         top {
             hbox {
@@ -35,9 +35,9 @@ class MainView: View() {
 }
 
 class FirstTab : UIComponent("Tab1") {
-    override val root = vbox {  }
+    override val root = vbox { }
 }
 
 class SecondTab : UIComponent("Tab2") {
-    override val root = vbox {  }
+    override val root = vbox { }
 }

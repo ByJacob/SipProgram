@@ -1,7 +1,7 @@
 package pl.edu.pwr.weka.sipprogram
 
 import kfoenix.jfxdecorator
-import pl.edu.pwr.weka.sipprogram.gui2.view.MainView
+import pl.edu.pwr.weka.sipprogram.gui.view.MainView
 import tornadofx.*
 
 

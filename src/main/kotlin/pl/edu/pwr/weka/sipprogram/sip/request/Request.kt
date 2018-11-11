@@ -5,7 +5,6 @@ import gov.nist.javax.sip.Utils
 import gov.nist.javax.sip.header.*
 import gov.nist.javax.sip.message.SIPRequest
 import org.slf4j.LoggerFactory
-import pl.edu.pwr.weka.sipprogram.gui2.model.FormRequest
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AuthMethodEnum
 import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
@@ -70,29 +69,6 @@ open class Request {
 
     open fun recreateHeaders() {
         listHeader.clear()
-    }
-
-    open fun mapToFormRequest(): FormRequest {
-        val formRequest = FormRequest()
-        formRequest.request = this.method
-        formRequest.serverAddress = this.serverAddress
-        formRequest.serverPort = this.serverPort
-        formRequest.user = this.userLogin
-        formRequest.password = this.userPassword
-        //formRequest.targetUser = ""
-        formRequest.localAddress = this.localIpAddress
-        formRequest.callId = this.callId
-        formRequest.seqNumber = this.sequenceNumber
-        formRequest.fromTag = this.fromHeaderTag
-        formRequest.branch = this.branchName
-
-        formRequest.authorizationEnabled = this.authorization.enabled
-        formRequest.typeAuthorization = this.authorization.type
-        formRequest.realmName = this.authorization.realm
-        formRequest.algorithm = this.authorization.algorithm
-        formRequest.nonce = this.authorization.nonce
-        formRequest.qop = this.authorization.qop
-        return formRequest
     }
 
     fun sendRequest() {

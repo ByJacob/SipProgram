@@ -1,11 +1,15 @@
 package pl.edu.pwr.weka.sipprogram.gui.controller.header
 
 import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseHeaderController
+import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderViaModel
+import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import javax.sip.header.Header
 
 class HeaderViaController: BaseHeaderController() {
     override fun toSipHeader(): Header {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val model = model as HeaderViaModel
+        return SipProtocol.headerFactory.createViaHeader(model.address.value,
+                model.port.value.toInt(), model.protocol.value.sipName, model.branch.value)
     }
 
 }

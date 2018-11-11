@@ -18,16 +18,23 @@ import tornadofx.*
 class HeaderCSeqRowView : BaseHeaderView("CSeq") {
     override val model = HeaderCSeqModel()
     override val controller: HeaderCSeqController by inject()
+
+    init {
+        controller.model = model
+    }
+
     override val root = form {
         fieldset("CSeq") {
             field("Numer") {
                 jfxtextfield {
-                    promptText = "1234"
+                    bind(model.number)
+                    clear()
                 }
             }
             field("Metoda") {
                 jfxcombobox<RequestEnum> {
                     items = FXCollections.observableArrayList(RequestEnum.values().toList())
+                    bind(model.method)
                 }
             }
         }

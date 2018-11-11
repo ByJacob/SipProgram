@@ -16,11 +16,16 @@ class HeaderUserAgentRowView() : BaseHeaderView("User-Agent") {
     override val controller: HeaderUserAgentController by inject()
     override val model = HeaderUserAgentModel()
 
+    init {
+        controller.model = model
+    }
+
     override val root = form {
         fieldset("User-Agent") {
             field("User-Agent") {
                 jfxtextfield {
-                    promptText = "MicroSIP/3.19.7"
+                    bind(model.userAgent)
+                    clear()
                 }
             }
         }

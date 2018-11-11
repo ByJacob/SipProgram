@@ -19,26 +19,35 @@ class HeaderViaRowView : BaseHeaderView("Via") {
     override val model = HeaderViaModel()
     override val controller: HeaderViaController by inject()
 
+    init {
+        controller.model = model
+    }
+
     override val root = form {
         fieldset("Via") {
             field("Protokół") {
                 jfxcombobox<TransportProtocol> {
                     items = FXCollections.observableArrayList(TransportProtocol.values().toList())
+                    bind(model.protocol)
+                    clear()
                 }
             }
             field("Wysłane z adresu") {
                 jfxtextfield {
-                    promptText = "10.0.0.0"
+                    bind(model.address)
+                    clear()
                 }
             }
             field("Wysłane z portu") {
                 jfxtextfield {
-                    promptText = "52000"
+                    bind(model.port)
+                    clear()
                 }
             }
             field("Branch") {
                 jfxtextfield {
-                    promptText = "01234567890abcdef"
+                    bind(model.branch)
+                    clear()
                 }
             }
         }

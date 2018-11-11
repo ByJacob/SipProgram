@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 
 class HeaderUserAgent {
-    val userAgentProperty = SimpleStringProperty()
+    val userAgentProperty = SimpleStringProperty("")
     var userAgent by userAgentProperty
 }
 

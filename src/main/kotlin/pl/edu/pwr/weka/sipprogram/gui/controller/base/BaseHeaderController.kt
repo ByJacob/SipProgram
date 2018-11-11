@@ -9,5 +9,8 @@ import javax.sip.header.Header
  * Date 11.11.2018 00:31
  */
 abstract class BaseHeaderController : Controller() {
+
+    lateinit var model: ViewModel
+
     abstract fun toSipHeader(): Header
 }

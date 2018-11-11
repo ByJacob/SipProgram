@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty
 import tornadofx.*
 
 class HeaderExpires {
-    val expiresdProperty = SimpleIntegerProperty()
+    val expiresdProperty = SimpleIntegerProperty(0)
     var expiresd by expiresdProperty
 
 }

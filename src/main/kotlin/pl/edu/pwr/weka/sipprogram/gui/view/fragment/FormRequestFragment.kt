@@ -2,9 +2,9 @@ package pl.edu.pwr.weka.sipprogram.gui.view.fragment
 
 import pl.edu.pwr.weka.sipprogram.gui.controller.FormRequestController
 import pl.edu.pwr.weka.sipprogram.gui.model.FormRequestModel
+import pl.edu.pwr.weka.sipprogram.gui.view.ProcessConnectionView
 import pl.edu.pwr.weka.sipprogram.gui.view.row.AddHeaderRowView
 import pl.edu.pwr.weka.sipprogram.gui.view.row.header.HeaderRequestLineRowView
-import pl.edu.pwr.weka.sipprogram.gui.view.ProcessConnectionView
 import tornadofx.*
 
 /**
@@ -33,7 +33,7 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
         model.method.bind(headerRequestLineRowView.model.method)
         controller.listHeaderRowsView.add(headerRequestLineRowView)
         val addHeaderRowView = AddHeaderRowView()
-        controller.listHeaderRowsView.add(addHeaderRowView)
+        controller.listHeaderRowsNode.add(addHeaderRowView.root)
 
     }
 

@@ -6,10 +6,10 @@ import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
 import tornadofx.*
 
 class HeaderCSeq(){
-    val numberProperty = SimpleIntegerProperty()
+    val numberProperty = SimpleIntegerProperty(0)
     var number by numberProperty
 
-    val methodProperty = SimpleObjectProperty<RequestEnum>()
+    val methodProperty = SimpleObjectProperty<RequestEnum>(RequestEnum.REGISTER)
     var method by methodProperty
 
 }

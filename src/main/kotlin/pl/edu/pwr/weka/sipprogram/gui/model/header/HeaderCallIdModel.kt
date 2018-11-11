@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 
 class HeaderCallId {
-    val callIdProperty = SimpleStringProperty()
+    val callIdProperty = SimpleStringProperty("")
     var callId by callIdProperty
 
 }

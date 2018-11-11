@@ -5,13 +5,13 @@ import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 
 class HeaderContact() {
-    val userProperty = SimpleStringProperty()
+    val userProperty = SimpleStringProperty("")
     var user by userProperty
 
-    val passwordProperty = SimpleStringProperty()
-    var password by passwordProperty
+    val addressProperty = SimpleStringProperty("")
+    var address by addressProperty
 
-    val portProperty = SimpleIntegerProperty()
+    val portProperty = SimpleIntegerProperty(0)
     var port by portProperty
 
 }
@@ -20,6 +20,6 @@ class HeaderContactModel(headerContact: HeaderContact) : ViewModel() {
     constructor() : this(HeaderContact())
 
     val user = bind(true) { headerContact.userProperty }
-    val password = bind(true) { headerContact.passwordProperty }
+    val address = bind(true) { headerContact.addressProperty }
     val port = bind(true) { headerContact.portProperty }
 }

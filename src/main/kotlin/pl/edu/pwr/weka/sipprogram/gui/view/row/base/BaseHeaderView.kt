@@ -11,4 +11,5 @@ import tornadofx.*
 abstract class BaseHeaderView(name: String) : View(name) {
     abstract val controller: BaseHeaderController
     abstract val model: ViewModel
+
 }

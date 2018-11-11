@@ -9,7 +9,6 @@ import kfoenix.jfxbutton
 import kfoenix.jfxlistview
 import pl.edu.pwr.weka.sipprogram.gui.controller.ProcessConnectionController
 import pl.edu.pwr.weka.sipprogram.gui.model.ProcessConnectionModel
-import pl.edu.pwr.weka.sipprogram.gui.view.row.AddHeaderRowView
 import tornadofx.*
 
 class ProcessConnectionView : View("ProcessConnection") {
@@ -47,6 +46,7 @@ class ProcessConnectionView : View("ProcessConnection") {
                         }
                         jfxbutton("Wyślij", JFXButton.ButtonType.RAISED) {
                             action {
+                                controller.sendRequests()
                             }
                         }
                         paddingAll = 10.0

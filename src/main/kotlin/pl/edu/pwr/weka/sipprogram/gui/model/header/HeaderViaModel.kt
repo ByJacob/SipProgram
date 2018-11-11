@@ -7,16 +7,16 @@ import pl.edu.pwr.weka.sipprogram.sip.headerEnums.TransportProtocol
 import tornadofx.*
 
 class HeaderVia {
-    val protocolProperty = SimpleObjectProperty<TransportProtocol>()
+    val protocolProperty = SimpleObjectProperty<TransportProtocol>(TransportProtocol.UDP)
     var protocol by protocolProperty
 
-    val addressProperty = SimpleStringProperty()
+    val addressProperty = SimpleStringProperty("")
     var address by addressProperty
 
-    val portProperty = SimpleIntegerProperty()
+    val portProperty = SimpleIntegerProperty(0)
     var port by portProperty
 
-    val branchProperty = SimpleStringProperty()
+    val branchProperty = SimpleStringProperty("")
     var branch by branchProperty
 
 }

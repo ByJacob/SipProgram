@@ -2,6 +2,7 @@ package pl.edu.pwr.weka.sipprogram
 
 import kfoenix.jfxdecorator
 import pl.edu.pwr.weka.sipprogram.gui.view.MainView
+import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import tornadofx.*
 
 
@@ -14,6 +15,7 @@ import tornadofx.*
 class PreMainView : View() {
     override val root = jfxdecorator(MainView::class){
         isCustomMaximize = true
+        SipProtocol.port
     }
 }
 

@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty
 import tornadofx.*
 
 class HeaderMaxForwards {
-    val maxForwardsProperty = SimpleIntegerProperty()
+    val maxForwardsProperty = SimpleIntegerProperty(0)
     var maxForwards by maxForwardsProperty
 
 }

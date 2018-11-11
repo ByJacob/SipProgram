@@ -1,6 +1,5 @@
 package pl.edu.pwr.weka.sipprogram.gui.controller
 
-import pl.edu.pwr.weka.sipprogram.gui.model.ProcessConnectionModel
 import pl.edu.pwr.weka.sipprogram.gui.view.fragment.FormRequestFragment
 import tornadofx.*
 
@@ -13,10 +12,11 @@ class ProcessConnectionController : Controller() {
 
     val formRequestFragmentList = mutableListOf<FormRequestFragment>().observable()
 
-    init {
-
+    fun sendRequests() {
+        formRequestFragmentList.forEach {
+            val createRequest = it.controller.createRequest()
+            print(createRequest.toString())
+        }
     }
-
-    val createRequestForm = ""
 
 }

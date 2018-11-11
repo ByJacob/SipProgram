@@ -10,15 +10,15 @@ class HeaderRequestLineRow {
     val methodProperty = SimpleObjectProperty<RequestEnum>(RequestEnum.REGISTER)
     var method by methodProperty
 
-    val requestHostProperty = SimpleStringProperty()
+    val requestHostProperty = SimpleStringProperty("")
     var requestHost by requestHostProperty
 
-    val requestPortProperty = SimpleIntegerProperty()
+    val requestPortProperty = SimpleIntegerProperty(0)
     var requestPort by requestPortProperty
 
 }
 
-class HeaderRequestLineRowModel(val headerRequestLineRow: HeaderRequestLineRow) : ViewModel() {
+class HeaderRequestLineModel(val headerRequestLineRow: HeaderRequestLineRow) : ViewModel() {
     constructor(): this(HeaderRequestLineRow())
     val method = bind(true){headerRequestLineRow.methodProperty}
     val requestHost = bind(true){headerRequestLineRow.requestHostProperty}

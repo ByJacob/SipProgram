@@ -17,16 +17,28 @@ class HeaderToRowView : BaseHeaderView("To") {
     override val model = HeaderToModel()
     override val controller: HeaderToController by inject()
 
+    init {
+        controller.model = model
+    }
+
     override val root = form {
         fieldset("To") {
             field("Nazwa użytkownika") {
                 jfxtextfield {
-                    promptText = "użytkownik"
+                    bind(model.user)
+                    clear()
                 }
             }
             field("Adres użytkownika") {
                 jfxtextfield {
-                    promptText = "70"
+                    bind(model.address)
+                    clear()
+                }
+            }
+            field("Port użytkownika") {
+                jfxtextfield {
+                    bind(model.port)
+                    clear()
                 }
             }
         }

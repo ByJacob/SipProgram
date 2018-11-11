@@ -24,7 +24,6 @@ class HeaderCallIdRowView : BaseHeaderView("Call-ID") {
             field("Call-ID") {
                 jfxtextfield {
                     bind(model.callId)
-                    clear()
                 }
             }
         }

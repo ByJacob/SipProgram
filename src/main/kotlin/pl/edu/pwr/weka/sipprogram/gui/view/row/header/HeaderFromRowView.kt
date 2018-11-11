@@ -17,7 +17,6 @@ class HeaderFromRowView : BaseHeaderView("From") {
 
     init {
         controller.model = model
-        controller.initValues()
     }
 
     override val root = form {
@@ -43,7 +42,6 @@ class HeaderFromRowView : BaseHeaderView("From") {
             field("Tag") {
                 jfxtextfield {
                     bind(model.tag)
-                    clear()
                 }
             }
         }

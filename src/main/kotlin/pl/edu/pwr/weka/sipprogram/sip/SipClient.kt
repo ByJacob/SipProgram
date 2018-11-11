@@ -40,6 +40,7 @@ class SipClient : SipListener {
                 responseListener.processResponse(responseEvent)
             }
         }
+        listeners.clear()
     }
 
     override fun processTimeout(p0: TimeoutEvent?) {

@@ -40,12 +40,12 @@ class AddHeaderRowView : View("AddHeaderRowView") {
 }
 
 enum class HeaderEnum(val headerName: String, val node: Class<*>) {
-    VIA("Via", HeaderViaRowView::class.java),
+    //VIA("Via", HeaderViaRowView::class.java),
     MAX_FORWARDS("Max-Forwards", HeaderMaxForwardsRowView::class.java),
-    FROM("From", HeaderFromRowView::class.java),
-    TO("To", HeaderToRowView::class.java),
-    CALL_ID("Call-ID", HeaderCallIdRowView::class.java),
-    C_SEQ("CSeq", HeaderCSeqRowView::class.java),
+    //FROM("From", HeaderFromRowView::class.java),
+    //TO("To", HeaderToRowView::class.java),
+    //CALL_ID("Call-ID", HeaderCallIdRowView::class.java),
+    //C_SEQ("CSeq", HeaderCSeqRowView::class.java),
     USER_AGENT("User-Agent", HeaderUserAgentRowView::class.java),
     CONTACT("Contact", HeaderContactRowView::class.java),
     EXPIRES("Expires", HeaderExpiresRowView::class.java);

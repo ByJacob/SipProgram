@@ -29,7 +29,6 @@ class HeaderRequestLineRowView : BaseHeaderView("Request-Line") {
                 jfxcombobox<RequestEnum> {
                     items = FXCollections.observableArrayList(RequestEnum.values().toList())
                     bind(model.method)
-                    clear()
                 }
             }
             field("Request-URI Host") {

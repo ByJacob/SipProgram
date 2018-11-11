@@ -46,7 +46,7 @@ class ProcessConnectionView : View("ProcessConnection") {
                         }
                         jfxbutton("Wyślij", JFXButton.ButtonType.RAISED) {
                             action {
-                                controller.sendRequests()
+                                controller.startSendAll()
                             }
                         }
                         paddingAll = 10.0
@@ -63,12 +63,12 @@ class ProcessConnectionView : View("ProcessConnection") {
                         cellFormat {
                             graphic = label(it.model.formRequest.method.toString()) {
                                 val iconOne =
-                                        if (it.model.isSendingRequest.value)
+                                        if (!it.model.isSendingRequest.value)
                                             FontAwesomeIconView(FontAwesomeIcon.ARROW_RIGHT)
                                         else
                                             FontAwesomeIconView(FontAwesomeIcon.ARROW_LEFT)
                                 iconOne.glyphSize = 18
-                                val iconTwo = FontAwesomeIconView(FontAwesomeIcon.SERVER)
+                                val iconTwo = FontAwesomeIconView(FontAwesomeIcon.DESKTOP)
                                 iconTwo.glyphSize = 18
                                 style {
                                     fontSize = 18.px

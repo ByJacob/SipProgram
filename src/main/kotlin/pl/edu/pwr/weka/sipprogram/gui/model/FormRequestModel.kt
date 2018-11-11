@@ -12,7 +12,7 @@ class FormRequest {
     val methodProperty = SimpleObjectProperty<RequestEnum>(RequestEnum.REGISTER)
     var method by methodProperty
 
-    val isSendingRequestProperty = SimpleBooleanProperty(false)
+    val isSendingRequestProperty = SimpleBooleanProperty(true)
     var isSendingRequest by isSendingRequestProperty
 
 }

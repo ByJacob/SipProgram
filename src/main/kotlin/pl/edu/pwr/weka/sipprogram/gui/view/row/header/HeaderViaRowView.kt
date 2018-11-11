@@ -29,25 +29,23 @@ class HeaderViaRowView : BaseHeaderView("Via") {
                 jfxcombobox<TransportProtocol> {
                     items = FXCollections.observableArrayList(TransportProtocol.values().toList())
                     bind(model.protocol)
-                    clear()
                 }
             }
             field("Wysłane z adresu") {
                 jfxtextfield {
                     bind(model.address)
-                    clear()
+                    isDisable = true
                 }
             }
             field("Wysłane z portu") {
                 jfxtextfield {
                     bind(model.port)
-                    clear()
+                    isDisable = true
                 }
             }
             field("Branch") {
                 jfxtextfield {
                     bind(model.branch)
-                    clear()
                 }
             }
         }

@@ -2,7 +2,7 @@ package pl.edu.pwr.weka.sipprogram.gui.model.header
 
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
-import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
 
 class HeaderCSeq(){

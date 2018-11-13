@@ -48,6 +48,10 @@ enum class HeaderEnum(val headerName: String, val node: Class<*>) {
     //C_SEQ("CSeq", HeaderCSeqRowView::class.java),
     USER_AGENT("User-Agent", HeaderUserAgentRowView::class.java),
     CONTACT("Contact", HeaderContactRowView::class.java),
+    ALLOW("Allow", HeaderAllowRowView::class.java),
+    SERVER("Server", HeaderServerRowView::class.java),
+    SUPPORTED("Supported", HeaderSupportedRowView::class.java),
+    WWW_AUTHENTICATE("WWW-Authenticate", HeaderWWWAuthenticateRowView::class.java),
     EXPIRES("Expires", HeaderExpiresRowView::class.java);
 
     override fun toString(): String {

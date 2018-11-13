@@ -2,12 +2,11 @@ package pl.edu.pwr.weka.sipprogram.sip.request
 
 import org.apache.commons.codec.digest.DigestUtils
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
-import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AlgorithmEnum
-import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AuthMethodEnum
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AlgorithmEnum
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AuthSchemeEnum
 import pl.edu.pwr.weka.sipprogram.sip.auth.enums.QualityOfProtectionEnum
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.sip.SipFactory
 import javax.sip.header.AuthorizationHeader
 
 
@@ -18,7 +17,7 @@ import javax.sip.header.AuthorizationHeader
  */
 class Authorization {
     var enabled = false
-    var type = AuthMethodEnum.DIGEST
+    var type = AuthSchemeEnum.DIGEST
     var realm = "asterisk"
     var algorithm = AlgorithmEnum.MD5
     var nonce = calculateNonce()

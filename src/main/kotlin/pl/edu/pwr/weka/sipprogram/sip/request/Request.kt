@@ -6,9 +6,9 @@ import gov.nist.javax.sip.header.*
 import gov.nist.javax.sip.message.SIPRequest
 import org.slf4j.LoggerFactory
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
-import pl.edu.pwr.weka.sipprogram.sip.auth.enums.AuthMethodEnum
-import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
-import pl.edu.pwr.weka.sipprogram.util.IdGenerator
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AuthSchemeEnum
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
+import pl.edu.pwr.weka.sipprogram.util.Generators
 import java.util.*
 import java.util.UUID
 import javax.sip.address.URI
@@ -46,7 +46,7 @@ open class Request {
     var fromHeaderAddress = ""
     var fromHeaderTag: String = Random().nextInt().toString()
     var callId: String
-    var sequenceNumber = IdGenerator.generateUniqueId().toLong()
+    var sequenceNumber = Generators.generateUniqueId().toLong()
     var branchName = "z9hG4bK" + UUID.randomUUID().toString().replace("-", "")
     var maxForwards = 70
     var contactAddress = "sip:$userLogin@$localIpAddress:$localPort"
@@ -104,7 +104,7 @@ open class Request {
                 }
                 SIPHeaderNames.WWW_AUTHENTICATE -> {
                     val header = re.response.getHeader(it.toString()) as WWWAuthenticate
-                    authorization.type = AuthMethodEnum.valueOf(header.scheme.toUpperCase())
+                    authorization.type = AuthSchemeEnum.valueOf(header.scheme.toUpperCase())
 //                    header.parameters.forEach { k, v ->
 //                        when(k) {
 //                            "algorithm" -> authorization.algorithm =

@@ -19,9 +19,9 @@ class ProcessConnectionController : Controller() {
 
     private val responseAction = { index: Int, responseEventEx: ResponseEventExt ->
         runAsync {
-            val find = find<FormRequestFragment>(Scope())
-            find.controller.processResponseEventExt(responseEventEx)
-            find
+            val controller = find<FormRequestFragment>(Scope())
+            controller.controller.processResponseEventExt(responseEventEx)
+            controller
         } ui {
             formRequestFragmentList.add(index, it)
             sendRequest(index + 1)

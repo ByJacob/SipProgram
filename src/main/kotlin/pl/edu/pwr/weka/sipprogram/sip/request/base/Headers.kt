@@ -3,6 +3,7 @@ package pl.edu.pwr.weka.sipprogram.sip.request.base
 import gov.nist.javax.sip.header.Via
 import gov.nist.javax.sip.header.ViaList
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import pl.edu.pwr.weka.sipprogram.sip.request.Authorization
 import javax.sip.header.*
 

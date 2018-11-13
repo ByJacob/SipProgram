@@ -15,6 +15,7 @@ class Styles : JFXStylesheet() {
     companion object {
         //class
         val glyphIcon by cssclass()
+        val jfxChipView by cssclass()
         //colors
         val decoratorColor = Color.web("#5264AE").derive(-0.2)
     }
@@ -38,6 +39,10 @@ class Styles : JFXStylesheet() {
         }
         glyphIcon {
             fontFamily = "FontAwesome"
+        }
+
+        jfxChipView {
+            backgroundColor += Color.RED
         }
     }
 }

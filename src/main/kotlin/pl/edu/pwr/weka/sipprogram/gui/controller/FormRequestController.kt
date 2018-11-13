@@ -11,7 +11,7 @@ import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderRequestLineControl
 import pl.edu.pwr.weka.sipprogram.gui.model.FormRequestModel
 import pl.edu.pwr.weka.sipprogram.gui.view.row.AddHeaderRowView
 import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
-import pl.edu.pwr.weka.sipprogram.sip.request.base.RequestEnum
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
 
 

@@ -41,6 +41,11 @@ class HeaderToRowView : BaseHeaderView("To") {
                     clear()
                 }
             }
+            field("Tag") {
+                jfxtextfield {
+                    bind(model.tag)
+                }
+            }
         }
     }
 

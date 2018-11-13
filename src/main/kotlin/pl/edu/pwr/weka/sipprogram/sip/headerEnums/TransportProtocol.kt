@@ -10,7 +10,7 @@ enum class TransportProtocol(val sipName: String) {
     TCP("tcp");
 
     override fun toString(): String {
-        return sipName
+        return sipName.toUpperCase()
     }
 
 

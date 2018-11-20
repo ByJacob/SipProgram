@@ -14,5 +14,5 @@ class HeaderSupported {
 class HeaderSupportedModel(val headerSupported: HeaderSupported) : ViewModel() {
     constructor() : this(HeaderSupported())
 
-    val supportedwList = bind(true) { headerSupported.supportedListProperty }
+    val supportedList = bind(true) { headerSupported.supportedListProperty }
 }

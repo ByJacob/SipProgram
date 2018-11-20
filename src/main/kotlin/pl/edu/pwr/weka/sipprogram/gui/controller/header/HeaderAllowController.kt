@@ -8,7 +8,7 @@ import javax.sip.header.Header
 class HeaderAllowController: BaseHeaderController() {
     override fun toSipHeader(): Header {
         val model = model as HeaderAllowModel
-        return SipProtocol.headerFactory.createAllowHeader(model.headerAllow.allowList
+        return SipProtocol.headerFactory.createAllowHeader(model.allowList
                 .joinToString {it.sipName.toUpperCase()})
     }
 

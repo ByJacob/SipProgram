@@ -42,7 +42,9 @@ class Styles : JFXStylesheet() {
         }
 
         jfxChipView {
-            backgroundColor += Color.RED
+            backgroundColor += Color.WHITE
+            backgroundRadius += box(16.px)
+            padding = box(4.px)
         }
     }
 }

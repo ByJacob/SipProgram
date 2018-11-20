@@ -1,6 +1,8 @@
 package pl.edu.pwr.weka.sipprogram
 
+import javafx.stage.Stage
 import kfoenix.jfxdecorator
+import org.scenicview.ScenicView
 import pl.edu.pwr.weka.sipprogram.gui.view.MainView
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import tornadofx.*
@@ -21,6 +23,10 @@ class PreMainView : View() {
 
 class MainApp : App(PreMainView::class, Styles::class) {
 
+    init {
+        reloadStylesheetsOnFocus()
+    }
+
     override fun stop() {
         System.exit(0)
     }
@@ -28,4 +34,5 @@ class MainApp : App(PreMainView::class, Styles::class) {
 
 fun main(args: Array<String>) {
     launch<MainApp>(args)
+
 }

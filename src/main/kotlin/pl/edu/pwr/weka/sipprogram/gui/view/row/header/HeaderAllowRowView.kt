@@ -6,6 +6,7 @@ import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderAllowController
 import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderAllowModel
 import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
+import pl.edu.pwr.weka.sipprogram.util.Toast
 import tornadofx.*
 
 /**
@@ -23,13 +24,37 @@ class HeaderAllowRowView : BaseHeaderView("Allow") {
 
     override val root = form {
         fieldset("Allow") {
-            field("Allow") {
-                val chipView = JFXChipView<RequestEnum>()
-                chipView.suggestions.addAll(RequestEnum.values())
-                chipView.chips.bind(model.allowList.value) { request -> request}
-                add(chipView)
+            field {
+                vbox {
+                    val chipView = JFXChipView<RequestEnum>()
+                    chipView.suggestions.addAll(RequestEnum.values())
+                    chipView.chips.addListener { c: ListChangeListener.Change<*> ->
+                        while (c.next()) {
+                            c.removed.forEach { model.allowList.remove(it) }
+                            c.addedSubList.forEach {
+                                when (it) {
+                                    is RequestEnum -> {
+                                        if (model.allowList.indexOf(it)<0)
+                                            model.allowList.add(it)
+                                        else {
+                                            chipView.chips.remove(it as Any)
+                                        }
+                                    }
+                                    else -> {
+                                        chipView.chips.remove(it)
+                                        val msg = "To nie jest poprawna wartość: $it.\n" +
+                                                "Możliwe wartości: " + RequestEnum.values()
+                                                .joinToString { itList -> itList.sipName }
+                                        Toast.makeText(msg, 1500, 500, 500)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    add(chipView)
+                }
             }
+
         }
     }
-
 }

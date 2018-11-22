@@ -23,7 +23,7 @@ class MainView : View() {
         center {
             jfxtabpane {
                 tab<ProcessConnectionView>()
-                tab<SecondTab>()
+                tab<AnimationSipView>()
             }
         }
         bottom {
@@ -32,12 +32,4 @@ class MainView : View() {
             }
         }
     }
-}
-
-class FirstTab : UIComponent("Tab1") {
-    override val root = vbox { }
-}
-
-class SecondTab : UIComponent("Tab2") {
-    override val root = vbox { }
 }

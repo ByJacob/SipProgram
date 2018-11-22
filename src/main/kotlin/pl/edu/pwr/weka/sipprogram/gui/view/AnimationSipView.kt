@@ -21,6 +21,49 @@ class AnimationSipView : View("Animation") {
     var centerTopPadding = SimpleDoubleProperty(0.0)
     val animationDuration = Duration.seconds(3.0)
     val arrowLineFixWidth = 25.0
+    val requestNode = { requestName: String, isArrowRight: Boolean ->
+        vbox requestVBox@{
+            alignment = Pos.CENTER
+            label(requestName)
+            vbox {
+                alignment = Pos.CENTER
+                hbox {
+                    alignment = if (isArrowRight) Pos.CENTER_LEFT else Pos.CENTER_RIGHT
+                    if (!isArrowRight)
+                        svgicon(SvgIcons.arrowLeft, 20)
+                    line {
+                        startX = 0.0
+                        startY = 0.0
+                        endY = 0.0
+                        endX = 0.0
+                        runLater(100.millis) {
+                            timeline {
+                                keyframe(animationDuration) {
+                                    setOnFinished {
+                                        endX = this@requestVBox.widthProperty().value - arrowLineFixWidth
+                                        this@requestVBox.widthProperty().addListener { _, _, newValue ->
+                                            runAsync {
+                                                newValue.toDouble() - arrowLineFixWidth
+                                            } ui {
+                                                endX = it
+                                            }
+                                        }
+                                    }
+                                    keyvalue(endXProperty(),
+                                            this@requestVBox.widthProperty().value - arrowLineFixWidth)
+                                }
+                            }
+                        }
+
+                        strokeWidth = 3.0
+                        strokeDashArray.addAll(30.0, 5.0)
+                    }
+                    if (isArrowRight)
+                        svgicon(SvgIcons.arrowRight, 20)
+                }
+            }
+        }
+    }
 
     override val root = borderpane {
         prefWidth = 800.0
@@ -57,148 +100,21 @@ class AnimationSipView : View("Animation") {
                     maxHeightProperty().bind(centerTopPadding)
                     minHeightProperty().bind(centerTopPadding)
                 }
-                vbox requestVBox@{
-                    alignment = Pos.CENTER
-                    subscribe<Scene1Request1> {
-                        label("REGISTER")
-                        vbox {
-                            alignment = Pos.CENTER
-                            hbox {
-                                alignment = Pos.CENTER_LEFT
-                                line {
-                                    startX = 0.0
-                                    startY = 0.0
-                                    endY = 0.0
-                                    endX = 0.0
-                                    timeline {
-                                        keyframe(animationDuration) {
-                                            setOnFinished {
-                                                this@requestVBox.widthProperty().addListener { _, _, newValue ->
-                                                    runAsync {
-                                                        newValue.toDouble() - arrowLineFixWidth
-                                                    } ui {
-                                                        endX = it
-                                                    }
-                                                }
-                                            }
-                                            keyvalue(endXProperty(), this@requestVBox.widthProperty().value - arrowLineFixWidth)
-                                        }
-                                    }
 
-                                    strokeWidth = 3.0
-                                    strokeDashArray.addAll(30.0, 5.0)
-                                }
-                                svgicon(SvgIcons.arrowRight, 20)
-                            }
-                        }
-                    }
+                subscribe<Scene1Request1> {
+                    add(requestNode("REGISTER", true))
                 }
-                vbox requestVBox@{
-                    alignment = Pos.CENTER
-                    subscribe<Scene1Request2> {
-                        label("401 Unauthorized")
-                        vbox {
-                            alignment = Pos.CENTER
-                            hbox {
-                                alignment = Pos.CENTER_RIGHT
-                                svgicon(SvgIcons.arrowLeft, 20)
-                                line {
-                                    startX = 0.0
-                                    startY = 0.0
-                                    endY = 0.0
-                                    timeline {
-                                        keyframe(animationDuration) {
-                                            setOnFinished {
-                                                this@requestVBox.widthProperty().addListener { _, _, newValue ->
-                                                    runAsync {
-                                                        newValue.toDouble() - arrowLineFixWidth
-                                                    } ui {
-                                                        endX = it
-                                                    }
-                                                }
-                                            }
-                                            keyvalue(endXProperty(), this@requestVBox.widthProperty().value - arrowLineFixWidth)
-                                        }
 
-                                    }
-                                    //endXProperty().bind(lineWidthProperty.subtract(30))
-                                    strokeWidth = 3.0
-                                    strokeDashArray.addAll(30.0, 5.0)
-                                }
-                            }
-                        }
-                    }
+                subscribe<Scene1Request2> {
+                    add(requestNode("401 Unauthorized", false))
                 }
-                vbox requestVBox@{
-                    alignment = Pos.CENTER
-                    subscribe<Scene1Request3> {
-                        label("REGISTER")
-                        vbox {
-                            alignment = Pos.CENTER
-                            hbox {
-                                alignment = Pos.CENTER_LEFT
-                                line {
-                                    startX = 0.0
-                                    startY = 0.0
-                                    endY = 0.0
-                                    timeline {
-                                        keyframe(animationDuration) {
-                                            setOnFinished {
-                                                this@requestVBox.widthProperty().addListener { _, _, newValue ->
-                                                    runAsync {
-                                                        newValue.toDouble() - arrowLineFixWidth
-                                                    } ui {
-                                                        endX = it
-                                                    }
-                                                }
-                                            }
-                                            keyvalue(endXProperty(), this@requestVBox.widthProperty().value - arrowLineFixWidth)
-                                        }
 
-                                    }
-                                    //endXProperty().bind(lineWidthProperty.subtract(30))
-                                    strokeWidth = 3.0
-                                    strokeDashArray.addAll(30.0, 5.0)
-                                }
-                                svgicon(SvgIcons.arrowRight, 20)
-                            }
-                        }
-                    }
+                subscribe<Scene1Request3> {
+                    add(requestNode("REGISTER", true))
                 }
-                vbox requestVBox@{
-                    alignment = Pos.CENTER
-                    subscribe<Scene1Request4> {
-                        label("200 OK")
-                        vbox {
-                            alignment = Pos.CENTER
-                            hbox {
-                                alignment = Pos.CENTER_RIGHT
-                                svgicon(SvgIcons.arrowLeft, 20)
-                                line {
-                                    startX = 0.0
-                                    startY = 0.0
-                                    endY = 0.0
-                                    timeline {
-                                        keyframe(animationDuration) {
-                                            setOnFinished {
-                                                this@requestVBox.widthProperty().addListener { _, _, newValue ->
-                                                    runAsync {
-                                                        newValue.toDouble() - arrowLineFixWidth
-                                                    } ui {
-                                                        endX = it
-                                                    }
-                                                }
-                                            }
-                                            keyvalue(endXProperty(), this@requestVBox.widthProperty().value - arrowLineFixWidth)
-                                        }
-                                    }
-                                    //endXProperty().bind(lineWidthProperty.subtract(30))
-                                    strokeWidth = 3.0
-                                    strokeDashArray.addAll(30.0, 5.0)
-                                }
-                            }
-                        }
-                    }
+
+                subscribe<Scene1Request4> {
+                    add(requestNode("200 OK", false))
                 }
             }
         }

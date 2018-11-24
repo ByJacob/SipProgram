@@ -12,18 +12,13 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderCallIdRowView : BaseHeaderView("Call-ID") {
-    override val model = HeaderCallIdModel()
     override val controller: HeaderCallIdController by inject()
-
-    init {
-        controller.model = model
-    }
 
     override val root = form {
         fieldset("Call-ID") {
             field("Call-ID") {
                 jfxtextfield {
-                    bind(model.callId)
+                    bind(controller.model.callId)
                 }
             }
         }

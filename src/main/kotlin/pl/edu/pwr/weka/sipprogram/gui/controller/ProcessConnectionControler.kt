@@ -34,8 +34,16 @@ class ProcessConnectionController : Controller() {
     }
 
     fun startSendAll() {
+        SipProtocol.sipClient.listeners.clear()
         formRequestFragmentList.removeAll(formRequestFragmentList.filter { !it.model.isSendingRequest.value })
         sendRequest(0)
+    }
+
+    fun startSendLast() {
+        SipProtocol.sipClient.listeners.clear()
+        if(!formRequestFragmentList.last().model.isSendingRequest.value)
+            formRequestFragmentList.remove(formRequestFragmentList.last())
+        sendRequest(formRequestFragmentList.lastIndex)
     }
 
     private fun sendRequest(index: Int) {

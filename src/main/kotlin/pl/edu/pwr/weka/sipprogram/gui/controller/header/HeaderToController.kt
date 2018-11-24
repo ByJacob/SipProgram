@@ -6,11 +6,12 @@ import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import javax.sip.header.Header
 
 class HeaderToController : BaseHeaderController() {
+
+    override val model = HeaderToModel()
     override fun toSipHeader(): Header {
-        val model = model as HeaderToModel
         return SipProtocol.headerFactory.createToHeader(
                 SipProtocol.addressFactory.createAddress(
-                        "sip:" + model.address.value + ":" + model.port.value.toString()
+                        "sip:${model.user.value}@${model.address.value}:${model.port.value}"
                 ),
                 null)
     }

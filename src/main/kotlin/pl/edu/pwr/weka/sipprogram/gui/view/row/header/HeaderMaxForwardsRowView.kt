@@ -12,18 +12,13 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderMaxForwardsRowView : BaseHeaderView("Max-Forwards") {
-    override val model = HeaderMaxForwardsModel()
     override val controller: HeaderMaxForwardsController by inject()
-
-    init {
-        controller.model = model
-    }
 
     override val root = form {
         fieldset("Max-Forwards") {
             field("Max Forwards") {
                 jfxtextfield {
-                    bind(model.maxForwards)
+                    bind(controller.model.maxForwards)
                     clear()
                 }
             }

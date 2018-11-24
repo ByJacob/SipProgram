@@ -12,36 +12,31 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderFromRowView : BaseHeaderView("From") {
-    override val model = HeaderFromModel()
     override val controller: HeaderFromController by inject()
-
-    init {
-        controller.model = model
-    }
 
     override val root = form {
         fieldset("From") {
             field("Nazwa użytkownika") {
                 jfxtextfield {
-                    bind(model.user)
+                    bind(controller.model.user)
                     clear()
                 }
             }
             field("Adres użytkownika") {
                 jfxtextfield {
-                    bind(model.address, true)
+                    bind(controller.model.address, true)
                     isDisable = true
                 }
             }
             field("Port użytkownika") {
                 jfxtextfield {
-                    bind(model.port, true)
+                    bind(controller.model.port, true)
                     isDisable = true
                 }
             }
             field("Tag") {
                 jfxtextfield {
-                    bind(model.tag)
+                    bind(controller.model.tag)
                 }
             }
         }

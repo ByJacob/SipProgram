@@ -15,12 +15,8 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderAllowRowView : BaseHeaderView("Allow") {
-    override val model = HeaderAllowModel()
     override val controller: HeaderAllowController by inject()
 
-    init {
-        controller.model = model
-    }
 
     override val root = form {
         fieldset("Allow") {
@@ -28,7 +24,7 @@ class HeaderAllowRowView : BaseHeaderView("Allow") {
                 vbox {
                     val chipView = JFXChipView<RequestEnum>()
                     chipView.suggestions.addAll(RequestEnum.values())
-                    chipView.chips.bind(model.allowList.value) { request -> request }
+                    chipView.chips.bind(controller.model.allowList.value) { request -> request }
                     add(chipView)
                 }
             }

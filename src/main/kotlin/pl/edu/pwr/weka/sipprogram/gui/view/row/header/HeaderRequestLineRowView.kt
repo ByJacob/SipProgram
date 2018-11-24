@@ -17,29 +17,23 @@ import tornadofx.*
 class HeaderRequestLineRowView : BaseHeaderView("Request-Line") {
     override val controller: HeaderRequestLineController by inject()
 
-    override val model = HeaderRequestLineModel()
-
-    init {
-        controller.model = model
-    }
-
     override val root = form {
         fieldset("Request-Line") {
             field("Metoda") {
                 jfxcombobox<RequestEnum> {
                     items = FXCollections.observableArrayList(RequestEnum.values().toList())
-                    bind(model.method)
+                    bind(controller.model.method)
                 }
             }
             field("Request-URI Host") {
                 jfxtextfield {
-                    bind(model.requestHost)
+                    bind(controller.model.requestHost)
                     clear()
                 }
             }
             field("Request-URI Port") {
                 jfxtextfield {
-                    bind(model.requestPort)
+                    bind(controller.model.requestPort)
                     clear()
                 }
             }

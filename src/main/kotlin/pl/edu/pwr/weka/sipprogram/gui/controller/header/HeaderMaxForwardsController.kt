@@ -6,8 +6,9 @@ import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import javax.sip.header.Header
 
 class HeaderMaxForwardsController: BaseHeaderController() {
+    override val model = HeaderMaxForwardsModel()
+
     override fun toSipHeader(): Header {
-        val model = model as HeaderMaxForwardsModel
         return SipProtocol.headerFactory.createMaxForwardsHeader(model.maxForwards.value.toInt())
     }
 

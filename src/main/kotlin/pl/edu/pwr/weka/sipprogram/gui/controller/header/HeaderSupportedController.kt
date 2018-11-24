@@ -7,8 +7,9 @@ import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import javax.sip.header.Header
 
 class HeaderSupportedController: BaseHeaderController() {
+    override val model = HeaderSupportedModel()
+
     override fun toSipHeader(): Header {
-        val model = model as HeaderSupportedModel
         return SipProtocol.headerFactory.createSupportedHeader(model.supportedList
                 .joinToString {it.sipName})
     }

@@ -44,7 +44,12 @@ class ProcessConnectionView : View("ProcessConnection") {
                                 fire(OpenFormRequestEvent(controller.formRequestFragmentList.lastIndex))
                             }
                         }
-                        jfxbutton("Wyślij", JFXButton.ButtonType.RAISED) {
+                        jfxbutton("Wyślij ostatni", JFXButton.ButtonType.RAISED) {
+                        action {
+                            controller.startSendLast()
+                        }
+                    }
+                        jfxbutton("Wyślij wszystko", JFXButton.ButtonType.RAISED) {
                             action {
                                 controller.startSendAll()
                             }

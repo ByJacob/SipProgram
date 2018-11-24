@@ -16,36 +16,31 @@ import tornadofx.*
  * Date 10.11.2018 16:20
  */
 class HeaderViaRowView : BaseHeaderView("Via") {
-    override val model = HeaderViaModel()
     override val controller: HeaderViaController by inject()
-
-    init {
-        controller.model = model
-    }
 
     override val root = form {
         fieldset("Via") {
             field("Protokół") {
                 jfxcombobox<TransportProtocol> {
                     items = FXCollections.observableArrayList(TransportProtocol.values().toList())
-                    bind(model.protocol)
+                    bind(controller.model.protocol)
                 }
             }
             field("Wysłane z adresu") {
                 jfxtextfield {
-                    bind(model.address)
+                    bind(controller.model.address)
                     isDisable = true
                 }
             }
             field("Wysłane z portu") {
                 jfxtextfield {
-                    bind(model.port)
+                    bind(controller.model.port)
                     isDisable = true
                 }
             }
             field("Branch") {
                 jfxtextfield {
-                    bind(model.branch)
+                    bind(controller.model.branch)
                 }
             }
         }

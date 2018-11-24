@@ -12,30 +12,25 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderContactRowView : BaseHeaderView("Contact") {
-    override val model = HeaderContactModel()
     override val controller: HeaderContactController by inject()
-    init {
-        controller.model = model
-    }
-
 
     override val root = form {
         fieldset("Contact") {
             field("Nazwa użytkownika") {
                 jfxtextfield {
-                    bind(model.user)
+                    bind(controller.model.user)
                     clear()
                 }
             }
             field("Adres użytkownika") {
                 jfxtextfield {
-                    bind(model.address)
+                    bind(controller.model.address)
                     clear()
                 }
             }
             field("Port użytkownika") {
                 jfxtextfield {
-                    bind(model.port)
+                    bind(controller.model.port)
                     clear()
                 }
             }

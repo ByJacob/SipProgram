@@ -13,12 +13,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderSupportedRowView : BaseHeaderView("Supported") {
-    override val model = HeaderSupportedModel()
     override val controller: HeaderSupportedController by inject()
-
-    init {
-        controller.model = model
-    }
 
     override val root = form {
         fieldset("Supported") {
@@ -26,7 +21,7 @@ class HeaderSupportedRowView : BaseHeaderView("Supported") {
                 vbox {
                     val chipView = JFXChipView<SupportedEnum>()
                     chipView.suggestions.addAll(SupportedEnum.values())
-                    chipView.chips.bind(model.supportedList.value) { request -> request }
+                    chipView.chips.bind(controller.model.supportedList.value) { request -> request }
                     add(chipView)
                 }
             }

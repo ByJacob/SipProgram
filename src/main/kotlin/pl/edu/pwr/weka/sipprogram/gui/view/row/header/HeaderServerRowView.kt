@@ -14,18 +14,13 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderServerRowView : BaseHeaderView("Server") {
-    override val model = HeaderServerModel()
     override val controller: HeaderServerController by inject()
-
-    init {
-        controller.model = model
-    }
 
     override val root = form {
         fieldset("Server") {
             field("Server") {
                 jfxtextfield {
-                    bind(model.server)
+                    bind(controller.model.server)
                 }
             }
         }

@@ -78,36 +78,36 @@ class FormRequestController : Controller() {
         listHeaderRowsView.clear()
         model.formRequest.method = RequestEnum.ACK
         val headerRequestLineRowView = HeaderRequestLineRowView()
-        headerRequestLineRowView.model.headerRequestLineRow.method = RequestEnum.ACK
-        headerRequestLineRowView.model.headerRequestLineRow.requestHost = responseEventExt.remoteIpAddress
-        headerRequestLineRowView.model.headerRequestLineRow.requestPort = responseEventExt.remotePort
+        headerRequestLineRowView.controller.model.headerRequestLineRow.method = RequestEnum.ACK
+        headerRequestLineRowView.controller.model.headerRequestLineRow.requestHost = responseEventExt.remoteIpAddress
+        headerRequestLineRowView.controller.model.headerRequestLineRow.requestPort = responseEventExt.remotePort
         listHeaderRowsView.add(headerRequestLineRowView)
         val sipResponse = responseEventExt.response as SIPResponse
 
         val headerFromRowView = HeaderFromRowView()
-        headerFromRowView.model.headerFrom.port = (sipResponse.fromHeader.address as AddressImpl).port
-        headerFromRowView.model.headerFrom.user = ((sipResponse.fromHeader.address as AddressImpl).uri as SipUri).user
-        headerFromRowView.model.headerFrom.address = (sipResponse.fromHeader.address as AddressImpl).host
-        headerFromRowView.model.headerFrom.tag = sipResponse.fromHeader.getParameter("tag")
+        headerFromRowView.controller.model.headerFrom.port = (sipResponse.fromHeader.address as AddressImpl).port
+        headerFromRowView.controller.model.headerFrom.user = ((sipResponse.fromHeader.address as AddressImpl).uri as SipUri).user
+        headerFromRowView.controller.model.headerFrom.address = (sipResponse.fromHeader.address as AddressImpl).host
+        headerFromRowView.controller.model.headerFrom.tag = sipResponse.fromHeader.getParameter("tag")
         listHeaderRowsView.add(headerFromRowView)
 
         val headerToRowView = HeaderToRowView()
-        headerToRowView.model.headerTo.port = (sipResponse.toHeader.address as AddressImpl).port
-        headerToRowView.model.headerTo.user = ((sipResponse.toHeader.address as AddressImpl).uri as SipUri).user
-        headerToRowView.model.headerTo.address = (sipResponse.toHeader.address as AddressImpl).host
-        headerToRowView.model.headerTo.tag = sipResponse.toHeader.getParameter("tag")
+        headerToRowView.controller.model.headerTo.port = (sipResponse.toHeader.address as AddressImpl).port
+        headerToRowView.controller.model.headerTo.user = ((sipResponse.toHeader.address as AddressImpl).uri as SipUri).user
+        headerToRowView.controller.model.headerTo.address = (sipResponse.toHeader.address as AddressImpl).host
+        headerToRowView.controller.model.headerTo.tag = sipResponse.toHeader.getParameter("tag")
         listHeaderRowsView.add(headerToRowView)
         sipResponse.headers.forEach { header ->
             when (header) {
                 is ViaList -> {
                     header.forEach {
                         val headerViaRowView = HeaderViaRowView()
-                        headerViaRowView.model.headerVia.protocol = TransportProtocol.valueOf(
+                        headerViaRowView.controller.model.headerVia.protocol = TransportProtocol.valueOf(
                                 it.sentProtocol.transport
                         )
-                        headerViaRowView.model.headerVia.address = it.sentBy.host.hostname
-                        headerViaRowView.model.headerVia.port = it.sentBy.port
-                        headerViaRowView.model.headerVia.branch = it.getParameter("branch")
+                        headerViaRowView.controller.model.headerVia.address = it.sentBy.host.hostname
+                        headerViaRowView.controller.model.headerVia.port = it.sentBy.port
+                        headerViaRowView.controller.model.headerVia.branch = it.getParameter("branch")
                         listHeaderRowsView.add(headerViaRowView)
                     }
                 }
@@ -115,12 +115,12 @@ class FormRequestController : Controller() {
         }
 
         val headerCallIdRowView = HeaderCallIdRowView()
-        headerCallIdRowView.model.headerCallId.callId = sipResponse.callIdHeader.callId
+        headerCallIdRowView.controller.model.headerCallId.callId = sipResponse.callIdHeader.callId
         listHeaderRowsView.add(headerCallIdRowView)
 
         val headerCSeqRowView = HeaderCSeqRowView()
-        headerCSeqRowView.model.headerCSeq.method = RequestEnum.valueOf(sipResponse.cSeqHeader.method)
-        headerCSeqRowView.model.headerCSeq.number = sipResponse.cSeqHeader.seqNumber.toInt()
+        headerCSeqRowView.controller.model.headerCSeq.method = RequestEnum.valueOf(sipResponse.cSeqHeader.method)
+        headerCSeqRowView.controller.model.headerCSeq.number = sipResponse.cSeqHeader.seqNumber.toInt()
         listHeaderRowsView.add(headerCSeqRowView)
         sipResponse.headers.forEach { header ->
             when (header) {
@@ -132,31 +132,36 @@ class FormRequestController : Controller() {
                     while (iteratorListProduct.hasNext()) {
                         listProduct.add(iteratorListProduct.next() as String)
                     }
-                    headerServerRowView.model.headerServer.server = listProduct.joinToString()
+                    headerServerRowView.controller.model.headerServer.server = listProduct.joinToString()
                     listHeaderRowsView.add(headerServerRowView)
                 }
                 is AllowList -> {
                     val headerAllowRowView = HeaderAllowRowView()
                     header.forEach {
-                        headerAllowRowView.model.allowList.add(RequestEnum.valueOf(it.method))
+                        headerAllowRowView.controller.model.allowList.add(RequestEnum.valueOf(it.method))
                     }
                     listHeaderRowsView.add(headerAllowRowView)
                 }
                 is SupportedList -> {
                     val headerSupportedRowView = HeaderSupportedRowView()
                     header.forEach {
-                        headerSupportedRowView.model.supportedList.add(SupportedEnum.valueOf(it.optionTag.toUpperCase()))
+                        headerSupportedRowView.controller.model.supportedList
+                                .add(SupportedEnum.valueOf(it.optionTag.toUpperCase()))
                     }
                     listHeaderRowsView.add(headerSupportedRowView)
                 }
                 is WWWAuthenticateList -> {
                     header.forEach {
                         val headerWWWAuthenticateRowView = HeaderWWWAuthenticateRowView()
-                        headerWWWAuthenticateRowView.model.headerWWWAuthenticate.scheme = AuthSchemeEnum.valueOf(it.scheme.toUpperCase())
+                        headerWWWAuthenticateRowView.controller.model.headerWWWAuthenticate.scheme =
+                                AuthSchemeEnum.valueOf(it.scheme.toUpperCase())
                         println(it.getParameter("algorithm"))
-                        headerWWWAuthenticateRowView.model.headerWWWAuthenticate.algorithm = AlgorithmEnum.valueOf(it.getParameter("algorithm").toUpperCase().replace("-", ""))
-                        headerWWWAuthenticateRowView.model.headerWWWAuthenticate.realm = it.getParameter("realm")
-                        headerWWWAuthenticateRowView.model.headerWWWAuthenticate.nonce = it.getParameter("nonce")
+                        headerWWWAuthenticateRowView.controller.model.headerWWWAuthenticate.algorithm =
+                                AlgorithmEnum.valueOf(it.getParameter("algorithm").toUpperCase().replace("-", ""))
+                        headerWWWAuthenticateRowView.controller.model.headerWWWAuthenticate.realm =
+                                it.getParameter("realm")
+                        headerWWWAuthenticateRowView.controller.model.headerWWWAuthenticate.nonce =
+                                it.getParameter("nonce")
                         listHeaderRowsView.add(headerWWWAuthenticateRowView)
                     }
                 }

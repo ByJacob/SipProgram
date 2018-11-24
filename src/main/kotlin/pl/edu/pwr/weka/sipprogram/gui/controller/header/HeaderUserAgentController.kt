@@ -6,8 +6,9 @@ import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import javax.sip.header.Header
 
 class HeaderUserAgentController: BaseHeaderController() {
+    override var model = HeaderUserAgentModel()
+
     override fun toSipHeader(): Header {
-        val model = model as HeaderUserAgentModel
         return SipProtocol.headerFactory.createUserAgentHeader(listOf(model.userAgent.value))
     }
 

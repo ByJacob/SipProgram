@@ -12,18 +12,13 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderExpiresRowView : BaseHeaderView("Expires") {
-    override val model = HeaderExpiresModel()
     override val controller: HeaderExpiresController by inject()
-
-    init {
-        controller.model = model
-    }
 
     override val root = form {
         fieldset("Expires") {
             field("Expires") {
                 jfxtextfield {
-                    bind(model.expires)
+                    bind(controller.model.expires)
                     clear()
                 }
             }

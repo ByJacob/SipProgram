@@ -28,7 +28,7 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
             fire(ProcessConnectionView.RefreshListFormRequestEvent())
         }
         val headerRequestLineRowView = HeaderRequestLineRowView()
-        model.method.bind(headerRequestLineRowView.model.method)
+        model.method.bind(headerRequestLineRowView.controller.model.method)
         controller.listHeaderRowsView.add(headerRequestLineRowView)
         controller.listHeaderRowsView.add(HeaderFromRowView())
         controller.listHeaderRowsView.add(HeaderToRowView())

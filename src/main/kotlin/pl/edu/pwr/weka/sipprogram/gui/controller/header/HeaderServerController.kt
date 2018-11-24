@@ -6,8 +6,9 @@ import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import javax.sip.header.Header
 
 class HeaderServerController : BaseHeaderController() {
+    override val model = HeaderServerModel()
+
     override fun toSipHeader(): Header {
-        val model = model as HeaderServerModel
         return SipProtocol.headerFactory.createServerHeader(listOf(model.server.value))
     }
 

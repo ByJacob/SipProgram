@@ -51,7 +51,7 @@ enum class HeaderEnum(val headerName: String, val node: Class<*>) {
     ALLOW("Allow", HeaderAllowRowView::class.java),
     SERVER("Server", HeaderServerRowView::class.java),
     SUPPORTED("Supported", HeaderSupportedRowView::class.java),
-    WWW_AUTHENTICATE("WWW-Authenticate", HeaderWWWAuthenticateRowView::class.java),
+    WWW_AUTHENTICATE("Authorization", HeaderAuthorizationRowView::class.java),
     EXPIRES("Expires", HeaderExpiresRowView::class.java);
 
     override fun toString(): String {

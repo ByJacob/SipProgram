@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
+import tornadofx.getValue
+import tornadofx.setValue
 
 class HeaderRequestLineRow {
     val methodProperty = SimpleObjectProperty<RequestEnum>(RequestEnum.REGISTER)
@@ -16,6 +18,10 @@ class HeaderRequestLineRow {
     val requestPortProperty = SimpleIntegerProperty(0)
     var requestPort by requestPortProperty
 
+    val statusCodeProperty = SimpleIntegerProperty()
+    var statusCode by statusCodeProperty
+
+
 }
 
 class HeaderRequestLineModel(val headerRequestLineRow: HeaderRequestLineRow) : ViewModel() {
@@ -23,5 +29,6 @@ class HeaderRequestLineModel(val headerRequestLineRow: HeaderRequestLineRow) : V
     val method = bind(true){headerRequestLineRow.methodProperty}
     val requestHost = bind(true){headerRequestLineRow.requestHostProperty}
     val requestPort = bind(true){headerRequestLineRow.requestPortProperty}
+    val statusCode = bind(true){headerRequestLineRow.statusCodeProperty}
 }
 

@@ -10,7 +10,7 @@ import javax.sip.header.Header
  */
 abstract class BaseHeaderController : Controller() {
 
-    lateinit var model: ViewModel
+    abstract val model: ViewModel
 
     abstract fun toSipHeader(): Header
 }

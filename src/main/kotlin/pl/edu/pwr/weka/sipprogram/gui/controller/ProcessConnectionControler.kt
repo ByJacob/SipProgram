@@ -6,6 +6,7 @@ import pl.edu.pwr.weka.sipprogram.gui.view.fragment.FormRequestFragment
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import pl.edu.pwr.weka.sipprogram.sip.request.base.ResponseListener
 import tornadofx.*
+import java.lang.Exception
 import javax.sip.ResponseEvent
 
 /**
@@ -20,7 +21,11 @@ class ProcessConnectionController : Controller() {
     private val responseAction = { index: Int, responseEventEx: ResponseEventExt ->
         runAsync {
             val controller = find<FormRequestFragment>(Scope())
-            controller.controller.processResponseEventExt(responseEventEx)
+            try {
+                controller.controller.processResponseEventExt(responseEventEx)
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
             controller
         } ui {
             formRequestFragmentList.add(index, it)

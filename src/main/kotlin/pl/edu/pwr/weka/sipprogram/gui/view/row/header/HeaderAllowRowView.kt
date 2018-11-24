@@ -28,29 +28,7 @@ class HeaderAllowRowView : BaseHeaderView("Allow") {
                 vbox {
                     val chipView = JFXChipView<RequestEnum>()
                     chipView.suggestions.addAll(RequestEnum.values())
-                    chipView.chips.addListener { c: ListChangeListener.Change<*> ->
-                        while (c.next()) {
-                            c.removed.forEach { model.allowList.remove(it) }
-                            c.addedSubList.forEach {
-                                when (it) {
-                                    is RequestEnum -> {
-                                        if (model.allowList.indexOf(it)<0)
-                                            model.allowList.add(it)
-                                        else {
-                                            chipView.chips.remove(it as Any)
-                                        }
-                                    }
-                                    else -> {
-                                        chipView.chips.remove(it)
-                                        val msg = "To nie jest poprawna wartość: $it.\n" +
-                                                "Możliwe wartości: " + RequestEnum.values()
-                                                .joinToString { itList -> itList.sipName }
-                                        Toast.makeText(msg, 1500, 500, 500)
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    chipView.chips.bind(model.allowList.value) { request -> request }
                     add(chipView)
                 }
             }

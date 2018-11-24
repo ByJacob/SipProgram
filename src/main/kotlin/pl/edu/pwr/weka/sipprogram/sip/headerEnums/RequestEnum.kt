@@ -9,15 +9,15 @@ enum class RequestEnum(val sipName: String) {
     REGISTER("Register"),
     INVITE("Invite"),
     ACK("Ack"),
-    //CANCEL("Cancel"),
-    //OPTIONS("Options"),
-    //BYE("Bye"),
-    //REFER("Refer"),
-    //SUBSCRIBE("Subscribe"),
-    //NOTIFY("Notify"),
-    //INFO("Info"),
-    //PUBLISH("Publish"),
-    //MESSAGE("Message")
+    CANCEL("Cancel"),
+    OPTIONS("Options"),
+    BYE("Bye"),
+    REFER("Refer"),
+    SUBSCRIBE("Subscribe"),
+    NOTIFY("Notify"),
+    INFO("Info"),
+    PUBLISH("Publish"),
+    MESSAGE("Message")
     ;
     override fun toString(): String{
         return sipName.toUpperCase()

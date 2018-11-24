@@ -25,7 +25,7 @@ class HeaderFrom {
 
 }
 
-class HeaderFromModel(headerFrom: HeaderFrom) : ViewModel() {
+class HeaderFromModel(val headerFrom: HeaderFrom) : ViewModel() {
     constructor() : this(HeaderFrom())
 
     val user = bind(true) { headerFrom.userProperty }

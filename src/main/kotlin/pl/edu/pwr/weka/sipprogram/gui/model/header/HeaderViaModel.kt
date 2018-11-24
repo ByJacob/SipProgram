@@ -24,7 +24,7 @@ class HeaderVia {
 
 }
 
-class HeaderViaModel(headerVia: HeaderVia) : ViewModel() {
+class HeaderViaModel(val headerVia: HeaderVia) : ViewModel() {
     constructor() : this(HeaderVia())
 
     val protocol = bind(true) { headerVia.protocolProperty }

@@ -11,7 +11,7 @@ class HeaderServer {
 
 }
 
-class HeaderServerModel(headerServer: HeaderServer): ViewModel() {
+class HeaderServerModel(val headerServer: HeaderServer): ViewModel() {
     constructor(): this(HeaderServer())
     val server = bind(true) { headerServer.serverProperty }
 }

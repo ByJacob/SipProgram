@@ -28,7 +28,7 @@ class HeaderWWWAuthenticate {
 
 }
 
-class HeaderWWWAuthenticateModel(headerWWWAuthenticate: HeaderWWWAuthenticate): ViewModel() {
+class HeaderWWWAuthenticateModel(val headerWWWAuthenticate: HeaderWWWAuthenticate): ViewModel() {
     constructor(): this(HeaderWWWAuthenticate())
     val scheme = bind(true){headerWWWAuthenticate.schemeProperty}
     val algorithm = bind(true){headerWWWAuthenticate.algorithmProperty}

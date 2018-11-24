@@ -22,7 +22,7 @@ class HeaderTo {
 
 }
 
-class HeaderToModel(headerTo: HeaderTo) : ViewModel() {
+class HeaderToModel(val headerTo: HeaderTo) : ViewModel() {
     constructor() : this(HeaderTo())
 
     val user = bind(true) { headerTo.userProperty }

@@ -14,7 +14,7 @@ class HeaderCSeq(){
 
 }
 
-class HeaderCSeqModel(headerCSeq: HeaderCSeq): ViewModel() {
+class HeaderCSeqModel(val headerCSeq: HeaderCSeq): ViewModel() {
     constructor(): this(HeaderCSeq())
     val number = bind(true){headerCSeq.numberProperty}
     val method = bind(true){headerCSeq.methodProperty}

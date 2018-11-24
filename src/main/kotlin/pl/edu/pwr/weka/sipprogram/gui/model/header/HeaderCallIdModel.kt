@@ -11,7 +11,7 @@ class HeaderCallId {
 
 }
 
-class HeaderCallIdModel(headerCallId: HeaderCallId): ViewModel() {
+class HeaderCallIdModel(val headerCallId: HeaderCallId): ViewModel() {
     constructor(): this(HeaderCallId())
     val callId = bind(true) { headerCallId.callIdProperty }
 }

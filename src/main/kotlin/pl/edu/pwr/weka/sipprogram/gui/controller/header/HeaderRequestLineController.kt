@@ -12,7 +12,7 @@ class HeaderRequestLineController : BaseHeaderController() {
 
     override val model = HeaderRequestLineModel()
     val requestMethod = FXCollections.observableArrayList(listOf(RequestEnum.REGISTER,
-            RequestEnum.INVITE, RequestEnum.INVITE))
+            RequestEnum.INVITE))
 
     override fun toSipHeader(): Header {
         throw NotImplementedError("Method don't use. Try use toSipRequest")

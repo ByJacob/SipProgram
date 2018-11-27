@@ -16,10 +16,10 @@ import tornadofx.*
  * Date 10.11.2018 17:23
  */
 class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
-    override val controller: HeaderAuthenticationController by inject()
+    override val controller: HeaderAuthenticationController by inject(Scope())
 
     override val root = form {
-        fieldset("Authorizatio") {
+        fieldset("Authorization") {
             field("Username") {
                 jfxtextfield {
                     bind(controller.model.username)

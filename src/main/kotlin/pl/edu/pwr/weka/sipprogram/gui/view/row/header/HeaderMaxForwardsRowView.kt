@@ -12,7 +12,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderMaxForwardsRowView : BaseHeaderView("Max-Forwards") {
-    override val controller: HeaderMaxForwardsController by inject()
+    override val controller: HeaderMaxForwardsController by inject(Scope())
 
     override val root = form {
         fieldset("Max-Forwards") {

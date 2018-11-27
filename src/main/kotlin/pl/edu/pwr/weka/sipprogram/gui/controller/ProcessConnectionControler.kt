@@ -3,10 +3,12 @@ package pl.edu.pwr.weka.sipprogram.gui.controller
 import gov.nist.javax.sip.ResponseEventExt
 import javafx.concurrent.Task
 import pl.edu.pwr.weka.sipprogram.gui.view.fragment.FormRequestFragment
+import pl.edu.pwr.weka.sipprogram.gui.view.row.header.HeaderAuthorizationRowView
+import pl.edu.pwr.weka.sipprogram.gui.view.row.header.HeaderWWWAuthenticateRowView
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import pl.edu.pwr.weka.sipprogram.sip.request.base.ResponseListener
 import tornadofx.*
-import java.lang.Exception
 import javax.sip.ResponseEvent
 
 /**
@@ -20,16 +22,61 @@ class ProcessConnectionController : Controller() {
 
     private val responseAction = { index: Int, responseEventEx: ResponseEventExt ->
         runAsync {
-            val controller = find<FormRequestFragment>(Scope())
+            val responseFragment = find<FormRequestFragment>(Scope())
             try {
-                controller.controller.processResponseEventExt(responseEventEx)
-            } catch (e: Exception){
+                responseFragment.controller.processResponseEventExt(responseEventEx)
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
-            controller
+            var isNeedRepeat = false
+            val responseNonce = getFormNonce(responseFragment)
+            val sendingNonce = getFormNonce(formRequestFragmentList[index - 1])
+            val isPreviousAck =
+                    if (formRequestFragmentList.size > 2 && index >=2 ) {
+                        formRequestFragmentList[index - 2].model.method.value == RequestEnum.ACK
+                    } else {
+                        false
+                    }
+            if (sendingNonce.isNotEmpty() && responseNonce.isNotEmpty() && sendingNonce != responseNonce && isPreviousAck) {
+                setFormNonce(formRequestFragmentList[index - 1], responseNonce)
+                setFormNonce(formRequestFragmentList[index - 2], responseNonce)
+                isNeedRepeat = true
+            }
+            Pair(responseFragment, isNeedRepeat)
         } ui {
-            formRequestFragmentList.add(index, it)
-            sendRequest(index + 1)
+            if (it.second) {
+                sendRequest(index - 1)
+            } else {
+                formRequestFragmentList.add(index, it.first)
+                sendRequest(index + 1)
+            }
+        }
+    }
+
+    private fun getFormNonce(responseFragment: FormRequestFragment): String {
+        responseFragment.controller.listHeaderRowsView.forEach {
+            when (it) {
+                is HeaderWWWAuthenticateRowView -> {
+                    return it.controller.model.headerWWWAuthenticate.nonce
+                }
+                is HeaderAuthorizationRowView -> {
+                    return it.controller.model.headerAuthorization.nonce
+                }
+            }
+        }
+        return ""
+    }
+
+    private fun setFormNonce(requestFragment: FormRequestFragment, newNonce: String) {
+        requestFragment.controller.listHeaderRowsView.forEach {
+            when (it) {
+                is HeaderAuthorizationRowView -> {
+                    it.controller.model.nonce.value = newNonce
+                }
+                is HeaderWWWAuthenticateRowView -> {
+                    it.controller.model.nonce.value = newNonce
+                }
+            }
         }
     }
 
@@ -41,7 +88,7 @@ class ProcessConnectionController : Controller() {
 
     fun startSendLast() {
         SipProtocol.sipClient.listeners.clear()
-        if(!formRequestFragmentList.last().model.isSendingRequest.value)
+        if (!formRequestFragmentList.last().model.isSendingRequest.value)
             formRequestFragmentList.remove(formRequestFragmentList.last())
         sendRequest(formRequestFragmentList.lastIndex)
     }
@@ -57,7 +104,7 @@ class ProcessConnectionController : Controller() {
         }
     }
 
-    class SipListenerImpl(var index: Int, var action: (Int, ResponseEventExt) -> Task<FormRequestFragment>) : ResponseListener {
+    class SipListenerImpl(var index: Int, var action: (Int, ResponseEventExt) -> Task<Pair<FormRequestFragment, Boolean>>) : ResponseListener {
         override fun processResponse(re: ResponseEvent) {
             action(index + 1, re as ResponseEventExt)
         }

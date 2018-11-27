@@ -14,7 +14,7 @@ import javax.sip.header.Header
  * Date 10.11.2018 16:35
  */
 class HeaderToRowView : BaseHeaderView("To") {
-    override val controller: HeaderToController by inject()
+    override val controller: HeaderToController by inject(Scope())
 
     override val root = form {
         fieldset("To") {

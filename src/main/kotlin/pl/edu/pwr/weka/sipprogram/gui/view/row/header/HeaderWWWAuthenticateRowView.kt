@@ -16,7 +16,7 @@ import tornadofx.*
  * Date 10.11.2018 17:23
  */
 class HeaderWWWAuthenticateRowView : BaseHeaderView("WWW-Authenticate") {
-    override val controller: HeaderWWWAuthenticateController by inject()
+    override val controller: HeaderWWWAuthenticateController by inject(Scope())
 
     override val root = form {
         fieldset("WWW-Authenticate") {

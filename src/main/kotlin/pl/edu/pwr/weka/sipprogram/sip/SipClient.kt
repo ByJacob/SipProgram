@@ -27,9 +27,7 @@ class SipClient : SipListener {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun processRequest(p0: RequestEvent?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun processRequest(p0: RequestEvent?) {}
 
     override fun processResponse(responseEvent: ResponseEvent?) {
         val response = responseEvent?.response

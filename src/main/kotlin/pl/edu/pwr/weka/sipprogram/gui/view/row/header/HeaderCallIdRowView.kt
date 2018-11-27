@@ -12,7 +12,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderCallIdRowView : BaseHeaderView("Call-ID") {
-    override val controller: HeaderCallIdController by inject()
+    override val controller: HeaderCallIdController by inject(Scope())
 
     override val root = form {
         fieldset("Call-ID") {

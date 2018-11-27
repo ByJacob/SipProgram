@@ -18,9 +18,6 @@ class HeaderRequestLineRow {
     val requestPortProperty = SimpleIntegerProperty(0)
     var requestPort by requestPortProperty
 
-    val statusCodeProperty = SimpleIntegerProperty()
-    var statusCode by statusCodeProperty
-
 
 }
 
@@ -29,6 +26,5 @@ class HeaderRequestLineModel(val headerRequestLineRow: HeaderRequestLineRow) : V
     val method = bind(true){headerRequestLineRow.methodProperty}
     val requestHost = bind(true){headerRequestLineRow.requestHostProperty}
     val requestPort = bind(true){headerRequestLineRow.requestPortProperty}
-    val statusCode = bind(true){headerRequestLineRow.statusCodeProperty}
 }
 

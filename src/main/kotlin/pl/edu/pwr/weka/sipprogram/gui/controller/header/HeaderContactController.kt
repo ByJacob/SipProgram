@@ -11,9 +11,11 @@ class HeaderContactController: BaseHeaderController() {
 
     override fun toSipHeader(): Header {
         val address = "sip:"+model.user.value+"@"+model.address.value+":"+model.port.value.toString()
-        return SipProtocol.headerFactory.createContactHeader(
+        val createContactHeader = SipProtocol.headerFactory.createContactHeader(
                 SipProtocol.addressFactory.createAddress(address)
         )
+        createContactHeader.expires = model.expires.value.toInt()
+        return createContactHeader
     }
 
 }

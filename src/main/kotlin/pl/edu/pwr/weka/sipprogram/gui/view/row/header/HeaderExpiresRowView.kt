@@ -12,7 +12,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderExpiresRowView : BaseHeaderView("Expires") {
-    override val controller: HeaderExpiresController by inject()
+    override val controller: HeaderExpiresController by inject(Scope())
 
     override val root = form {
         fieldset("Expires") {

@@ -76,13 +76,16 @@ class FormRequestController : Controller() {
 
         listHeaderRowsNode.clear()
         listHeaderRowsView.clear()
-        model.formRequest.method = RequestEnum.ACK
-        val headerRequestLineRowView = HeaderRequestLineRowView()
-        headerRequestLineRowView.controller.model.headerRequestLineRow.method = RequestEnum.ACK
-        headerRequestLineRowView.controller.model.headerRequestLineRow.requestHost = responseEventExt.remoteIpAddress
-        headerRequestLineRowView.controller.model.headerRequestLineRow.requestPort = responseEventExt.remotePort
-        listHeaderRowsView.add(headerRequestLineRowView)
         val sipResponse = responseEventExt.response as SIPResponse
+
+        val headerRequestLineRowView = HeaderStatusLineRowView()
+        headerRequestLineRowView.controller.model.headerStatusLineRow.method = RequestEnum.ACK
+        headerRequestLineRowView.controller.model.headerStatusLineRow.statusCode = sipResponse.statusLine.statusCode
+        headerRequestLineRowView.controller.model.headerStatusLineRow.message = sipResponse.statusLine.reasonPhrase
+        model.method.bind(headerRequestLineRowView.controller.model.method)
+        model.statusCode.bind(headerRequestLineRowView.controller.model.statusCode)
+        model.messageStatusCode.bind(headerRequestLineRowView.controller.model.message)
+        listHeaderRowsView.add(headerRequestLineRowView)
 
         val headerFromRowView = HeaderFromRowView()
         headerFromRowView.controller.model.headerFrom.port = (sipResponse.fromHeader.address as AddressImpl).port
@@ -164,6 +167,25 @@ class FormRequestController : Controller() {
                                 it.getParameter("nonce")
                         listHeaderRowsView.add(headerWWWAuthenticateRowView)
                     }
+                }
+                is Expires -> {
+                    val headerExpiresRowView = HeaderExpiresRowView()
+                    headerExpiresRowView.controller.model.headerExpires.expiresd = header.expires
+                    listHeaderRowsView.add(headerExpiresRowView)
+                }
+                is ContactList -> {
+                    header.forEach {
+                        val headerContactRowView = HeaderContactRowView()
+                        val headerContact = headerContactRowView.controller.model.headerContact
+                        headerContact.port = (it.address as AddressImpl).port
+                        headerContact.user = ((sipResponse.fromHeader.address as AddressImpl).uri as SipUri).user
+                        headerContact.address = (sipResponse.fromHeader.address as AddressImpl).host
+                        headerContact.expires = it.getParameter("expires").toInt()
+                        listHeaderRowsView.add(headerContactRowView)
+                    }
+                }
+                is SIPDateHeader -> {
+
                 }
             }
         }

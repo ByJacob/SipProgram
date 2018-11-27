@@ -16,7 +16,7 @@ import tornadofx.*
  * Date 10.11.2018 16:20
  */
 class HeaderViaRowView : BaseHeaderView("Via") {
-    override val controller: HeaderViaController by inject()
+    override val controller: HeaderViaController by inject(Scope())
 
     override val root = form {
         fieldset("Via") {

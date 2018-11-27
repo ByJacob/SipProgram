@@ -13,7 +13,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderSupportedRowView : BaseHeaderView("Supported") {
-    override val controller: HeaderSupportedController by inject()
+    override val controller: HeaderSupportedController by inject(Scope())
 
     override val root = form {
         fieldset("Supported") {

@@ -9,7 +9,7 @@ class HeaderExpires {
 
 }
 
-class HeaderExpiresModel(headerExpires: HeaderExpires) : ViewModel() {
+class HeaderExpiresModel(val headerExpires: HeaderExpires) : ViewModel() {
     constructor(): this(HeaderExpires())
     val expires = bind(true) { headerExpires.expiresdProperty }
 }

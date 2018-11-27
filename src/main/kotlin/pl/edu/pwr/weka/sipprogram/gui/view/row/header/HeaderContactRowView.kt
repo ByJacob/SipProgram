@@ -12,7 +12,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderContactRowView : BaseHeaderView("Contact") {
-    override val controller: HeaderContactController by inject()
+    override val controller: HeaderContactController by inject(Scope())
 
     override val root = form {
         fieldset("Contact") {
@@ -31,6 +31,12 @@ class HeaderContactRowView : BaseHeaderView("Contact") {
             field("Port użytkownika") {
                 jfxtextfield {
                     bind(controller.model.port)
+                    clear()
+                }
+            }
+            field("Expires") {
+                jfxtextfield {
+                    bind(controller.model.expires)
                     clear()
                 }
             }

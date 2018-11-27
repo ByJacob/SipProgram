@@ -15,7 +15,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderCSeqRowView : BaseHeaderView("CSeq") {
-    override val controller: HeaderCSeqController by inject()
+    override val controller: HeaderCSeqController by inject(Scope())
 
     override val root = form {
         fieldset("CSeq") {

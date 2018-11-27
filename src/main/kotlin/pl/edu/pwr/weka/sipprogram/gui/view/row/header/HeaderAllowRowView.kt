@@ -15,8 +15,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderAllowRowView : BaseHeaderView("Allow") {
-    override val controller: HeaderAllowController by inject()
-
+    override val controller: HeaderAllowController by inject(Scope())
 
     override val root = form {
         fieldset("Allow") {

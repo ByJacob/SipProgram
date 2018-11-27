@@ -26,16 +26,21 @@ object SipProtocol {
     val port: Int = getLocalPort()
 
     private val sipFactory: SipFactory = SipFactory.getInstance()
-    private val sipStack: SipStack
+    private lateinit var sipStack: SipStack
     private val properties = Properties()
     val sipClient = SipClient()
-    val messageFactory: MessageFactory
-    val headerFactory: HeaderFactory
-    val addressFactory: AddressFactory
-    val sipProvider: SipProvider
+    lateinit var messageFactory: MessageFactory
+    lateinit var headerFactory: HeaderFactory
+    lateinit var addressFactory: AddressFactory
+    lateinit var sipProvider: SipProvider
 
     init {
         properties.setProperty("javax.sip.STACK_NAME", "PWR")
+        resetFactory()
+    }
+
+    fun resetFactory() {
+        sipFactory.resetFactory()
         sipStack = sipFactory.createSipStack(properties)
         messageFactory = sipFactory.createMessageFactory()
         headerFactory = sipFactory.createHeaderFactory()

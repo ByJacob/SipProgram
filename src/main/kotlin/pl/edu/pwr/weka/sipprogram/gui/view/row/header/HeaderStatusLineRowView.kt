@@ -4,6 +4,7 @@ import javafx.collections.FXCollections
 import kfoenix.jfxcombobox
 import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderRequestLineController
+import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderStatusLineController
 import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderRequestLineModel
 import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
@@ -14,26 +15,26 @@ import tornadofx.*
  * User: Jakub Rosa
  * Date 10.11.2018 17:23
  */
-class HeaderRequestLineRowView : BaseHeaderView("Request-Line") {
-    override val controller: HeaderRequestLineController by inject(Scope())
+class HeaderStatusLineRowView : BaseHeaderView("Status-Line") {
+    override val controller: HeaderStatusLineController by inject(Scope())
 
     override val root = form {
-        fieldset("Request-Line") {
+        fieldset("Status-Line") {
             field("Metoda") {
                 jfxcombobox<RequestEnum> {
-                    items = controller.requestMethod
+                    items = FXCollections.observableArrayList(RequestEnum.ACK)
                     bind(controller.model.method)
                 }
             }
-            field("Request-URI Host") {
+            field("Status-Code") {
                 jfxtextfield {
-                    bind(controller.model.requestHost)
+                    bind(controller.model.statusCode)
                     clear()
                 }
             }
-            field("Request-URI Port") {
+            field("Message") {
                 jfxtextfield {
-                    bind(controller.model.requestPort)
+                    bind(controller.model.message)
                     clear()
                 }
             }

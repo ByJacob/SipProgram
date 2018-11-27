@@ -15,6 +15,7 @@ import tornadofx.*
 class AddHeaderRowView : View("AddHeaderRowView") {
     val headersList = FXCollections.observableArrayList(
             HeaderEnum.values().toList().sortedBy { it.headerName })
+
     override val root = form {
         fieldset("Dodaj nowy") {
             val selectedHeader = SimpleObjectProperty<HeaderEnum>()
@@ -28,7 +29,7 @@ class AddHeaderRowView : View("AddHeaderRowView") {
             button("Dodaj") {
                 action {
                     selectedHeader.get()?.let {
-                        fire(AddNewHeaderToFormEvent(selectedHeader.get(),super.scope))
+                        fire(AddNewHeaderToFormEvent(selectedHeader.get(), super.scope))
                         headersList.remove(selectedHeader.get())
                     }
                 }

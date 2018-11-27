@@ -12,7 +12,7 @@ import tornadofx.*
  * Date 10.11.2018 16:35
  */
 class HeaderFromRowView : BaseHeaderView("From") {
-    override val controller: HeaderFromController by inject()
+    override val controller: HeaderFromController by inject(Scope())
 
     override val root = form {
         fieldset("From") {

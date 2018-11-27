@@ -9,6 +9,8 @@ import kfoenix.jfxbutton
 import kfoenix.jfxlistview
 import pl.edu.pwr.weka.sipprogram.gui.controller.ProcessConnectionController
 import pl.edu.pwr.weka.sipprogram.gui.model.ProcessConnectionModel
+import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
+import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
 
 class ProcessConnectionView : View("ProcessConnection") {
@@ -42,16 +44,23 @@ class ProcessConnectionView : View("ProcessConnection") {
                             action {
                                 controller.formRequestFragmentList.add(find(Scope()))
                                 fire(OpenFormRequestEvent(controller.formRequestFragmentList.lastIndex))
+                                fire(SelectElementInListEvent(controller.formRequestFragmentList.lastIndex))
                             }
                         }
                         jfxbutton("Wyślij ostatni", JFXButton.ButtonType.RAISED) {
-                        action {
-                            controller.startSendLast()
+                            action {
+                                controller.startSendLast()
+                            }
                         }
-                    }
                         jfxbutton("Wyślij wszystko", JFXButton.ButtonType.RAISED) {
                             action {
                                 controller.startSendAll()
+                            }
+                        }
+                        jfxbutton("Czyść wszystko", JFXButton.ButtonType.RAISED) {
+                            action {
+                                SipProtocol.resetFactory()
+                                controller.formRequestFragmentList.clear()
                             }
                         }
                         paddingAll = 10.0
@@ -66,19 +75,16 @@ class ProcessConnectionView : View("ProcessConnection") {
                         isShowTooltip = true
                         bindSelected(model.formRequestFragment)
                         cellFormat {
-                            graphic = label(it.model.formRequest.method.toString()) {
+                            graphic = hbox {
                                 val iconOne =
                                         if (!it.model.isSendingRequest.value)
                                             FontAwesomeIconView(FontAwesomeIcon.ARROW_RIGHT)
                                         else
                                             FontAwesomeIconView(FontAwesomeIcon.ARROW_LEFT)
-                                iconOne.glyphSize = 18
+                                iconOne.glyphSize = 13
                                 val iconTwo = FontAwesomeIconView(FontAwesomeIcon.DESKTOP)
-                                iconTwo.glyphSize = 18
-                                style {
-                                    fontSize = 18.px
-                                }
-                                graphic = hbox {
+                                iconTwo.glyphSize = 13
+                                hbox {
                                     style {
                                         padding = box(0.px, 10.px, 0.px, 0.px)
                                         spacing = 5.px
@@ -86,6 +92,22 @@ class ProcessConnectionView : View("ProcessConnection") {
                                     }
                                     add(iconOne)
                                     add(iconTwo)
+                                }
+                                vbox {
+                                    spacing = 1.0
+                                    val size = if (it.model.formRequest.method == RequestEnum.ACK) 12.px else 18.px
+                                    label(it.model.formRequest.method.toString()) {
+                                        style {
+                                            fontSize = size
+                                        }
+                                    }
+                                    if (it.model.formRequest.method == RequestEnum.ACK) {
+                                        label("${it.model.formRequest.statusCode}(${it.model.formRequest.messageStatusCode})") {
+                                            style {
+                                                fontSize = size
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -95,13 +117,19 @@ class ProcessConnectionView : View("ProcessConnection") {
                         subscribe<RefreshListFormRequestEvent> {
                             refresh()
                         }
+                        subscribe<SelectElementInListEvent> {
+                            this@jfxlistview.selectionModel.select(it.index)
+                        }
                     }
                 }
             }
         }
     }
 
+
     class OpenFormRequestEvent(val selectedIndex: Int) : FXEvent()
 
     class RefreshListFormRequestEvent : FXEvent()
+
+    class SelectElementInListEvent(val index: Int): FXEvent()
 }

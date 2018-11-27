@@ -1,4 +1,4 @@
-package pl.edu.pwr.weka.sipprogram.gui.view.fragment
+package pl.edu.pwr.weka.sipprogram.gui.view
 
 import pl.edu.pwr.weka.sipprogram.gui.controller.FormRequestController
 import pl.edu.pwr.weka.sipprogram.gui.model.FormRequestModel
@@ -18,8 +18,14 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
     val model = FormRequestModel()
 
     override val root = vbox {
-        clear()
-        controller.listHeaderRowsNode = children
+        vbox{
+            clear()
+            controller.listHeaderRowsNode = children
+        }
+        val addHeaderRowView = AddHeaderRowView()
+        addHeaderRowView.root.managedProperty().bind(model.isSendingRequest)
+        addHeaderRowView.root.visibleProperty().bind(model.isSendingRequest)
+        add(addHeaderRowView)
     }
 
     init {
@@ -29,14 +35,12 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
         }
         val headerRequestLineRowView = HeaderRequestLineRowView()
         model.method.bind(headerRequestLineRowView.controller.model.method)
-        controller.listHeaderRowsView.add(headerRequestLineRowView)
-        controller.listHeaderRowsView.add(HeaderFromRowView())
-        controller.listHeaderRowsView.add(HeaderToRowView())
-        controller.listHeaderRowsView.add(HeaderViaRowView())
-        controller.listHeaderRowsView.add(HeaderCallIdRowView())
-        controller.listHeaderRowsView.add(HeaderCSeqRowView())
-        val addHeaderRowView = AddHeaderRowView()
-        controller.listHeaderRowsNode.add(addHeaderRowView.root)
+        controller.addHeader(headerRequestLineRowView)
+        controller.addHeader(HeaderFromRowView())
+        controller.addHeader(HeaderToRowView())
+        controller.addHeader(HeaderViaRowView())
+        controller.addHeader(HeaderCallIdRowView())
+        controller.addHeader(HeaderCSeqRowView())
 
 
     }

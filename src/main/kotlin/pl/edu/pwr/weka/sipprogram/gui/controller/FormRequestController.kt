@@ -28,38 +28,15 @@ class FormRequestController : Controller() {
     lateinit var model: FormRequestModel
 
     init {
-        listHeaderRowsView.addListener { c: ListChangeListener.Change<out BaseHeaderView> ->
-            while (c.next()) {
-                when {
-                    c.wasPermutated() -> for (i in c.from until c.to) {
-                        println("Permuted: " + i + " " + listHeaderRowsView[i])
-                    }
-                    c.wasUpdated() -> for (i in c.from until c.to) {
-                        println("Updated: " + i + " " + listHeaderRowsView[i])
-                    }
-                    c.wasAdded() -> for (i in c.from until c.to) {
-                        runAsync {} ui {
-                            if (listHeaderRowsView.lastIndex >= i)
-                                listHeaderRowsNode.add(i, listHeaderRowsView[i].root)
-                        }
-                    }
-                    c.wasRemoved() -> for (removedItem in c.removed) {
-                        runAsync {} ui {
-                            if (removedItem.root in listHeaderRowsNode)
-                                listHeaderRowsNode.remove(removedItem.root)
-                        }
-                    }
-                    else -> {
-                        println("Do nothing")
-                    }
-                }
-            }
-        }
-
         subscribe<AddHeaderRowView.AddNewHeaderToFormEvent> {
             val view = (it.header.node.newInstance() as BaseHeaderView)
-            listHeaderRowsView.add(view)
+            addHeader(view)
         }
+    }
+    
+    fun addHeader(headerView: BaseHeaderView){
+        listHeaderRowsView.add(headerView)
+        listHeaderRowsNode.add(headerView.root)
     }
 
     fun createRequest(): SIPRequest {
@@ -85,21 +62,21 @@ class FormRequestController : Controller() {
         model.method.bind(headerRequestLineRowView.controller.model.method)
         model.statusCode.bind(headerRequestLineRowView.controller.model.statusCode)
         model.messageStatusCode.bind(headerRequestLineRowView.controller.model.message)
-        listHeaderRowsView.add(headerRequestLineRowView)
+        addHeader(headerRequestLineRowView)
 
         val headerFromRowView = HeaderFromRowView()
         headerFromRowView.controller.model.headerFrom.port = (sipResponse.fromHeader.address as AddressImpl).port
         headerFromRowView.controller.model.headerFrom.user = ((sipResponse.fromHeader.address as AddressImpl).uri as SipUri).user
         headerFromRowView.controller.model.headerFrom.address = (sipResponse.fromHeader.address as AddressImpl).host
         headerFromRowView.controller.model.headerFrom.tag = sipResponse.fromHeader.getParameter("tag")
-        listHeaderRowsView.add(headerFromRowView)
+        addHeader(headerFromRowView)
 
         val headerToRowView = HeaderToRowView()
         headerToRowView.controller.model.headerTo.port = (sipResponse.toHeader.address as AddressImpl).port
         headerToRowView.controller.model.headerTo.user = ((sipResponse.toHeader.address as AddressImpl).uri as SipUri).user
         headerToRowView.controller.model.headerTo.address = (sipResponse.toHeader.address as AddressImpl).host
         headerToRowView.controller.model.headerTo.tag = sipResponse.toHeader.getParameter("tag")
-        listHeaderRowsView.add(headerToRowView)
+        addHeader(headerToRowView)
         sipResponse.headers.forEach { header ->
             when (header) {
                 is ViaList -> {
@@ -111,7 +88,7 @@ class FormRequestController : Controller() {
                         headerViaRowView.controller.model.headerVia.address = it.sentBy.host.hostname
                         headerViaRowView.controller.model.headerVia.port = it.sentBy.port
                         headerViaRowView.controller.model.headerVia.branch = it.getParameter("branch")
-                        listHeaderRowsView.add(headerViaRowView)
+                        addHeader(headerViaRowView)
                     }
                 }
             }
@@ -119,12 +96,12 @@ class FormRequestController : Controller() {
 
         val headerCallIdRowView = HeaderCallIdRowView()
         headerCallIdRowView.controller.model.headerCallId.callId = sipResponse.callIdHeader.callId
-        listHeaderRowsView.add(headerCallIdRowView)
+        addHeader(headerCallIdRowView)
 
         val headerCSeqRowView = HeaderCSeqRowView()
         headerCSeqRowView.controller.model.headerCSeq.method = RequestEnum.valueOf(sipResponse.cSeqHeader.method)
         headerCSeqRowView.controller.model.headerCSeq.number = sipResponse.cSeqHeader.seqNumber.toInt()
-        listHeaderRowsView.add(headerCSeqRowView)
+        addHeader(headerCSeqRowView)
         sipResponse.headers.forEach { header ->
             when (header) {
                 is ContentLength -> println("NOT IMPLEMENTED!!!!!!!!!!!")
@@ -136,14 +113,14 @@ class FormRequestController : Controller() {
                         listProduct.add(iteratorListProduct.next() as String)
                     }
                     headerServerRowView.controller.model.headerServer.server = listProduct.joinToString()
-                    listHeaderRowsView.add(headerServerRowView)
+                    addHeader(headerServerRowView)
                 }
                 is AllowList -> {
                     val headerAllowRowView = HeaderAllowRowView()
                     header.forEach {
                         headerAllowRowView.controller.model.allowList.add(RequestEnum.valueOf(it.method))
                     }
-                    listHeaderRowsView.add(headerAllowRowView)
+                    addHeader(headerAllowRowView)
                 }
                 is SupportedList -> {
                     val headerSupportedRowView = HeaderSupportedRowView()
@@ -151,7 +128,7 @@ class FormRequestController : Controller() {
                         headerSupportedRowView.controller.model.supportedList
                                 .add(SupportedEnum.valueOf(it.optionTag.toUpperCase()))
                     }
-                    listHeaderRowsView.add(headerSupportedRowView)
+                    addHeader(headerSupportedRowView)
                 }
                 is WWWAuthenticateList -> {
                     header.forEach {
@@ -165,13 +142,13 @@ class FormRequestController : Controller() {
                                 it.getParameter("realm")
                         headerWWWAuthenticateRowView.controller.model.headerWWWAuthenticate.nonce =
                                 it.getParameter("nonce")
-                        listHeaderRowsView.add(headerWWWAuthenticateRowView)
+                        addHeader(headerWWWAuthenticateRowView)
                     }
                 }
                 is Expires -> {
                     val headerExpiresRowView = HeaderExpiresRowView()
                     headerExpiresRowView.controller.model.headerExpires.expiresd = header.expires
-                    listHeaderRowsView.add(headerExpiresRowView)
+                    addHeader(headerExpiresRowView)
                 }
                 is ContactList -> {
                     header.forEach {
@@ -181,7 +158,7 @@ class FormRequestController : Controller() {
                         headerContact.user = ((sipResponse.fromHeader.address as AddressImpl).uri as SipUri).user
                         headerContact.address = (sipResponse.fromHeader.address as AddressImpl).host
                         headerContact.expires = it.getParameter("expires").toInt()
-                        listHeaderRowsView.add(headerContactRowView)
+                        addHeader(headerContactRowView)
                     }
                 }
                 is SIPDateHeader -> {

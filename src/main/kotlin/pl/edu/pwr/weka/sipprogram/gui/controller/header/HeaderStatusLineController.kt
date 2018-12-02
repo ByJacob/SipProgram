@@ -1,7 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.gui.controller.header
 
 import gov.nist.javax.sip.message.SIPResponse
-import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseHeaderController
+import pl.edu.pwr.weka.sipprogram.gui.controller.header.base.BaseHeaderController
 import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderStatusLineModel
 import javax.sip.header.Header
 

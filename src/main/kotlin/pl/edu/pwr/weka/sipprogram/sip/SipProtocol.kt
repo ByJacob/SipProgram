@@ -5,6 +5,7 @@ import java.net.InetAddress
 import java.net.Socket
 import java.net.SocketException
 import java.util.*
+import javax.sip.ListeningPoint
 import javax.sip.SipFactory
 import javax.sip.SipProvider
 import javax.sip.SipStack
@@ -40,6 +41,11 @@ object SipProtocol {
     }
 
     fun resetFactory() {
+        if (::sipStack.isInitialized)
+            sipStack.listeningPoints.forEachRemaining {
+                it as ListeningPoint
+                sipStack.deleteListeningPoint(it)
+            }
         sipFactory.resetFactory()
         sipStack = sipFactory.createSipStack(properties)
         messageFactory = sipFactory.createMessageFactory()

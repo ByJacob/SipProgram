@@ -7,7 +7,6 @@ import gov.nist.javax.sip.header.*
 import gov.nist.javax.sip.message.SIPRequest
 import gov.nist.javax.sip.message.SIPResponse
 import javafx.collections.FXCollections
-import javafx.collections.ListChangeListener
 import javafx.collections.ObservableList
 import javafx.scene.Node
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderRequestLineController
@@ -29,12 +28,15 @@ class FormRequestController : Controller() {
 
     init {
         subscribe<AddHeaderRowView.AddNewHeaderToFormEvent> {
-            val view = (it.header.node.newInstance() as BaseHeaderView)
-            addHeader(view)
+            runAsync {
+                (it.header.node.newInstance() as BaseHeaderView)
+            } ui {
+                addHeader(it)
+            }
         }
     }
-    
-    fun addHeader(headerView: BaseHeaderView){
+
+    fun addHeader(headerView: BaseHeaderView) {
         listHeaderRowsView.add(headerView)
         listHeaderRowsNode.add(headerView.root)
     }

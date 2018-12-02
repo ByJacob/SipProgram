@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleDoubleProperty
 import javafx.collections.FXCollections
 import javafx.scene.layout.Priority
 import kfoenix.jfxlistview
-import pl.edu.pwr.weka.sipprogram.gui.view.animation.cases.Case1RegisterBasic
+import pl.edu.pwr.weka.sipprogram.gui.view.animation.cases.Case1RegisterBasicView
 import tornadofx.*
 
 /**
@@ -28,11 +28,9 @@ class AnimationSipView : View("Animation") {
         }
         center {
             vbox {
-                add(Case1RegisterBasic::class)
-                subscribe<ChangeAnimationEvent> {
-                    clear()
-                    val view = it.animClass.newInstance() as View
-                    add(view)
+                add(Case1RegisterBasicView::class)
+                subscribe<ChangeAnimationEvent> {context ->
+                    this@vbox.replaceChildren(context.animClass)
                 }
                 vgrow = Priority.ALWAYS
             }
@@ -40,15 +38,14 @@ class AnimationSipView : View("Animation") {
 
     }
 
-    class ChangeAnimationEvent(val animClass: Class<*>): FXEvent()
-}
+    class ChangeAnimationEvent(val animClass: View): FXEvent()
 
-enum class AnimationCaseEnum(val animName: String, val animClass: Class<*>){
-    BASIC_REGISTER("Basic Register", Case1RegisterBasic::class.java);
+    enum class AnimationCaseEnum(val animName: String, val animClass: View){
+        BASIC_REGISTER("Basic Register", Case1RegisterBasicView() as View);
 
-    override fun toString(): String{
-        return animName
+        override fun toString(): String{
+            return animName
+        }
+
     }
-
-
 }

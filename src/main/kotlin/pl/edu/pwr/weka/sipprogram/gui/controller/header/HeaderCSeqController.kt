@@ -1,9 +1,8 @@
 package pl.edu.pwr.weka.sipprogram.gui.controller.header
 
-import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseHeaderController
+import pl.edu.pwr.weka.sipprogram.gui.controller.header.base.BaseHeaderController
 import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderCSeqModel
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
-import tornadofx.*
 import javax.sip.header.Header
 
 class HeaderCSeqController: BaseHeaderController() {

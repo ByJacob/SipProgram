@@ -1,9 +1,11 @@
 package pl.edu.pwr.weka.sipprogram
 
+import javafx.stage.Stage
 import kfoenix.jfxdecorator
 import pl.edu.pwr.weka.sipprogram.gui.view.MainView
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import tornadofx.*
+import java.lang.Exception
 
 
 /**
@@ -25,12 +27,24 @@ class MainApp : App(PreMainView::class, Styles::class) {
         reloadStylesheetsOnFocus()
     }
 
-    override fun stop() {
-        System.exit(0)
+    override fun start(stage: Stage) {
+        try {
+            super.start(stage)
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
     }
+
+//    override fun stop() {
+//        super.stop()
+//        System.exit(0)
+//    }
 }
 
 fun main(args: Array<String>) {
-    launch<MainApp>(args)
-
+    try {
+        launch<MainApp>(args)
+    } catch (e: Exception){
+        e.printStackTrace()
+    }
 }

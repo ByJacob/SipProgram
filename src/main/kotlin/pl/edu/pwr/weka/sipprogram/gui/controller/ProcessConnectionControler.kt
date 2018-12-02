@@ -33,7 +33,8 @@ class ProcessConnectionController : Controller() {
             val sendingNonce = getFormNonce(formRequestFragmentList[index - 1])
             val isPreviousAck =
                     if (formRequestFragmentList.size > 2 && index >=2 ) {
-                        formRequestFragmentList[index - 2].model.method.value == RequestEnum.ACK
+                        formRequestFragmentList[index - 2].model.method.value == RequestEnum.ACK &&
+                        formRequestFragmentList[index - 2].model.statusCode.value == 401
                     } else {
                         false
                     }

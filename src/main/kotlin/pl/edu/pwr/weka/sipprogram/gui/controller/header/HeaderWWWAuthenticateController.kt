@@ -1,11 +1,8 @@
 package pl.edu.pwr.weka.sipprogram.gui.controller.header
 
-import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseHeaderController
-import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderAllowModel
-import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderWWWAuthenticate
+import pl.edu.pwr.weka.sipprogram.gui.controller.header.base.BaseHeaderController
 import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderWWWAuthenticateModel
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
-import tornadofx.*
 import javax.sip.header.Header
 
 class HeaderWWWAuthenticateController: BaseHeaderController() {

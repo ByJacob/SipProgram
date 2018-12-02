@@ -1,7 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.gui.controller.header
 
 import org.apache.commons.codec.digest.DigestUtils
-import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseHeaderController
+import pl.edu.pwr.weka.sipprogram.gui.controller.header.base.BaseHeaderController
 import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderAuthorizationModel
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import javax.sip.header.Header

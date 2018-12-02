@@ -3,9 +3,7 @@ package pl.edu.pwr.weka.sipprogram.gui.view.row.header
 import javafx.collections.FXCollections
 import kfoenix.jfxcombobox
 import kfoenix.jfxtextfield
-import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseHeaderController
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderViaController
-import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderViaModel
 import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.TransportProtocol
 import tornadofx.*

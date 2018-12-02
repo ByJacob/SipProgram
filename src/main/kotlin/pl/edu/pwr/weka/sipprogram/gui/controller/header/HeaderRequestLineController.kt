@@ -2,7 +2,7 @@ package pl.edu.pwr.weka.sipprogram.gui.controller.header
 
 import gov.nist.javax.sip.message.SIPRequest
 import javafx.collections.FXCollections
-import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseHeaderController
+import pl.edu.pwr.weka.sipprogram.gui.controller.header.base.BaseHeaderController
 import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderRequestLineModel
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum

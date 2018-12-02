@@ -5,6 +5,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
 import javafx.geometry.Pos
 import javafx.scene.control.ScrollPane
+import javafx.scene.layout.Priority
 import kfoenix.jfxbutton
 import kfoenix.jfxlistview
 import pl.edu.pwr.weka.sipprogram.gui.controller.ProcessConnectionController
@@ -23,6 +24,9 @@ class ProcessConnectionView : View("ProcessConnection") {
             borderpane {
                 center {
                     vbox {
+                        subscribe<ClearFormRequestEvent> {
+                            clear()
+                        }
                         subscribe<OpenFormRequestEvent> { it ->
                             clear()
                             scrollpane {
@@ -31,6 +35,9 @@ class ProcessConnectionView : View("ProcessConnection") {
                                 isFitToHeight = true
                                 add(controller.formRequestFragmentList[it.selectedIndex])
                             }
+                        }
+                        vboxConstraints {
+                            vgrow = Priority.ALWAYS
                         }
                     }
                 }
@@ -61,6 +68,7 @@ class ProcessConnectionView : View("ProcessConnection") {
                             action {
                                 SipProtocol.resetFactory()
                                 controller.formRequestFragmentList.clear()
+                                fire(ClearFormRequestEvent())
                             }
                         }
                         paddingAll = 10.0
@@ -120,6 +128,9 @@ class ProcessConnectionView : View("ProcessConnection") {
                         subscribe<SelectElementInListEvent> {
                             this@jfxlistview.selectionModel.select(it.index)
                         }
+                        vboxConstraints {
+                            vgrow = Priority.ALWAYS
+                        }
                     }
                 }
             }
@@ -131,5 +142,7 @@ class ProcessConnectionView : View("ProcessConnection") {
 
     class RefreshListFormRequestEvent : FXEvent()
 
-    class SelectElementInListEvent(val index: Int): FXEvent()
+    class ClearFormRequestEvent : FXEvent()
+
+    class SelectElementInListEvent(val index: Int) : FXEvent()
 }

@@ -1,4 +1,4 @@
-package pl.edu.pwr.weka.sipprogram.gui.controller.base
+package pl.edu.pwr.weka.sipprogram.gui.controller.header.base
 
 import tornadofx.*
 import javax.sip.header.Header

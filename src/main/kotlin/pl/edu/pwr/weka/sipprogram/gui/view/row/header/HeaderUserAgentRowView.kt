@@ -1,9 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.row.header
 
 import kfoenix.jfxtextfield
-import pl.edu.pwr.weka.sipprogram.gui.controller.base.BaseHeaderController
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderUserAgentController
-import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderUserAgentModel
 import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
 import tornadofx.*
 

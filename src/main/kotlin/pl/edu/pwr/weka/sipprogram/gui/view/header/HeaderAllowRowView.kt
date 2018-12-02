@@ -1,12 +1,9 @@
-package pl.edu.pwr.weka.sipprogram.gui.view.row.header
+package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import com.jfoenix.controls.JFXChipView
-import javafx.collections.ListChangeListener
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderAllowController
-import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderAllowModel
-import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
+import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
-import pl.edu.pwr.weka.sipprogram.util.Toast
 import tornadofx.*
 
 /**

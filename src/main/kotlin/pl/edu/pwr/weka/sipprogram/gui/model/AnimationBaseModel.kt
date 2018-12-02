@@ -21,7 +21,7 @@ class CaseAnimation(){
 
 }
 
-class CaseAnimationModel : ItemViewModel<CaseAnimation>() {
+class AnimationBaseModel : ItemViewModel<CaseAnimation>() {
     val descriptionTitle = bind(CaseAnimation::descriptionTitleProperty, true)
     val description = bind(CaseAnimation::descriptionProperty, true)
 }

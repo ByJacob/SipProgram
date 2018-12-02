@@ -1,11 +1,10 @@
-package pl.edu.pwr.weka.sipprogram.gui.view.row.header
+package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import javafx.collections.FXCollections
 import kfoenix.jfxcombobox
 import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderWWWAuthenticateController
-import pl.edu.pwr.weka.sipprogram.gui.model.header.HeaderWWWAuthenticateModel
-import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
+import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AlgorithmEnum
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AuthSchemeEnum
 import tornadofx.*

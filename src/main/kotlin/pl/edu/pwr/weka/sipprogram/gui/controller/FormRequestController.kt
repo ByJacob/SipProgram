@@ -12,8 +12,8 @@ import javafx.scene.Node
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderRequestLineController
 import pl.edu.pwr.weka.sipprogram.gui.model.FormRequestModel
 import pl.edu.pwr.weka.sipprogram.gui.view.row.AddHeaderRowView
-import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
-import pl.edu.pwr.weka.sipprogram.gui.view.row.header.*
+import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
+import pl.edu.pwr.weka.sipprogram.gui.view.header.*
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.*
 import tornadofx.*
 

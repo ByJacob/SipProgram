@@ -2,9 +2,8 @@ package pl.edu.pwr.weka.sipprogram.gui.view
 
 import pl.edu.pwr.weka.sipprogram.gui.controller.FormRequestController
 import pl.edu.pwr.weka.sipprogram.gui.model.FormRequestModel
-import pl.edu.pwr.weka.sipprogram.gui.view.ProcessConnectionView
 import pl.edu.pwr.weka.sipprogram.gui.view.row.AddHeaderRowView
-import pl.edu.pwr.weka.sipprogram.gui.view.row.header.*
+import pl.edu.pwr.weka.sipprogram.gui.view.header.*
 import tornadofx.*
 
 /**

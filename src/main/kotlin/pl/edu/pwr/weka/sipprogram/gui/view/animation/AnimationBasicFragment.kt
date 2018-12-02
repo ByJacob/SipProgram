@@ -1,10 +1,9 @@
-package pl.edu.pwr.weka.sipprogram.gui.view.animation.cases
+package pl.edu.pwr.weka.sipprogram.gui.view.animation
 
 import javafx.scene.layout.Priority
 import javafx.scene.text.FontWeight
 import kfoenix.jfxtextarea
-import pl.edu.pwr.weka.sipprogram.gui.controller.animation.Case1RegisterBasicController
-import pl.edu.pwr.weka.sipprogram.gui.view.animation.base.AnimationViewObject
+import pl.edu.pwr.weka.sipprogram.gui.controller.animation.AnimationBasicController
 import tornadofx.*
 
 /**
@@ -12,9 +11,9 @@ import tornadofx.*
  * User: Jakub Rosa
  * Date 27.11.2018 21:21
  */
-class Case1RegisterBasicView : View() {
+class AnimationBasicFragment : Fragment() {
 
-    val controller: Case1RegisterBasicController by inject(Scope())
+    val controller: AnimationBasicController by inject(this.scope, params)
 
     override val root = borderpane {
         vboxConstraints {
@@ -26,6 +25,7 @@ class Case1RegisterBasicView : View() {
                 vbox vBoxContainer@{
                     minWidth = 100.0
                     controller.flowLines = children
+                    controller.controlCenter(0)
                 }
             }
             add(mainScene)
@@ -53,18 +53,15 @@ class Case1RegisterBasicView : View() {
                 }
                 hbox {
                     var actualRequest = 0
-                    val maxRequest = 4
                     spacing = 10.0
                     button("Wstecz") {
                         action {
-                            actualRequest = if (actualRequest > 0) actualRequest - 1 else 0
-                            controller.controlCenter(actualRequest)
+                            actualRequest = controller.controlCenter(actualRequest - 1)
                         }
                     }
                     button("Naprzód") {
                         action {
-                            actualRequest = if (actualRequest < maxRequest) actualRequest + 1 else maxRequest
-                            controller.controlCenter(actualRequest)
+                            actualRequest = controller.controlCenter(actualRequest + 1)
                         }
                     }
                     button("Czyść") {

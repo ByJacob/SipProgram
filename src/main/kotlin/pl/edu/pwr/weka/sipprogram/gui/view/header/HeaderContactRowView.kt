@@ -1,8 +1,8 @@
-package pl.edu.pwr.weka.sipprogram.gui.view.row.header
+package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import kfoenix.jfxtextfield
-import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderToController
-import pl.edu.pwr.weka.sipprogram.gui.view.row.base.BaseHeaderView
+import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderContactController
+import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import tornadofx.*
 
 /**
@@ -10,11 +10,11 @@ import tornadofx.*
  * User: Jakub Rosa
  * Date 10.11.2018 16:35
  */
-class HeaderToRowView : BaseHeaderView("To") {
-    override val controller: HeaderToController by inject(Scope())
+class HeaderContactRowView : BaseHeaderView("Contact") {
+    override val controller: HeaderContactController by inject(Scope())
 
     override val root = form {
-        fieldset("To") {
+        fieldset("Contact") {
             field("Nazwa użytkownika") {
                 jfxtextfield {
                     bind(controller.model.user)
@@ -33,9 +33,10 @@ class HeaderToRowView : BaseHeaderView("To") {
                     clear()
                 }
             }
-            field("Tag") {
+            field("Expires") {
                 jfxtextfield {
-                    bind(controller.model.tag)
+                    bind(controller.model.expires)
+                    clear()
                 }
             }
         }

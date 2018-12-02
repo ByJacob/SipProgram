@@ -1,4 +1,4 @@
-package pl.edu.pwr.weka.sipprogram.gui.view.animation.base
+package pl.edu.pwr.weka.sipprogram.gui.view.animation
 
 import javafx.geometry.Pos
 import javafx.scene.layout.BorderPane
@@ -6,8 +6,7 @@ import javafx.scene.layout.VBox
 import javafx.scene.paint.Color
 import javafx.scene.shape.Line
 import javafx.util.Duration
-import pl.edu.pwr.weka.sipprogram.gui.view.AnimationSipView
-import pl.edu.pwr.weka.sipprogram.util.animation.SvgIcons
+import pl.edu.pwr.weka.sipprogram.util.SvgIcons
 import tornadofx.*
 
 /**

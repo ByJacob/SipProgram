@@ -1,4 +1,4 @@
-package pl.edu.pwr.weka.sipprogram.gui.view.row.base
+package pl.edu.pwr.weka.sipprogram.gui.view.header.base
 
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.base.BaseHeaderController
 import tornadofx.*

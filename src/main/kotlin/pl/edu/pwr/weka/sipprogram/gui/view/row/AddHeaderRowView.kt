@@ -4,7 +4,7 @@ import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
 import javafx.collections.FXCollections
 import kfoenix.jfxcombobox
-import pl.edu.pwr.weka.sipprogram.gui.view.row.header.*
+import pl.edu.pwr.weka.sipprogram.gui.view.header.*
 import tornadofx.*
 
 /**

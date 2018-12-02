@@ -1,5 +1,6 @@
 package pl.edu.pwr.weka.sipprogram
 
+import javafx.application.Platform
 import javafx.stage.Stage
 import kfoenix.jfxdecorator
 import pl.edu.pwr.weka.sipprogram.gui.view.MainView
@@ -35,10 +36,10 @@ class MainApp : App(PreMainView::class, Styles::class) {
         }
     }
 
-//    override fun stop() {
-//        super.stop()
-//        System.exit(0)
-//    }
+    override fun stop() {
+        super.stop()
+        Platform.runLater { System.exit(0) }
+    }
 }
 
 fun main(args: Array<String>) {

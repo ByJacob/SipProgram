@@ -1,4 +1,4 @@
-package pl.edu.pwr.weka.sipprogram.util.animation
+package pl.edu.pwr.weka.sipprogram.util
 
 /**
  * Project Name: sipprogram

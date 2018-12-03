@@ -20,6 +20,10 @@ class PreMainView : View() {
         isCustomMaximize = true
         SipProtocol.port
     }
+    init {
+        root.setMaximized(true)
+        root.setOnCloseButtonAction { Platform.runLater { System.exit(0) } }
+    }
 }
 
 class MainApp : App(PreMainView::class, Styles::class) {
@@ -36,10 +40,6 @@ class MainApp : App(PreMainView::class, Styles::class) {
         }
     }
 
-    override fun stop() {
-        super.stop()
-        Platform.runLater { System.exit(0) }
-    }
 }
 
 fun main(args: Array<String>) {

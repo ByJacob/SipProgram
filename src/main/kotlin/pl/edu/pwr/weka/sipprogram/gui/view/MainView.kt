@@ -12,16 +12,9 @@ import tornadofx.*
  */
 class MainView : View("SIP Learn") {
     override val root = borderpane {
-        top {
-            hbox {
-                label(messages["PWR"])
-                FontAwesomeIconView(FontAwesomeIcon.DESKTOP).apply {
-                    size = 24.toString()
-                }
-            }
-        }
         center {
             jfxtabpane {
+                tab<WelcomeView>()
                 tab<AnimationSipView>()
                 tab<ProcessConnectionView>()
             }

@@ -35,7 +35,8 @@ class AnimationBasicFragment : Fragment() {
                 style {
                     padding = box(10.px)
                 }
-                prefWidth = 250.0
+                prefWidth = 350.0
+                maxWidth = 500.0
                 spacing = 10.0
                 label {
                     style {

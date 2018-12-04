@@ -45,12 +45,18 @@ class AnimationBasicFragment : Fragment() {
                     }
                     textProperty().bind(controller.model.descriptionTitle)
                 }
+                val computeWidth = this@vbox.widthProperty()
+                        .subtract(this@vbox.paddingLeftProperty)
+                        .subtract(this@vbox.paddingRightProperty)
                 jfxtextarea {
+                    prefWidthProperty().bind(computeWidth)
+                    maxWidthProperty().bind(computeWidth)
+                    isWrapText = true
                     isEditable = false
+                    textProperty().bind(controller.model.description)
                     vboxConstraints {
                         vgrow = Priority.SOMETIMES
                     }
-                    textProperty().bind(controller.model.description)
                 }
                 hbox {
                     var actualRequest = 0

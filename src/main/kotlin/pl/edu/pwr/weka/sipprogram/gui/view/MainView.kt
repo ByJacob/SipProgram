@@ -1,9 +1,9 @@
 package pl.edu.pwr.weka.sipprogram.gui.view
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
+import javafx.scene.control.TextArea
 import kfoenix.jfxtabpane
 import tornadofx.*
+
 
 /**
  * Project Name: sipprogram

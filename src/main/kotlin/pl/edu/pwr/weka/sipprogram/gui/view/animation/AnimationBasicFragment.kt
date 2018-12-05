@@ -3,6 +3,7 @@ package pl.edu.pwr.weka.sipprogram.gui.view.animation
 import javafx.scene.layout.Priority
 import javafx.scene.text.FontWeight
 import kfoenix.jfxtextarea
+import pl.edu.pwr.weka.sipprogram.Styles
 import pl.edu.pwr.weka.sipprogram.gui.controller.animation.AnimationBasicController
 import tornadofx.*
 
@@ -48,15 +49,27 @@ class AnimationBasicFragment : Fragment() {
                 val computeWidth = this@vbox.widthProperty()
                         .subtract(this@vbox.paddingLeftProperty)
                         .subtract(this@vbox.paddingRightProperty)
-                jfxtextarea {
+                textflow {
                     prefWidthProperty().bind(computeWidth)
                     maxWidthProperty().bind(computeWidth)
-                    isWrapText = true
-                    isEditable = false
-                    textProperty().bind(controller.model.description)
+                    addClass(Styles.materialTextArea)
                     vboxConstraints {
                         vgrow = Priority.SOMETIMES
                     }
+                    text {
+                        addClass(Stylesheet.text)
+                        bind(controller.model.description, true)
+                    }
+                }
+                jfxtextarea {
+                    prefWidthProperty().bind(computeWidth)
+                    maxWidthProperty().bind(computeWidth)
+                    addClass(Styles.jfxTextArea)
+                    vboxConstraints {
+                        vgrow = Priority.SOMETIMES
+                    }
+                    bind(controller.model.description, true)
+
                 }
                 hbox {
                     var actualRequest = 0

@@ -17,6 +17,7 @@ class Styles : JFXStylesheet() {
         val glyphIcon by cssclass()
         val jfxChipView by cssclass()
         val jfxTextArea by cssclass()
+        val materialTextArea by cssclass()
         //colors
         val decoratorColor = Color.web("#5264AE").derive(-0.2)
     }
@@ -47,9 +48,11 @@ class Styles : JFXStylesheet() {
             backgroundRadius += box(16.px)
             padding = box(4.px)
         }
-
-        jfxTextArea {
-            padding = box(5.px)
+        materialTextArea {
+            backgroundColor += Color.web("#0000a")
+            child(text){
+                fill = Color.web("#000000", 0.87)
+            }
         }
     }
 }

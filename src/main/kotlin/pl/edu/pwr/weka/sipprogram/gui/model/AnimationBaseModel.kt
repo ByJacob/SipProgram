@@ -19,9 +19,14 @@ class CaseAnimation(){
     val descriptionProperty = SimpleStringProperty()
     var description by descriptionProperty
 
+    val exampleProperty = SimpleStringProperty()
+    var example by exampleProperty
+
+
 }
 
 class AnimationBaseModel : ItemViewModel<CaseAnimation>() {
     val descriptionTitle = bind(CaseAnimation::descriptionTitleProperty, true)
     val description = bind(CaseAnimation::descriptionProperty, true)
+    val example = bind(CaseAnimation::exampleProperty, true)
 }

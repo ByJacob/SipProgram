@@ -33,11 +33,12 @@ class AnimationBasicController : Controller() {
 
     fun controlCenter(actualRequest: Int): Int {
         parameters.getOrNull(actualRequest)?.let {
-            val (title, description, arrowName, isArrowRight) = parameters[actualRequest]
+            val (title, description, arrowName, isArrowRightLeft, example) = parameters[actualRequest]
             if (flowLines.size < actualRequest + 1)
-                flowLines.add(AnimationViewObject.requestNode(arrowName, isArrowRight))
+                flowLines.add(AnimationViewObject.requestNode(arrowName, isArrowRightLeft))
             model.descriptionTitle.value = title
             model.description.value = description
+            model.example.value = example
         }
         return when (actualRequest) {
             in 0 until parameters.size -> actualRequest

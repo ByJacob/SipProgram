@@ -18,25 +18,33 @@ class AnimationViewObject : View() {
     override val root = vbox {}
 
     companion object {
-        fun requestNode(requestName: String, isArrowRight: Boolean): VBox {
-            return AnimationViewObject().requestNode(requestName, isArrowRight)
+        fun requestNode(requestName: String, isArrowRightLeft: Pair<Boolean, Boolean>): VBox {
+            return AnimationViewObject().requestNode(requestName, isArrowRightLeft)
         }
         fun requestMainScene(): BorderPane {
             return AnimationViewObject().mainAnim
         }
     }
 
-    val requestNode = { requestName: String, isArrowRight: Boolean ->
+    val requestNode = { requestName: String, (isArrowRight,isArrowLeft): Pair<Boolean, Boolean> ->
         val animationDuration = Duration.seconds(3.0)
-        val arrowLineFixWidth = 25.0
+        var arrowLineFixWidth = 25.0
         vbox requestVBox@{
             alignment = Pos.CENTER
             label(requestName)
             vbox {
                 alignment = Pos.CENTER
                 hbox {
-                    alignment = if (isArrowRight) Pos.CENTER_LEFT else Pos.CENTER_RIGHT
-                    if (!isArrowRight)
+                    alignment = if (isArrowRight && !isArrowLeft) Pos.CENTER_LEFT
+                    else {
+                        if (isArrowLeft && !isArrowRight) Pos.CENTER_RIGHT
+                        else {
+                            Pos.CENTER
+                        }
+                    }
+                    if(isArrowLeft && isArrowRight)
+                        arrowLineFixWidth *= 2
+                    if (isArrowLeft)
                         svgicon(SvgIcons.arrowLeft, 20)
                     line {
                         startX = 0.0

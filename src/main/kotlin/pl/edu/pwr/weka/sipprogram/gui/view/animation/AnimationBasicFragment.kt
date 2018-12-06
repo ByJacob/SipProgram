@@ -1,11 +1,14 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.animation
 
+import javafx.beans.property.DoubleProperty
+import javafx.beans.property.DoublePropertyBase
 import javafx.scene.layout.Priority
+import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
-import kfoenix.jfxtextarea
 import pl.edu.pwr.weka.sipprogram.Styles
 import pl.edu.pwr.weka.sipprogram.gui.controller.animation.AnimationBasicController
 import tornadofx.*
+import java.util.function.DoublePredicate
 
 /**
  * Project Name: sipprogram
@@ -20,9 +23,11 @@ class AnimationBasicFragment : Fragment() {
         vboxConstraints {
             vgrow = Priority.ALWAYS
         }
+        var widthProperty = widthProperty()
         center {
             val mainScene = AnimationViewObject.requestMainScene()
             mainScene.center {
+                widthProperty = widthProperty()
                 vbox vBoxContainer@{
                     minWidth = 100.0
                     controller.flowLines = children
@@ -36,8 +41,11 @@ class AnimationBasicFragment : Fragment() {
                 style {
                     padding = box(10.px)
                 }
-                prefWidth = 350.0
-                maxWidth = 500.0
+                minWidth = 300.0
+                widthProperty.addListener { _, _, newValue ->
+                    runAsync { newValue } ui { prefWidth = newValue.toDouble() * 0.45}
+                }
+                maxWidth = 700.0
                 spacing = 10.0
                 label {
                     style {
@@ -46,12 +54,7 @@ class AnimationBasicFragment : Fragment() {
                     }
                     textProperty().bind(controller.model.descriptionTitle)
                 }
-                val computeWidth = this@vbox.widthProperty()
-                        .subtract(this@vbox.paddingLeftProperty)
-                        .subtract(this@vbox.paddingRightProperty)
                 textflow {
-                    prefWidthProperty().bind(computeWidth)
-                    maxWidthProperty().bind(computeWidth)
                     addClass(Styles.materialTextArea)
                     vboxConstraints {
                         vgrow = Priority.SOMETIMES
@@ -60,16 +63,29 @@ class AnimationBasicFragment : Fragment() {
                         addClass(Stylesheet.text)
                         bind(controller.model.description, true)
                     }
-                }
-                jfxtextarea {
-                    prefWidthProperty().bind(computeWidth)
-                    maxWidthProperty().bind(computeWidth)
-                    addClass(Styles.jfxTextArea)
-                    vboxConstraints {
-                        vgrow = Priority.SOMETIMES
+                    vbox {
+                        visibleWhen(controller.model.example.isNotBlank())
+                        //managedWhen(controller.model.example.isNotBlank())
+                        text {
+                            addClass(Stylesheet.text)
+                            text = "\n\n"
+                        }
+                        text {
+                            addClass(Stylesheet.text)
+                            text = messages["example_frame"]
+                        }
+                        text {
+                            addClass(Stylesheet.text)
+                            text = "\n"
+                        }
+                        text {
+                            addClass(Stylesheet.text)
+                            style {
+                                fontStyle = FontPosture.ITALIC
+                            }
+                            bind(controller.model.example, true)
+                        }
                     }
-                    bind(controller.model.description, true)
-
                 }
                 hbox {
                     var actualRequest = 0

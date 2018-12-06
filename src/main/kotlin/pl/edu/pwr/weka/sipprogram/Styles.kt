@@ -49,7 +49,9 @@ class Styles : JFXStylesheet() {
             padding = box(4.px)
         }
         materialTextArea {
-            backgroundColor += Color.web("#0000a")
+            backgroundColor += Color.web("#00000a", 0.04)
+            backgroundRadius += box(4.px)
+            padding = box(6.px)
             child(text){
                 fill = Color.web("#000000", 0.87)
             }

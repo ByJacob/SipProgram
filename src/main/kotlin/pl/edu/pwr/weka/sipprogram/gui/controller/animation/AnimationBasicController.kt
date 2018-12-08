@@ -18,6 +18,7 @@ class AnimationBasicController : Controller() {
     val model: AnimationBaseModel by inject()
 
     private val parameters: List<AnimationCaseEnum.AnimationCaseEnumParameters> by param(listOf())
+    private val documentationUrl: String by param("")
 
 
     lateinit var flowLines: ObservableList<Node>
@@ -40,6 +41,7 @@ class AnimationBasicController : Controller() {
             model.description.value = description
             model.example.value = example
         }
+        model.url.value = documentationUrl
         return when (actualRequest) {
             in 0 until parameters.size -> actualRequest
             in parameters.size..Int.MAX_VALUE -> parameters.size - 1

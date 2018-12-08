@@ -5,7 +5,7 @@ import javafx.scene.paint.Color
 import javafx.scene.text.FontWeight
 import tornadofx.*
 
-class WelcomeView : View("Welcome page") {
+class WelcomeView : View(FX.messages["welcome_window"]) {
     override val root = borderpane {
         style {
             padding = box(10.px)

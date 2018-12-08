@@ -1,6 +1,6 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.animation
 
-import pl.edu.pwr.weka.sipprogram.util.MessageBundle
+import tornadofx.*
 
 /**
  * Project Name: sipprogram
@@ -8,9 +8,10 @@ import pl.edu.pwr.weka.sipprogram.util.MessageBundle
  * Date 02.12.2018 19:44
  */
 
-val resources = MessageBundle("Messages")
+val resources = FX.messages
 
-enum class AnimationCaseEnum(val animName: String, val parameters: List<AnimationCaseEnumParameters>) {
+enum class AnimationCaseEnum(val animName: String, val parameters: List<AnimationCaseEnumParameters>,
+                             val documentationUrl: String = "") {
 
     BASIC_REGISTER(resources["name1"], listOf<AnimationCaseEnumParameters>(
             AnimationCaseEnumParameters(resources["title10"], resources["description10"],
@@ -23,7 +24,7 @@ enum class AnimationCaseEnum(val animName: String, val parameters: List<Animatio
                     resources["register"], Pair(true, false), resources["example13"]),
             AnimationCaseEnumParameters(resources["title14"], resources["description14"],
                     resources["ack200"], Pair(false, true), resources["example14"])
-    )),
+    ),"https://tools.ietf.org/html/rfc3261#section-10.3"),
     UPDATE_CONTACT_REGISTER(resources["name2"], listOf<AnimationCaseEnumParameters>(
             AnimationCaseEnumParameters(resources["title20"], resources["description20"],
                     "", Pair(false, false)),
@@ -74,7 +75,7 @@ enum class AnimationCaseEnum(val animName: String, val parameters: List<Animatio
             AnimationCaseEnumParameters(resources["title65"], resources["description65"],
                     resources["rpt_media"], Pair(true, true), resources["example65"]),
             AnimationCaseEnumParameters(resources["title66"], resources["description66"],
-                    resources["bye"], Pair(false , true), resources["example66"]),
+                    resources["bye"], Pair(false, true), resources["example66"]),
             AnimationCaseEnumParameters(resources["title67"], resources["description67"],
                     resources["ack200"], Pair(true, false), resources["example67"])
     )),

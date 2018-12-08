@@ -17,6 +17,7 @@ class MainView : View("SIP Learn") {
                 tab<WelcomeView>()
                 tab<AnimationSipView>()
                 tab<ProcessConnectionView>()
+                tab<DictionaryView>()
             }
         }
         bottom {

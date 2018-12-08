@@ -28,7 +28,7 @@ class AnimationViewObject : View() {
 
     val requestNode = { requestName: String, (isArrowRight,isArrowLeft): Pair<Boolean, Boolean> ->
         val animationDuration = Duration.seconds(3.0)
-        var arrowLineFixWidth = 25.0
+        var arrowLineFixWidth = 27.0
         vbox requestVBox@{
             alignment = Pos.CENTER
             label(requestName)

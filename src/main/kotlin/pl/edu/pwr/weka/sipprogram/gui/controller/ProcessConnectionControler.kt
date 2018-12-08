@@ -20,6 +20,8 @@ class ProcessConnectionController : Controller() {
 
     val formRequestFragmentList = mutableListOf<FormRequestFragment>().observable()
 
+    private var tryCount = 0
+
     private val responseAction = { index: Int, responseEventEx: ResponseEventExt ->
         runAsync {
             val responseFragment = find<FormRequestFragment>(Scope())
@@ -30,18 +32,10 @@ class ProcessConnectionController : Controller() {
             }
             var isNeedRepeat = false
             val responseNonce = getFormNonce(responseFragment)
-            val sendingNonce = getFormNonce(formRequestFragmentList[index - 1])
-            val isPreviousAck =
-                    if (formRequestFragmentList.size > 2 && index >=2 ) {
-                        formRequestFragmentList[index - 2].model.method.value == RequestEnum.ACK &&
-                        formRequestFragmentList[index - 2].model.statusCode.value == 401
-                    } else {
-                        false
-                    }
-            if (sendingNonce.isNotEmpty() && responseNonce.isNotEmpty() && sendingNonce != responseNonce && isPreviousAck) {
+            if (responseNonce.isNotEmpty() && isExistAck401() && tryCount < 5) {
                 setFormNonce(formRequestFragmentList[index - 1], responseNonce)
-                setFormNonce(formRequestFragmentList[index - 2], responseNonce)
                 isNeedRepeat = true
+                tryCount++
             }
             Pair(responseFragment, isNeedRepeat)
         } ui {
@@ -50,7 +44,15 @@ class ProcessConnectionController : Controller() {
             } else {
                 formRequestFragmentList.add(index, it.first)
                 sendRequest(index + 1)
+                tryCount = 0
             }
+        }
+    }
+
+    private fun isExistAck401(): Boolean {
+        return formRequestFragmentList.any {
+            it.controller.model.formRequest.method == RequestEnum.ACK &&
+                    it.controller.model.formRequest.messageStatusCode == "401"
         }
     }
 

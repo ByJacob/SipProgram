@@ -14,7 +14,7 @@ import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
 
-class ProcessConnectionView : View("ProcessConnection") {
+class ProcessConnectionView : View(FX.messages["simulation"]) {
     val controller: ProcessConnectionController by inject()
     val model = ProcessConnectionModel()
     override val root = vbox()

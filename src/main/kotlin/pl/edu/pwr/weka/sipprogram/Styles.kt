@@ -16,8 +16,9 @@ class Styles : JFXStylesheet() {
         //class
         val glyphIcon by cssclass()
         val jfxChipView by cssclass()
-        val jfxTextArea by cssclass()
-        val materialTextArea by cssclass()
+        val scrollBarAnimationDescription by cssclass()
+        val containerDAnimationDescription by cssclass()
+        val viewport by cssclass()
         //colors
         val decoratorColor = Color.web("#5264AE").derive(-0.2)
     }
@@ -48,9 +49,14 @@ class Styles : JFXStylesheet() {
             backgroundRadius += box(16.px)
             padding = box(4.px)
         }
-        materialTextArea {
+        scrollBarAnimationDescription {
             backgroundColor += Color.web("#00000a", 0.04)
             backgroundRadius += box(4.px)
+            child(viewport){
+                backgroundColor += Color.TRANSPARENT
+            }
+        }
+        containerDAnimationDescription {
             padding = box(6.px)
             child(text){
                 fill = Color.web("#000000", 0.87)

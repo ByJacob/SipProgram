@@ -1,14 +1,11 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.animation
 
-import javafx.beans.property.DoubleProperty
-import javafx.beans.property.DoublePropertyBase
 import javafx.scene.layout.Priority
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
 import pl.edu.pwr.weka.sipprogram.Styles
 import pl.edu.pwr.weka.sipprogram.gui.controller.animation.AnimationBasicController
 import tornadofx.*
-import java.util.function.DoublePredicate
 
 /**
  * Project Name: sipprogram
@@ -37,13 +34,13 @@ class AnimationBasicFragment : Fragment() {
             add(mainScene)
         }
         right {
-            vbox {
+            vbox textContainer@{
                 style {
                     padding = box(10.px)
                 }
                 minWidth = 300.0
                 widthProperty.addListener { _, _, newValue ->
-                    runAsync { newValue } ui { prefWidth = newValue.toDouble() * 0.45}
+                    runAsync { newValue } ui { prefWidth = newValue.toDouble() * 0.45 }
                 }
                 maxWidth = 700.0
                 spacing = 10.0
@@ -54,37 +51,48 @@ class AnimationBasicFragment : Fragment() {
                     }
                     textProperty().bind(controller.model.descriptionTitle)
                 }
-                textflow {
-                    addClass(Styles.materialTextArea)
+                scrollpane {
+                    addClass(Styles.scrollBarAnimationDescription)
                     vboxConstraints {
-                        vgrow = Priority.SOMETIMES
-                    }
-                    text {
-                        addClass(Stylesheet.text)
-                        bind(controller.model.description, true)
+                        vgrow = Priority.ALWAYS
                     }
                     vbox {
-                        visibleWhen(controller.model.example.isNotBlank())
-                        //managedWhen(controller.model.example.isNotBlank())
+                        addClass(Styles.containerDAnimationDescription)
                         text {
                             addClass(Stylesheet.text)
-                            text = "\n\n"
+                            bind(controller.model.description, true)
+                            wrappingWidthProperty().bind(this@textContainer.widthProperty().subtract(35))
                         }
-                        text {
-                            addClass(Stylesheet.text)
-                            text = messages["example_frame"]
-                        }
-                        text {
-                            addClass(Stylesheet.text)
-                            text = "\n"
-                        }
-                        text {
-                            addClass(Stylesheet.text)
-                            style {
-                                fontStyle = FontPosture.ITALIC
+                        vbox {
+                            visibleWhen(controller.model.example.isNotBlank())
+                            managedWhen(controller.model.example.isNotBlank())
+                            text {
+                                addClass(Stylesheet.text)
+                                text = "\n\n"
                             }
-                            bind(controller.model.example, true)
+                            text {
+                                addClass(Stylesheet.text)
+                                text = messages["example_frame"]
+                            }
+                            text {
+                                addClass(Stylesheet.text)
+                                text = "\n"
+                            }
+                            text {
+                                addClass(Stylesheet.text)
+                                style {
+                                    fontStyle = FontPosture.ITALIC
+                                }
+                                bind(controller.model.example, true)
+                            }
                         }
+                    }
+                }
+                hyperlink(messages["hyperlink_rfc"]) {
+                    visibleWhen { controller.model.url.isNotBlank() }
+                    action {
+                        if (controller.model.url.value.isNotEmpty())
+                            hostServices.showDocument(controller.model.url.value)
                     }
                 }
                 hbox {

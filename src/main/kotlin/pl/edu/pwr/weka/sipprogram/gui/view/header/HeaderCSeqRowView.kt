@@ -21,10 +21,7 @@ class HeaderCSeqRowView : BaseHeaderView("CSeq") {
                 add(createTextFieldWithHelp(controller.model.number))
             }
             field("Metoda") {
-                jfxcombobox<RequestEnum> {
-                    items = FXCollections.observableArrayList(RequestEnum.values().toList())
-                    bind(controller.model.method)
-                }
+                add(createVomboBoxWithHelp<RequestEnum>(FXCollections.observableArrayList(RequestEnum.values().toList()), controller.model.method))
             }
         }
     }

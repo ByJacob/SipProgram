@@ -18,10 +18,7 @@ class HeaderViaRowView : BaseHeaderView("Via") {
     override val root = form {
         fieldset("Via") {
             field("Protokół") {
-                jfxcombobox<TransportProtocol> {
-                    items = FXCollections.observableArrayList(TransportProtocol.values().toList())
-                    bind(controller.model.protocol)
-                }
+                add(createVomboBoxWithHelp<TransportProtocol>(FXCollections.observableArrayList(TransportProtocol.values().toList()), controller.model.protocol))
             }
             field("Wysłane z adresu") {
                 add(createTextFieldWithHelp(controller.model.address))

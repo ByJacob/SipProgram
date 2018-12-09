@@ -26,16 +26,10 @@ class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
                 add(createTextFieldWithHelp(controller.model.password))
             }
             field("Authentication Scheme") {
-                jfxcombobox<AuthSchemeEnum> {
-                    items = FXCollections.observableArrayList(AuthSchemeEnum.values().toList())
-                    bind(controller.model.scheme)
-                }
+                add(createVomboBoxWithHelp<AuthSchemeEnum>(FXCollections.observableArrayList(AuthSchemeEnum.values().toList()), controller.model.scheme))
             }
             field("Algorithm") {
-                jfxcombobox<AlgorithmEnum> {
-                    items = FXCollections.observableArrayList(AlgorithmEnum.values().toList())
-                    bind(controller.model.algorithm)
-                }
+                add(createVomboBoxWithHelp<AlgorithmEnum>(FXCollections.observableArrayList(AlgorithmEnum.values().toList()), controller.model.algorithm))
             }
             field("Realm") {
                 add(createTextFieldWithHelp(controller.model.realm))
@@ -44,10 +38,7 @@ class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
                 add(createTextFieldWithHelp(controller.model.nonce))
             }
             field("Metoda") {
-                jfxcombobox<RequestEnum> {
-                    items = FXCollections.observableArrayList(RequestEnum.values().toList())
-                    bind(controller.model.method)
-                }
+                add(createVomboBoxWithHelp<RequestEnum>(FXCollections.observableArrayList(RequestEnum.values().toList()), controller.model.method))
             }
             field("Authentication URI Host") {
                 add(createTextFieldWithHelp(controller.model.authenticationUriHost))

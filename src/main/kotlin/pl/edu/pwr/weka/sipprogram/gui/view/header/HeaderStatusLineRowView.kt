@@ -18,10 +18,7 @@ class HeaderStatusLineRowView : BaseHeaderView("Status-Line") {
     override val root = form {
         fieldset("Status-Line") {
             field("Metoda") {
-                jfxcombobox<RequestEnum> {
-                    items = FXCollections.observableArrayList(RequestEnum.ACK)
-                    bind(controller.model.method)
-                }
+                add(createVomboBoxWithHelp<RequestEnum>(FXCollections.observableArrayList(RequestEnum.ACK), controller.model.method))
             }
             field("Status-Code") {
                 add(createTextFieldWithHelp(controller.model.statusCode))

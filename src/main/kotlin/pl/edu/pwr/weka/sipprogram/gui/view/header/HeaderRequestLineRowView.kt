@@ -1,5 +1,6 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.header
 
+import javafx.beans.property.SimpleStringProperty
 import kfoenix.jfxcombobox
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderRequestLineController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
@@ -14,13 +15,13 @@ import tornadofx.*
 class HeaderRequestLineRowView : BaseHeaderView("Request-Line") {
     override val controller: HeaderRequestLineController by inject(Scope())
 
+    val helpRequest = SimpleStringProperty("Rodzaj zapytania jaki chcesz wysłać.")
+
     override val root = form {
         fieldset("Request-Line") {
             field("Metoda") {
-                jfxcombobox<RequestEnum> {
-                    items = controller.requestMethod
-                    bind(controller.model.method)
-                }
+                add(createVomboBoxWithHelp<RequestEnum>(controller.requestMethod, controller.model.method, helpRequest))
+
             }
             field("Request-URI Host") {
                 add(createTextFieldWithHelp(controller.model.requestHost))

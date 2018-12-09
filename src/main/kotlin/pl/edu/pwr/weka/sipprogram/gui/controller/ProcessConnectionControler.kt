@@ -52,7 +52,7 @@ class ProcessConnectionController : Controller() {
     private fun isExistAck401(): Boolean {
         return formRequestFragmentList.any {
             it.controller.model.formRequest.method == RequestEnum.ACK &&
-                    it.controller.model.formRequest.messageStatusCode == "401"
+                    it.controller.model.formRequest.statusCode == 401
         }
     }
 

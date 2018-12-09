@@ -23,6 +23,7 @@ class AddHeaderRowView : View("AddHeaderRowView") {
                 jfxcombobox<HeaderEnum> {
                     items = headersList
                     bind(selectedHeader)
+                    maxWidth = Double.MAX_VALUE
                     disableProperty().bind(Bindings.isEmpty(items))
                 }
             }

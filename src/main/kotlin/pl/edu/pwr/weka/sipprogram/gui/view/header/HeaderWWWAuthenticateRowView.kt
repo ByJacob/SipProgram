@@ -19,16 +19,10 @@ class HeaderWWWAuthenticateRowView : BaseHeaderView("WWW-Authenticate") {
     override val root = form {
         fieldset("WWW-Authenticate") {
             field("Authentication Scheme") {
-                jfxcombobox<AuthSchemeEnum> {
-                    items = FXCollections.observableArrayList(AuthSchemeEnum.values().toList())
-                    bind(controller.model.scheme)
-                }
+                add(createVomboBoxWithHelp<AuthSchemeEnum>(FXCollections.observableArrayList(AuthSchemeEnum.values().toList()), controller.model.scheme))
             }
             field("Algorithm") {
-                jfxcombobox<AlgorithmEnum> {
-                    items = FXCollections.observableArrayList(AlgorithmEnum.values().toList())
-                    bind(controller.model.algorithm)
-                }
+                add(createVomboBoxWithHelp<AlgorithmEnum>(FXCollections.observableArrayList(AlgorithmEnum.values().toList()), controller.model.algorithm))
             }
             field("Realm") {
                 add(createTextFieldWithHelp(controller.model.realm))

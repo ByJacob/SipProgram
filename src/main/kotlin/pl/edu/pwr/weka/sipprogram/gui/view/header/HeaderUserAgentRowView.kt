@@ -15,7 +15,7 @@ class HeaderUserAgentRowView() : BaseHeaderView("User-Agent") {
     override val root = form {
         fieldset("User-Agent") {
             field("User-Agent") {
-                add(createMaterialTextField(controller.model.userAgent))
+                add(createTextFieldWithHelp(controller.model.userAgent))
             }
         }
     }

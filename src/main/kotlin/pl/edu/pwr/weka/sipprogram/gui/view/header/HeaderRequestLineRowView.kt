@@ -23,10 +23,10 @@ class HeaderRequestLineRowView : BaseHeaderView("Request-Line") {
                 }
             }
             field("Request-URI Host") {
-                add(createMaterialTextField(controller.model.requestHost))
+                add(createTextFieldWithHelp(controller.model.requestHost))
             }
             field("Request-URI Port") {
-                add(createMaterialTextField(controller.model.requestPort))
+                add(createTextFieldWithHelp(controller.model.requestPort))
             }
         }
     }

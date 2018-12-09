@@ -15,7 +15,7 @@ class HeaderCallIdRowView : BaseHeaderView("Call-ID") {
     override val root = form {
         fieldset("Call-ID") {
             field("Call-ID") {
-                add(createMaterialTextField(controller.model.callId))
+                add(createTextFieldWithHelp(controller.model.callId))
             }
         }
     }

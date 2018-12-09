@@ -15,16 +15,16 @@ class HeaderToRowView : BaseHeaderView("To") {
     override val root = form {
         fieldset("To") {
             field("Nazwa użytkownika") {
-                add(createMaterialTextField(controller.model.user))
+                add(createTextFieldWithHelp(controller.model.user))
             }
             field("Adres użytkownika") {
-                add(createMaterialTextField(controller.model.address))
+                add(createTextFieldWithHelp(controller.model.address))
             }
             field("Port użytkownika") {
-                add(createMaterialTextField(controller.model.port))
+                add(createTextFieldWithHelp(controller.model.port))
             }
             field("Tag") {
-                add(createMaterialTextField(controller.model.tag))
+                add(createTextFieldWithHelp(controller.model.tag))
             }
         }
     }

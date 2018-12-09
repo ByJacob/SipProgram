@@ -15,7 +15,7 @@ class HeaderMaxForwardsRowView : BaseHeaderView("Max-Forwards") {
     override val root = form {
         fieldset("Max-Forwards") {
             field("Max Forwards") {
-                add(createMaterialTextField(controller.model.maxForwards))
+                add(createTextFieldWithHelp(controller.model.maxForwards))
             }
         }
     }

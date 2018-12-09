@@ -20,10 +20,10 @@ class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
     override val root = form {
         fieldset("Authorization") {
             field("Username") {
-                add(createMaterialTextField(controller.model.username))
+                add(createTextFieldWithHelp(controller.model.username))
             }
             field("Password") {
-                add(createMaterialTextField(controller.model.password))
+                add(createTextFieldWithHelp(controller.model.password))
             }
             field("Authentication Scheme") {
                 jfxcombobox<AuthSchemeEnum> {
@@ -38,10 +38,10 @@ class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
                 }
             }
             field("Realm") {
-                add(createMaterialTextField(controller.model.realm))
+                add(createTextFieldWithHelp(controller.model.realm))
             }
             field("Nonce") {
-                add(createMaterialTextField(controller.model.nonce))
+                add(createTextFieldWithHelp(controller.model.nonce))
             }
             field("Metoda") {
                 jfxcombobox<RequestEnum> {
@@ -50,10 +50,10 @@ class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
                 }
             }
             field("Authentication URI Host") {
-                add(createMaterialTextField(controller.model.authenticationUriHost))
+                add(createTextFieldWithHelp(controller.model.authenticationUriHost))
             }
             field("Authentication URI Port") {
-                add(createMaterialTextField(controller.model.authenticationUriPort))
+                add(createTextFieldWithHelp(controller.model.authenticationUriPort))
             }
         }
     }

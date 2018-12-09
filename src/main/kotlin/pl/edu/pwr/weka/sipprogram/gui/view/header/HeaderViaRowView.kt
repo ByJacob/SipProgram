@@ -24,13 +24,13 @@ class HeaderViaRowView : BaseHeaderView("Via") {
                 }
             }
             field("Wysłane z adresu") {
-                add(createMaterialTextField(controller.model.address))
+                add(createTextFieldWithHelp(controller.model.address))
             }
             field("Wysłane z portu") {
-                add(createMaterialTextField(controller.model.port))
+                add(createTextFieldWithHelp(controller.model.port))
             }
             field("Branch") {
-                add(createMaterialTextField(controller.model.branch))
+                add(createTextFieldWithHelp(controller.model.branch))
             }
         }
     }

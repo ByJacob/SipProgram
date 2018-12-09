@@ -31,10 +31,10 @@ class HeaderWWWAuthenticateRowView : BaseHeaderView("WWW-Authenticate") {
                 }
             }
             field("Realm") {
-                add(createMaterialTextField(controller.model.realm))
+                add(createTextFieldWithHelp(controller.model.realm))
             }
             field("Nonce") {
-                add(createMaterialTextField(controller.model.nonce))
+                add(createTextFieldWithHelp(controller.model.nonce))
             }
         }
     }

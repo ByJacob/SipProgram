@@ -15,7 +15,7 @@ class HeaderExpiresRowView : BaseHeaderView("Expires") {
     override val root = form {
         fieldset("Expires") {
             field("Expires") {
-                add(createMaterialTextField(controller.model.expires))
+                add(createTextFieldWithHelp(controller.model.expires))
             }
         }
     }

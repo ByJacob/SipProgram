@@ -18,7 +18,7 @@ class HeaderCSeqRowView : BaseHeaderView("CSeq") {
     override val root = form {
         fieldset("CSeq") {
             field("Numer") {
-                add(createMaterialTextField(controller.model.number))
+                add(createTextFieldWithHelp(controller.model.number))
             }
             field("Metoda") {
                 jfxcombobox<RequestEnum> {

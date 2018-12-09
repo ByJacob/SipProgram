@@ -24,10 +24,10 @@ class HeaderStatusLineRowView : BaseHeaderView("Status-Line") {
                 }
             }
             field("Status-Code") {
-                add(createMaterialTextField(controller.model.statusCode))
+                add(createTextFieldWithHelp(controller.model.statusCode))
             }
             field("Message") {
-                add(createMaterialTextField(controller.model.message))
+                add(createTextFieldWithHelp(controller.model.message))
             }
         }
     }

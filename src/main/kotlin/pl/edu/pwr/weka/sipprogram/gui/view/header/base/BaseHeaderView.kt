@@ -21,7 +21,7 @@ abstract class BaseHeaderView(name: String) : View(name) {
 
     abstract val controller: BaseHeaderController
 
-    inline fun <reified S : T, reified T : Any> createMaterialTextField(value: ObservableValue<S>,
+    inline fun <reified S : T, reified T : Any> createTextFieldWithHelp(value: ObservableValue<S>,
                                                                         helpTextBind: ObservableValue<out String> = emptyString): HBox {
         return hbox {
             jfxtextfield("") {
@@ -39,5 +39,7 @@ abstract class BaseHeaderView(name: String) : View(name) {
             }
         }
     }
+
+    fun <T>
 
 }

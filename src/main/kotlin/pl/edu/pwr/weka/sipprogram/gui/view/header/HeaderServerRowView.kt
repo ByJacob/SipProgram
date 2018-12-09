@@ -15,7 +15,7 @@ class HeaderServerRowView : BaseHeaderView("Server") {
     override val root = form {
         fieldset("Server") {
             field("Server") {
-                add(createMaterialTextField(controller.model.server))
+                add(createTextFieldWithHelp(controller.model.server))
             }
         }
     }

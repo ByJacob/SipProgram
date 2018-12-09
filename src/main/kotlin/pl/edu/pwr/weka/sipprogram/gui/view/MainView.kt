@@ -1,6 +1,5 @@
 package pl.edu.pwr.weka.sipprogram.gui.view
 
-import javafx.scene.control.TextArea
 import kfoenix.jfxtabpane
 import tornadofx.*
 

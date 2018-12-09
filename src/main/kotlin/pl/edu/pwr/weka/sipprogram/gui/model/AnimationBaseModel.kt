@@ -2,8 +2,6 @@ package pl.edu.pwr.weka.sipprogram.gui.model
 
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
-import tornadofx.getValue
-import tornadofx.setValue
 
 /**
  * Project Name: sipprogram

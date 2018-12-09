@@ -1,6 +1,5 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.header
 
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderMaxForwardsController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import tornadofx.*
@@ -16,10 +15,7 @@ class HeaderMaxForwardsRowView : BaseHeaderView("Max-Forwards") {
     override val root = form {
         fieldset("Max-Forwards") {
             field("Max Forwards") {
-                jfxtextfield {
-                    bind(controller.model.maxForwards)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.maxForwards))
             }
         }
     }

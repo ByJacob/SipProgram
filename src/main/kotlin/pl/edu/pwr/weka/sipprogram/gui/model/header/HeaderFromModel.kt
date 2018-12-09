@@ -4,9 +4,6 @@ import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
 import tornadofx.*
-import tornadofx.getValue
-import tornadofx.setValue
-import java.util.*
 import kotlin.random.Random
 
 class HeaderFrom {

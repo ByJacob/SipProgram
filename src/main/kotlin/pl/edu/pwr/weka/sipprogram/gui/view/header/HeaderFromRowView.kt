@@ -1,6 +1,5 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.header
 
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderFromController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import tornadofx.*
@@ -16,27 +15,16 @@ class HeaderFromRowView : BaseHeaderView("From") {
     override val root = form {
         fieldset("From") {
             field("Nazwa użytkownika") {
-                jfxtextfield {
-                    bind(controller.model.user)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.user))
             }
             field("Adres użytkownika") {
-                jfxtextfield {
-                    bind(controller.model.address, true)
-                    isDisable = true
-                }
+                add(createMaterialTextField(controller.model.address))
             }
             field("Port użytkownika") {
-                jfxtextfield {
-                    bind(controller.model.port, true)
-                    isDisable = true
-                }
+                add(createMaterialTextField(controller.model.port))
             }
             field("Tag") {
-                jfxtextfield {
-                    bind(controller.model.tag)
-                }
+                add(createMaterialTextField(controller.model.tag))
             }
         }
     }

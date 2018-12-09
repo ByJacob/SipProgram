@@ -1,7 +1,6 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import kfoenix.jfxcombobox
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderRequestLineController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
@@ -24,16 +23,10 @@ class HeaderRequestLineRowView : BaseHeaderView("Request-Line") {
                 }
             }
             field("Request-URI Host") {
-                jfxtextfield {
-                    bind(controller.model.requestHost)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.requestHost))
             }
             field("Request-URI Port") {
-                jfxtextfield {
-                    bind(controller.model.requestPort)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.requestPort))
             }
         }
     }

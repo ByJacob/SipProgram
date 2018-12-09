@@ -3,8 +3,6 @@ package pl.edu.pwr.weka.sipprogram.gui.model.header
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
-import tornadofx.getValue
-import tornadofx.setValue
 import kotlin.random.Random
 
 class HeaderTo {

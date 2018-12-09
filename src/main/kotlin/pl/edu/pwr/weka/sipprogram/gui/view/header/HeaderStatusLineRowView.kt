@@ -2,7 +2,6 @@ package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import javafx.collections.FXCollections
 import kfoenix.jfxcombobox
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderStatusLineController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
@@ -25,16 +24,10 @@ class HeaderStatusLineRowView : BaseHeaderView("Status-Line") {
                 }
             }
             field("Status-Code") {
-                jfxtextfield {
-                    bind(controller.model.statusCode)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.statusCode))
             }
             field("Message") {
-                jfxtextfield {
-                    bind(controller.model.message)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.message))
             }
         }
     }

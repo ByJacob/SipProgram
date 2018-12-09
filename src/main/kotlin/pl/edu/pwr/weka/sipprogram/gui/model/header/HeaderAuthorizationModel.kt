@@ -6,10 +6,7 @@ import javafx.beans.property.SimpleStringProperty
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AlgorithmEnum
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AuthSchemeEnum
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
-import pl.edu.pwr.weka.sipprogram.util.Generators
 import tornadofx.*
-import tornadofx.getValue
-import tornadofx.setValue
 
 /**
  * Project Name: sipprogram

@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory
 import pl.edu.pwr.weka.sipprogram.sip.request.base.ResponseListener
 import javax.sip.*
 import javax.sip.message.Response
-import kotlin.reflect.KProperty
 
 /**
  * Project Name: sipprogram

@@ -2,7 +2,6 @@ package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import javafx.collections.FXCollections
 import kfoenix.jfxcombobox
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderViaController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.TransportProtocol
@@ -25,21 +24,13 @@ class HeaderViaRowView : BaseHeaderView("Via") {
                 }
             }
             field("Wysłane z adresu") {
-                jfxtextfield {
-                    bind(controller.model.address)
-                    isDisable = true
-                }
+                add(createMaterialTextField(controller.model.address))
             }
             field("Wysłane z portu") {
-                jfxtextfield {
-                    bind(controller.model.port)
-                    isDisable = true
-                }
+                add(createMaterialTextField(controller.model.port))
             }
             field("Branch") {
-                jfxtextfield {
-                    bind(controller.model.branch)
-                }
+                add(createMaterialTextField(controller.model.branch))
             }
         }
     }

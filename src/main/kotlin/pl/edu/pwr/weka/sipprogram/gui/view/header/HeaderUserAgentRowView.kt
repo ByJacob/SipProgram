@@ -1,6 +1,5 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.header
 
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderUserAgentController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import tornadofx.*
@@ -16,10 +15,7 @@ class HeaderUserAgentRowView() : BaseHeaderView("User-Agent") {
     override val root = form {
         fieldset("User-Agent") {
             field("User-Agent") {
-                jfxtextfield {
-                    bind(controller.model.userAgent)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.userAgent))
             }
         }
     }

@@ -1,6 +1,5 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.header
 
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderCallIdController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import tornadofx.*
@@ -16,9 +15,7 @@ class HeaderCallIdRowView : BaseHeaderView("Call-ID") {
     override val root = form {
         fieldset("Call-ID") {
             field("Call-ID") {
-                jfxtextfield {
-                    bind(controller.model.callId)
-                }
+                add(createMaterialTextField(controller.model.callId))
             }
         }
     }

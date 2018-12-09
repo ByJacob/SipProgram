@@ -2,7 +2,6 @@ package pl.edu.pwr.weka.sipprogram.gui.view
 
 import com.jfoenix.controls.JFXListCell
 import javafx.collections.FXCollections
-import javafx.scene.control.Control
 import javafx.scene.layout.Priority
 import javafx.util.Callback
 import kfoenix.jfxlistview

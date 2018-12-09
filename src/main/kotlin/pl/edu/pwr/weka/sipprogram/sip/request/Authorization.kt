@@ -2,9 +2,9 @@ package pl.edu.pwr.weka.sipprogram.sip.request
 
 import org.apache.commons.codec.digest.DigestUtils
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
+import pl.edu.pwr.weka.sipprogram.sip.auth.enums.QualityOfProtectionEnum
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AlgorithmEnum
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AuthSchemeEnum
-import pl.edu.pwr.weka.sipprogram.sip.auth.enums.QualityOfProtectionEnum
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.sip.header.AuthorizationHeader

@@ -5,8 +5,6 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
-import tornadofx.getValue
-import tornadofx.setValue
 
 class HeaderStatusLineRow {
     val methodProperty = SimpleObjectProperty<RequestEnum>(RequestEnum.ACK)

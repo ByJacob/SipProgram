@@ -2,7 +2,6 @@ package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import javafx.collections.FXCollections
 import kfoenix.jfxcombobox
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderAuthenticationController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AlgorithmEnum
@@ -21,14 +20,10 @@ class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
     override val root = form {
         fieldset("Authorization") {
             field("Username") {
-                jfxtextfield {
-                    bind(controller.model.username)
-                }
+                add(createMaterialTextField(controller.model.username))
             }
             field("Password") {
-                jfxtextfield {
-                    bind(controller.model.password)
-                }
+                add(createMaterialTextField(controller.model.password))
             }
             field("Authentication Scheme") {
                 jfxcombobox<AuthSchemeEnum> {
@@ -43,15 +38,10 @@ class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
                 }
             }
             field("Realm") {
-                jfxtextfield {
-                    bind(controller.model.realm)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.realm))
             }
             field("Nonce") {
-                jfxtextfield {
-                    bind(controller.model.nonce)
-                }
+                add(createMaterialTextField(controller.model.nonce))
             }
             field("Metoda") {
                 jfxcombobox<RequestEnum> {
@@ -60,15 +50,10 @@ class HeaderAuthorizationRowView : BaseHeaderView("Authorizatio") {
                 }
             }
             field("Authentication URI Host") {
-                jfxtextfield {
-                    bind(controller.model.authenticationUriHost)
-                }
+                add(createMaterialTextField(controller.model.authenticationUriHost))
             }
             field("Authentication URI Port") {
-                jfxtextfield {
-                    bind(controller.model.authenticationUriPort)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.authenticationUriPort))
             }
         }
     }

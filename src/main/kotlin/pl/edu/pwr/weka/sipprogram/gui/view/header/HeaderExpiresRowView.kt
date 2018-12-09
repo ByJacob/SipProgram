@@ -1,6 +1,5 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.header
 
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderExpiresController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import tornadofx.*
@@ -16,10 +15,7 @@ class HeaderExpiresRowView : BaseHeaderView("Expires") {
     override val root = form {
         fieldset("Expires") {
             field("Expires") {
-                jfxtextfield {
-                    bind(controller.model.expires)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.expires))
             }
         }
     }

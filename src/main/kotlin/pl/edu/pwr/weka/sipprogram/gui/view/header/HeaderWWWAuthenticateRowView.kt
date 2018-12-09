@@ -2,7 +2,6 @@ package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import javafx.collections.FXCollections
 import kfoenix.jfxcombobox
-import kfoenix.jfxtextfield
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderWWWAuthenticateController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.AlgorithmEnum
@@ -32,15 +31,10 @@ class HeaderWWWAuthenticateRowView : BaseHeaderView("WWW-Authenticate") {
                 }
             }
             field("Realm") {
-                jfxtextfield {
-                    bind(controller.model.realm)
-                    clear()
-                }
+                add(createMaterialTextField(controller.model.realm))
             }
             field("Nonce") {
-                jfxtextfield {
-                    bind(controller.model.nonce)
-                }
+                add(createMaterialTextField(controller.model.nonce))
             }
         }
     }

@@ -4,6 +4,7 @@ import javafx.application.Platform
 import javafx.stage.Stage
 import pl.edu.pwr.weka.sipprogram.gui.view.MainView
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
+import pl.edu.pwr.weka.sipprogram.util.MessageBundle
 import pl.edu.pwr.weka.sipprogram.util.addBetterIcon
 import pl.edu.pwr.weka.sipprogram.util.jfxdecorator
 import tornadofx.*
@@ -33,6 +34,7 @@ class PreMainView : View() {
 class MainApp : App(PreMainView::class, Styles::class) {
 
     init {
+        FX.messages = MessageBundle("Messages")
         reloadStylesheetsOnFocus()
     }
 

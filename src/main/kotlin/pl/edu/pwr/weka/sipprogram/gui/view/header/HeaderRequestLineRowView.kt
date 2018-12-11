@@ -1,7 +1,6 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.header
 
 import javafx.beans.property.SimpleStringProperty
-import kfoenix.jfxcombobox
 import pl.edu.pwr.weka.sipprogram.gui.controller.header.HeaderRequestLineController
 import pl.edu.pwr.weka.sipprogram.gui.view.header.base.BaseHeaderView
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum

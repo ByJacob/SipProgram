@@ -3,6 +3,7 @@ package pl.edu.pwr.weka.sipprogram.gui.controller
 import gov.nist.javax.sip.ResponseEventExt
 import javafx.concurrent.Task
 import pl.edu.pwr.weka.sipprogram.gui.view.FormRequestFragment
+import pl.edu.pwr.weka.sipprogram.gui.view.ProcessConnectionView
 import pl.edu.pwr.weka.sipprogram.gui.view.header.HeaderAuthorizationRowView
 import pl.edu.pwr.weka.sipprogram.gui.view.header.HeaderWWWAuthenticateRowView
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
@@ -46,6 +47,20 @@ class ProcessConnectionController : Controller() {
                 sendRequest(index + 1)
                 tryCount = 0
             }
+        }
+    }
+
+    init {
+        subscribe<RemoveFormRequestEvent> {
+            val indexOf = formRequestFragmentList.indexOf(it.fragment)
+            formRequestFragmentList.remove(it.fragment)
+            when {
+                indexOf < formRequestFragmentList.size ->
+                    fire(ProcessConnectionView.OpenFormRequestEvent(indexOf))
+                indexOf >= formRequestFragmentList.size && formRequestFragmentList.lastIndex >= 0 ->
+                    fire(ProcessConnectionView.OpenFormRequestEvent(formRequestFragmentList.lastIndex))
+            }
+            fire(ProcessConnectionView.SelectElementInListEvent(indexOf))
         }
     }
 
@@ -112,4 +127,6 @@ class ProcessConnectionController : Controller() {
             action(index + 1, re as ResponseEventExt)
         }
     }
+
+    class RemoveFormRequestEvent(val fragment: FormRequestFragment) : FXEvent()
 }

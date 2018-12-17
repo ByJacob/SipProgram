@@ -1,5 +1,6 @@
 package pl.edu.pwr.weka.sipprogram
 
+import javafx.scene.Cursor
 import javafx.scene.paint.Color
 import javafx.scene.text.FontWeight
 import kfoenix.JFXStylesheet

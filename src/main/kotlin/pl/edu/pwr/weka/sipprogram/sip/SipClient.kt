@@ -23,7 +23,6 @@ class SipClient : SipListener {
     }
 
     override fun processDialogTerminated(p0: DialogTerminatedEvent?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun processRequest(p0: RequestEvent?) {}

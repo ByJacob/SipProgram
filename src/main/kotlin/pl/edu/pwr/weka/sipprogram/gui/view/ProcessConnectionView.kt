@@ -1,8 +1,6 @@
 package pl.edu.pwr.weka.sipprogram.gui.view
 
 import com.jfoenix.controls.JFXButton
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
 import javafx.geometry.Pos
 import javafx.scene.control.ScrollPane
 import javafx.scene.layout.Priority
@@ -10,8 +8,8 @@ import kfoenix.jfxbutton
 import kfoenix.jfxlistview
 import pl.edu.pwr.weka.sipprogram.gui.controller.ProcessConnectionController
 import pl.edu.pwr.weka.sipprogram.gui.model.ProcessConnectionModel
+import pl.edu.pwr.weka.sipprogram.gui.view.row.ProcessConnectionItemView
 import pl.edu.pwr.weka.sipprogram.sip.SipProtocol
-import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
 
 class ProcessConnectionView : View(FX.messages["simulation"]) {
@@ -83,41 +81,7 @@ class ProcessConnectionView : View(FX.messages["simulation"]) {
                         isShowTooltip = true
                         bindSelected(model.formRequestFragment)
                         cellFormat {
-                            graphic = hbox {
-                                val iconOne =
-                                        if (!it.model.isSendingRequest.value)
-                                            FontAwesomeIconView(FontAwesomeIcon.ARROW_RIGHT)
-                                        else
-                                            FontAwesomeIconView(FontAwesomeIcon.ARROW_LEFT)
-                                iconOne.glyphSize = 13
-                                val iconTwo = FontAwesomeIconView(FontAwesomeIcon.DESKTOP)
-                                iconTwo.glyphSize = 13
-                                hbox {
-                                    style {
-                                        padding = box(0.px, 10.px, 0.px, 0.px)
-                                        spacing = 5.px
-                                        alignment = Pos.CENTER
-                                    }
-                                    add(iconOne)
-                                    add(iconTwo)
-                                }
-                                vbox {
-                                    spacing = 1.0
-                                    val size = if (it.model.formRequest.method == RequestEnum.ACK) 12.px else 18.px
-                                    label(it.model.formRequest.method.toString()) {
-                                        style {
-                                            fontSize = size
-                                        }
-                                    }
-                                    if (it.model.formRequest.method == RequestEnum.ACK) {
-                                        label("${it.model.formRequest.statusCode}(${it.model.formRequest.messageStatusCode})") {
-                                            style {
-                                                fontSize = size
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            graphic = ProcessConnectionItemView(it).root
                         }
                         onUserSelect(clickCount = 1) {
                             fire(OpenFormRequestEvent(controller.formRequestFragmentList.indexOf(it)))
@@ -126,7 +90,12 @@ class ProcessConnectionView : View(FX.messages["simulation"]) {
                             refresh()
                         }
                         subscribe<SelectElementInListEvent> {
-                            this@jfxlistview.selectionModel.select(it.index)
+                            when {
+                                this@jfxlistview.items.size <= 0 -> fire(ClearFormRequestEvent())
+                                it.index >= this@jfxlistview.items.size ->
+                                    this@jfxlistview.selectionModel.select(this@jfxlistview.items.lastIndex)
+                                else -> this@jfxlistview.selectionModel.select(it.index)
+                            }
                         }
                         vboxConstraints {
                             vgrow = Priority.ALWAYS
@@ -138,7 +107,7 @@ class ProcessConnectionView : View(FX.messages["simulation"]) {
     }
 
 
-    class OpenFormRequestEvent(val selectedIndex: Int) : FXEvent()
+    class OpenFormRequestEvent(var selectedIndex: Int) : FXEvent()
 
     class RefreshListFormRequestEvent : FXEvent()
 

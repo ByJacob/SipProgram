@@ -1,6 +1,12 @@
 package pl.edu.pwr.weka.sipprogram.gui.view
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
+import javafx.geometry.Pos
+import javafx.scene.Cursor
+import kfoenix.jfxbutton
 import pl.edu.pwr.weka.sipprogram.gui.controller.FormRequestController
+import pl.edu.pwr.weka.sipprogram.gui.controller.ProcessConnectionController
 import pl.edu.pwr.weka.sipprogram.gui.model.FormRequestModel
 import pl.edu.pwr.weka.sipprogram.gui.view.header.*
 import pl.edu.pwr.weka.sipprogram.gui.view.row.AddHeaderRowView
@@ -17,7 +23,29 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
     val model = FormRequestModel()
 
     override val root = vbox {
-        vbox{
+        hbox {
+            spacing = 1.0
+            alignment = Pos.CENTER
+            jfxbutton("Usuń") {
+                style {
+                    padding = box(12.px)
+                }
+                prefHeight = 40.0
+                maxHeight = prefHeight
+                minHeight = prefHeight
+                val fontAwesomeIconView = FontAwesomeIconView(FontAwesomeIcon.TRASH)
+                fontAwesomeIconView.size = "20"
+                fontAwesomeIconView.style {
+                    fontSize = 20.px
+                    cursor = Cursor.HAND
+                }
+                graphic = fontAwesomeIconView
+                action {
+                    fire(ProcessConnectionController.RemoveFormRequestEvent(this@FormRequestFragment))
+                }
+            }
+        }
+        vbox {
             clear()
             controller.listHeaderRowsNode = children
         }

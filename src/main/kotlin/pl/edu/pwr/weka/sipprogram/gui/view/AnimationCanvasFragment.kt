@@ -1,0 +1,135 @@
+package pl.edu.pwr.weka.sipprogram.gui.view
+
+import javafx.scene.layout.Priority
+import javafx.scene.text.FontPosture
+import javafx.scene.text.FontWeight
+import pl.edu.pwr.weka.sipprogram.Styles
+import pl.edu.pwr.weka.sipprogram.gui.controller.AnimationCanvasFragmentController
+import pl.edu.pwr.weka.sipprogram.gui.view.animation.AnimationCanvasArrowsView
+import pl.edu.pwr.weka.sipprogram.gui.view.animation.AnimationCanvasBackgroundView
+import tornadofx.*
+
+/**
+ * Project Name: sipprogram
+ * User: Jakub Rosa
+ * Date 19.12.2018 23:46
+ */
+class AnimationCanvasFragment : Fragment() {
+
+    val controller: AnimationCanvasFragmentController by inject(Scope(), params)
+
+    override val root = borderpane {
+        vboxConstraints {
+            vGrow = Priority.ALWAYS
+        }
+        center {
+            vbox {
+                stackpane {
+                    val background = AnimationCanvasBackgroundView(controller.scenario.endpoints)
+                    background.widthProperty().bind(this.widthProperty())
+                    background.heightProperty().bind(this.heightProperty())
+                    add(background)
+                    val arrow = AnimationCanvasArrowsView(
+                        background.sixthLayerLineY,
+                        controller.scenario.endpoints.size
+                    )
+                    arrow.widthProperty().bind(this.widthProperty())
+                    arrow.heightProperty().bind(this.heightProperty())
+                    add(arrow)
+                    vboxConstraints {
+                        vGrow = Priority.ALWAYS
+                    }
+                }
+            }
+        }
+        right {
+            vbox textContainer@{
+                style {
+                    padding = box(10.px)
+                }
+                spacing = 10.0
+                label {
+                    style {
+                        fontWeight = FontWeight.EXTRA_BOLD
+                        fontSize = 2.em
+                    }
+                    textProperty().bind(controller.model.arrowTitle)
+                }
+                scrollpane {
+                    addClass(Styles.scrollBarAnimationDescription)
+                    vboxConstraints {
+                        vgrow = Priority.ALWAYS
+                    }
+                    vbox {
+                        addClass(Styles.containerDAnimationDescription)
+                        text {
+                            addClass(Stylesheet.text)
+                            bind(controller.model.description, true)
+                            wrappingWidthProperty().bind(this@textContainer.widthProperty().subtract(35))
+                        }
+                        vbox {
+                            visibleWhen(controller.model.arrowExample.isNotBlank())
+                            managedWhen(controller.model.arrowExample.isNotBlank())
+                            text {
+                                addClass(Stylesheet.text)
+                                text = "\n\n"
+                            }
+                            text {
+                                addClass(Stylesheet.text)
+                                text = messages["example_frame"]
+                            }
+                            text {
+                                addClass(Stylesheet.text)
+                                text = "\n"
+                            }
+                            text {
+                                addClass(Stylesheet.text)
+                                style {
+                                    fontStyle = FontPosture.ITALIC
+                                }
+                                bind(controller.model.arrowExample, true)
+                            }
+                        }
+                    }
+                }
+                hyperlink(messages["hyperlink_rfc"]) {
+                    visibleWhen { controller.model.documentationUrl.isNotBlank() }
+                    action {
+                        if (controller.model.documentationUrl.value.isNotEmpty())
+                            hostServices.showDocument(controller.model.documentationUrl.value)
+                    }
+                }
+                hbox {
+                    spacing = 10.0
+                    button("Wstecz") {
+                        action {
+                            controller.controlAnimation(false)
+                        }
+                    }
+                    button("Naprzód") {
+                        action {
+                            controller.controlAnimation(true)
+                        }
+                    }
+                    button("Czyść") {
+                        action {
+                            controller.resetAnimation()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    data class ScenariosProperties(
+        val name: String,
+        val description: String = "",
+        val documentationUrl: String = "",
+        val endpoints: List<AnimationCanvasBackgroundView.EndPointProperties>,
+        val arrows: List<AnimationCanvasArrowsView.ArrowProperties>
+    ) {
+        override fun toString(): String {
+            return name
+        }
+    }
+}

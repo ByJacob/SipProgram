@@ -1,0 +1,21 @@
+{
+  "name": "",
+  "description": "",
+  "documentationUrl": "",
+  "endpoints": [
+    {
+      "name": "",
+      "iconName": ""
+    }
+  ],
+  "arrows": [
+    {
+      "from": 0,
+      "to": 1,
+      "name": "",
+      "title": "",
+      "description": "",
+      "example": ""
+    }
+  ]
+}

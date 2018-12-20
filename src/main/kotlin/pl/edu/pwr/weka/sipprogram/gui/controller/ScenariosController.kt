@@ -1,7 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.gui.controller
 
 import com.beust.klaxon.Klaxon
-import pl.edu.pwr.weka.sipprogram.gui.view.AnimationCanvasFragment
+import pl.edu.pwr.weka.sipprogram.gui.view.fragment.AnimationCanvasFragment
 import pl.edu.pwr.weka.sipprogram.util.getResourceList
 import tornadofx.*
 
@@ -11,7 +11,7 @@ import tornadofx.*
  * Date 19.12.2018 23:52
  */
 
-class AnimationCanvasController: Controller(){
+class ScenariosController: Controller(){
     val scenarios = mutableListOf<AnimationCanvasFragment.ScenariosProperties>()
 
     init {

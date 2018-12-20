@@ -2,7 +2,7 @@ package pl.edu.pwr.weka.sipprogram.gui.controller
 
 import gov.nist.javax.sip.ResponseEventExt
 import javafx.concurrent.Task
-import pl.edu.pwr.weka.sipprogram.gui.view.FormRequestFragment
+import pl.edu.pwr.weka.sipprogram.gui.view.fragment.FormRequestFragment
 import pl.edu.pwr.weka.sipprogram.gui.view.ProcessConnectionView
 import pl.edu.pwr.weka.sipprogram.gui.view.header.HeaderAuthorizationRowView
 import pl.edu.pwr.weka.sipprogram.gui.view.header.HeaderWWWAuthenticateRowView

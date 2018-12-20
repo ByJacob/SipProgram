@@ -1,7 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.gui.model
 
 import javafx.beans.property.SimpleObjectProperty
-import pl.edu.pwr.weka.sipprogram.gui.view.FormRequestFragment
+import pl.edu.pwr.weka.sipprogram.gui.view.fragment.FormRequestFragment
 import tornadofx.*
 
 class ProcessConnection {

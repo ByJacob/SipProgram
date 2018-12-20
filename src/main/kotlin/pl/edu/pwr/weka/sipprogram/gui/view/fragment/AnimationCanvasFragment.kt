@@ -1,10 +1,10 @@
-package pl.edu.pwr.weka.sipprogram.gui.view
+package pl.edu.pwr.weka.sipprogram.gui.view.fragment
 
 import javafx.scene.layout.Priority
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
 import pl.edu.pwr.weka.sipprogram.Styles
-import pl.edu.pwr.weka.sipprogram.gui.controller.AnimationCanvasFragmentController
+import pl.edu.pwr.weka.sipprogram.gui.controller.AnimationCanvasController
 import pl.edu.pwr.weka.sipprogram.gui.view.animation.AnimationCanvasArrowsView
 import pl.edu.pwr.weka.sipprogram.gui.view.animation.AnimationCanvasBackgroundView
 import tornadofx.*
@@ -16,7 +16,7 @@ import tornadofx.*
  */
 class AnimationCanvasFragment : Fragment() {
 
-    val controller: AnimationCanvasFragmentController by inject(Scope(), params)
+    val controller: AnimationCanvasController by inject(Scope(), params)
 
     override val root = borderpane {
         vboxConstraints {
@@ -36,6 +36,12 @@ class AnimationCanvasFragment : Fragment() {
                     arrow.widthProperty().bind(this.widthProperty())
                     arrow.heightProperty().bind(this.heightProperty())
                     add(arrow)
+                    subscribe<NextArrowEvent> {
+                        arrow.drawArrowAnimation(it.arrow)
+                    }
+                    subscribe<ClearArrowEvent> {
+                        arrow.clearCanvas()
+                    }
                     vboxConstraints {
                         vGrow = Priority.ALWAYS
                     }
@@ -53,10 +59,13 @@ class AnimationCanvasFragment : Fragment() {
                         fontWeight = FontWeight.EXTRA_BOLD
                         fontSize = 2.em
                     }
-                    textProperty().bind(controller.model.arrowTitle)
+                    textProperty().bind(controller.model.title)
                 }
                 scrollpane {
                     addClass(Styles.scrollBarAnimationDescription)
+                    style {
+                        padding = box(5.px)
+                    }
                     vboxConstraints {
                         vgrow = Priority.ALWAYS
                     }
@@ -92,11 +101,16 @@ class AnimationCanvasFragment : Fragment() {
                         }
                     }
                 }
-                hyperlink(messages["hyperlink_rfc"]) {
-                    visibleWhen { controller.model.documentationUrl.isNotBlank() }
-                    action {
-                        if (controller.model.documentationUrl.value.isNotEmpty())
-                            hostServices.showDocument(controller.model.documentationUrl.value)
+                vbox {
+                    prefWidthProperty().bind(this@textContainer.widthProperty()
+                        .subtract(this@textContainer.paddingLeftProperty)
+                        .subtract(this@textContainer.paddingRightProperty))
+                    hyperlink(messages["hyperlink_rfc"]) {
+                        visibleWhen { controller.model.documentationUrl.isNotBlank() }
+                        action {
+                            if (controller.model.documentationUrl.value.isNotEmpty())
+                                hostServices.showDocument(controller.model.documentationUrl.value)
+                        }
                     }
                 }
                 hbox {
@@ -120,6 +134,9 @@ class AnimationCanvasFragment : Fragment() {
             }
         }
     }
+
+    class NextArrowEvent(val arrow: AnimationCanvasArrowsView.ArrowProperties): FXEvent()
+    class ClearArrowEvent(): FXEvent()
 
     data class ScenariosProperties(
         val name: String,

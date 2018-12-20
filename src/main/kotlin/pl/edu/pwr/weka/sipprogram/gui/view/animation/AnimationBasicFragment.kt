@@ -39,9 +39,9 @@ class AnimationBasicFragment : Fragment() {
                     padding = box(10.px)
                 }
                 minWidth = 300.0
-                widthProperty.addListener { _, _, newValue ->
-                    runAsync { newValue } ui { prefWidth = newValue.toDouble() * 0.45 }
-                }
+//                widthProperty.addListener { _, _, newValue ->
+//                    runAsync { newValue } ui { prefWidth = newValue.toDouble() * 0.45 }
+//                }
                 maxWidth = 700.0
                 spacing = 10.0
                 label {
@@ -53,6 +53,9 @@ class AnimationBasicFragment : Fragment() {
                 }
                 scrollpane {
                     addClass(Styles.scrollBarAnimationDescription)
+                    style {
+                        padding = box(5.px)
+                    }
                     vboxConstraints {
                         vgrow = Priority.ALWAYS
                     }
@@ -89,6 +92,7 @@ class AnimationBasicFragment : Fragment() {
                     }
                 }
                 hyperlink(messages["hyperlink_rfc"]) {
+                    prefWidthProperty().bind(this@textContainer.widthProperty())
                     visibleWhen { controller.model.url.isNotBlank() }
                     action {
                         if (controller.model.url.value.isNotEmpty())

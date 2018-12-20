@@ -11,15 +11,15 @@ import tornadofx.setValue
  * Date 19.12.2018 22:22
  */
 
-class AnimationFragmentCanvas {
+class AnimationCanvas {
     val nameProperty = SimpleStringProperty("")
     var name by nameProperty
 
     val descriptionProperty = SimpleStringProperty("")
     var description by descriptionProperty
 
-    val arrowTitleProperty = SimpleStringProperty("")
-    var arrowTitle by arrowTitleProperty
+    val titleProperty = SimpleStringProperty("")
+    var title by titleProperty
 
     val arrowDescriptionProperty = SimpleStringProperty("")
     var arrowDescription by arrowDescriptionProperty
@@ -33,11 +33,11 @@ class AnimationFragmentCanvas {
 
 }
 
-class AnimationCanvasFragmentModel : ItemViewModel<AnimationFragmentCanvas>() {
-    val name = bind(AnimationFragmentCanvas::nameProperty, true)
-    val description = bind(AnimationFragmentCanvas::descriptionProperty, true)
-    val arrowTitle = bind(AnimationFragmentCanvas::arrowTitleProperty, true)
-    val arrowDescription = bind(AnimationFragmentCanvas::arrowDescriptionProperty, true)
-    val arrowExample = bind(AnimationFragmentCanvas::arrowExampleProperty, true)
-    val documentationUrl = bind(AnimationFragmentCanvas::documentationUrlProperty, true)
+class AnimationCanvasModel : ItemViewModel<AnimationCanvas>() {
+    val name = bind(AnimationCanvas::nameProperty, true)
+    val description = bind(AnimationCanvas::descriptionProperty, true)
+    val title = bind(AnimationCanvas::titleProperty, true)
+    val arrowDescription = bind(AnimationCanvas::arrowDescriptionProperty, true)
+    val arrowExample = bind(AnimationCanvas::arrowExampleProperty, true)
+    val documentationUrl = bind(AnimationCanvas::documentationUrlProperty, true)
 }

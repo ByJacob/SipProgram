@@ -1,4 +1,4 @@
-package pl.edu.pwr.weka.sipprogram.gui.view
+package pl.edu.pwr.weka.sipprogram.gui.view.fragment
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
@@ -8,6 +8,7 @@ import kfoenix.jfxbutton
 import pl.edu.pwr.weka.sipprogram.gui.controller.FormRequestController
 import pl.edu.pwr.weka.sipprogram.gui.controller.ProcessConnectionController
 import pl.edu.pwr.weka.sipprogram.gui.model.FormRequestModel
+import pl.edu.pwr.weka.sipprogram.gui.view.ProcessConnectionView
 import pl.edu.pwr.weka.sipprogram.gui.view.header.*
 import pl.edu.pwr.weka.sipprogram.gui.view.row.AddHeaderRowView
 import tornadofx.*

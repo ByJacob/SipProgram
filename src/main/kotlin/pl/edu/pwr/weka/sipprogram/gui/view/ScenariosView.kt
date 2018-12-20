@@ -1,7 +1,8 @@
 package pl.edu.pwr.weka.sipprogram.gui.view
 
 import kfoenix.jfxlistview
-import pl.edu.pwr.weka.sipprogram.gui.controller.AnimationCanvasController
+import pl.edu.pwr.weka.sipprogram.gui.controller.ScenariosController
+import pl.edu.pwr.weka.sipprogram.gui.view.fragment.AnimationCanvasFragment
 import tornadofx.*
 
 /**
@@ -9,7 +10,7 @@ import tornadofx.*
  * User: Jakub Rosa
  * Date 17.12.2018 15:32
  */
-class AnimationCanvasView : View() {
+class ScenariosView : View() {
 
     companion object {
         fun calculateEndPointsX(countEndPoints: Int, width: Double): List<Double> {
@@ -30,7 +31,7 @@ class AnimationCanvasView : View() {
         }
     }
 
-    val controller: AnimationCanvasController by inject()
+    val controller: ScenariosController by inject()
 
     override val root = borderpane {
         prefWidth = 500.0
@@ -38,6 +39,9 @@ class AnimationCanvasView : View() {
         left{
             jfxlistview<AnimationCanvasFragment.ScenariosProperties> {
                 items = controller.scenarios.observable()
+                onUserSelect(1){
+                    fire(OpenScenario(it))
+                }
             }
         }
         center{

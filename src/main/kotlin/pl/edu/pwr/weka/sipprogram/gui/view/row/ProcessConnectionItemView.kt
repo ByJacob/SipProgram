@@ -3,7 +3,7 @@ package pl.edu.pwr.weka.sipprogram.gui.view.row
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
 import javafx.geometry.Pos
-import pl.edu.pwr.weka.sipprogram.gui.view.FormRequestFragment
+import pl.edu.pwr.weka.sipprogram.gui.view.fragment.FormRequestFragment
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
 

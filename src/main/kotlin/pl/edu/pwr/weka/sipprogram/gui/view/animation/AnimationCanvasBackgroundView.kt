@@ -2,7 +2,7 @@ package pl.edu.pwr.weka.sipprogram.gui.view.animation
 
 import javafx.scene.image.Image
 import javafx.scene.text.Font
-import pl.edu.pwr.weka.sipprogram.gui.view.AnimationCanvasView
+import pl.edu.pwr.weka.sipprogram.gui.view.ScenariosView
 import pl.edu.pwr.weka.sipprogram.util.CanvasResizable
 
 /**
@@ -22,7 +22,7 @@ class AnimationCanvasBackgroundView(private val properties: List<EndPointPropert
 
     override fun draw() {
 
-        val endPointsX = AnimationCanvasView.calculateEndPointsX(properties.size, width)
+        val endPointsX = ScenariosView.calculateEndPointsX(properties.size, width)
         val oldLineWidth = gc.lineWidth
         gc.font = Font("Roboto", 12.0)
         gc.lineWidth = 0.5

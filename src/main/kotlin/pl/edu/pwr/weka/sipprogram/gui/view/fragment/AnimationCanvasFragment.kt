@@ -136,11 +136,13 @@ class AnimationCanvasFragment : Fragment() {
                         action {
                             controller.controlAnimation(false)
                         }
+                        shortcut("LEFT")
                     }
                     button("Naprzód") {
                         action {
                             controller.controlAnimation(true)
                         }
+                        shortcut("RIGHT")
                     }
                     button("Czyść") {
                         action {

@@ -22,7 +22,7 @@ class AnimationCanvasBackgroundView(private val properties: List<EndPointPropert
     private val fifthLayerNothingY = fourthLayerIconY + iconSize
     val sixthLayerLineY = fifthLayerNothingY + 5
 
-    override fun draw() {
+    override fun draw(change: DimensionChange) {
 
         val endPointsX = ScenariosView.calculateEndPointsX(properties.size, width)
         val oldLineWidth = gc.lineWidth

@@ -36,16 +36,18 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
         this.height = Control.USE_PREF_SIZE
     }
 
-    override fun draw() {
+    override fun draw(change: DimensionChange) {
         endPointsX = ScenariosView.calculateEndPointsX(countEndPoints, width)
-        animatedArrows.forEach {
-            it.timer.stop()
-            it.timeline.stop()
-        }
-        val animatedArrowsList = animatedArrows.toList()
-        animatedArrows.clear()
-        animatedArrowsList.forEach {
-            drawArrowAnimation(it.properties)
+        if (change == DimensionChange.WIDTH) {
+            animatedArrows.forEach {
+                it.timer.stop()
+                it.timeline.stop()
+            }
+            val animatedArrowsList = animatedArrows.toList()
+            animatedArrows.clear()
+            animatedArrowsList.forEach {
+                drawArrowAnimation(it.properties)
+            }
         }
 
         arrows.forEachIndexed { index, properties ->
@@ -96,6 +98,7 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
             timer.stop()
             animatedArrows.remove(arrowAnimationProperties)
             arrows.add(properties)
+            drawArrow(fromX, toX, y, properties.name)
         }
         timer.start()
         timeline.play()

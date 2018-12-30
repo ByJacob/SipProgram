@@ -13,13 +13,13 @@ abstract class CanvasResizable : Canvas() {
     val gc = graphicsContext2D
 
     init {
-        widthProperty().addListener { _, _, _ -> gc.clearRect(0.0, 0.0, width, height); draw() }
-        heightProperty().addListener { _, _, _ -> gc.clearRect(0.0, 0.0, width, height); draw() }
+        widthProperty().addListener { _, _, _ -> gc.clearRect(0.0, 0.0, width, height); draw(DimensionChange.WIDTH) }
+        heightProperty().addListener { _, _, _ -> gc.clearRect(0.0, 0.0, width, height); draw(DimensionChange.HEIGHT) }
         gc.lineWidth = 2.0
         gc.lineJoin = StrokeLineJoin.ROUND
     }
 
-    abstract fun draw()
+    abstract fun draw(change: DimensionChange)
 
 
     override fun isResizable(): Boolean {
@@ -40,5 +40,9 @@ abstract class CanvasResizable : Canvas() {
 
     override fun prefHeight(width: Double): Double {
         return height
+    }
+
+    enum class DimensionChange{
+        WIDTH, HEIGHT
     }
 }

@@ -1,5 +1,8 @@
 package pl.edu.pwr.weka.sipprogram.gui.view
 
+import com.jfoenix.controls.JFXListView
+import javafx.scene.input.KeyCode
+import javafx.scene.input.KeyEvent
 import kfoenix.jfxlistview
 import pl.edu.pwr.weka.sipprogram.gui.controller.ScenariosController
 import pl.edu.pwr.weka.sipprogram.gui.view.fragment.AnimationCanvasFragment
@@ -34,25 +37,35 @@ class ScenariosView : View() {
     val controller: ScenariosController by inject()
 
     override val root = borderpane {
+        lateinit var jfxListView: JFXListView<AnimationCanvasFragment.ScenariosProperties>
         prefWidth = 500.0
         prefHeight = 400.0
-        left{
+        left {
             jfxlistview<AnimationCanvasFragment.ScenariosProperties> {
+                jfxListView = this
                 items = controller.scenarios.observable()
-                onUserSelect(1){
+                onUserSelect(1) {
                     fire(OpenScenario(it))
                 }
             }
         }
-        center{
+        center {
             vbox {
                 replaceChildren(find<AnimationCanvasFragment>("scenario" to controller.scenarios[0]))
                 subscribe<OpenScenario> {
                     replaceChildren(find<AnimationCanvasFragment>("scenario" to it.scenario))
                 }
             }
+            addEventFilter(KeyEvent.KEY_PRESSED) {
+                val selectedIndex = if (jfxListView.selectionModel.selectedIndex <= 0) 0
+                else jfxListView.selectionModel.selectedIndex
+                jfxListView.selectionModel.select(selectedIndex)
+                val selectedItem = jfxListView.selectedItem
+                if (selectedItem != null)
+                    fire(OpenScenario(selectedItem))
+            }
         }
     }
 
-    class OpenScenario(val scenario: AnimationCanvasFragment.ScenariosProperties): FXEvent()
+    class OpenScenario(val scenario: AnimationCanvasFragment.ScenariosProperties) : FXEvent()
 }

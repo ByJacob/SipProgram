@@ -12,12 +12,14 @@ import pl.edu.pwr.weka.sipprogram.util.CanvasResizable
  */
 class AnimationCanvasBackgroundView(private val properties: List<EndPointProperties>) : CanvasResizable() {
 
+
+    private val iconSize = 40.0
+
     private val firstLayerNothingY = 0.0
     private val secondLayerTextY = firstLayerNothingY + 10.0
     private val thirtyLayerNothingY = secondLayerTextY + 10.0
     private val fourthLayerIconY = thirtyLayerNothingY + 10.0
-    private val fifthLayerNothingY = fourthLayerIconY + 40.0
-    private val iconSize = 40.0
+    private val fifthLayerNothingY = fourthLayerIconY + iconSize
     val sixthLayerLineY = fifthLayerNothingY + 5
 
     override fun draw() {
@@ -108,6 +110,10 @@ class AnimationCanvasBackgroundView(private val properties: List<EndPointPropert
 
     override fun minWidth(height: Double): Double {
         return (properties.size+1) * iconSize
+    }
+
+    override fun minHeight(width: Double): Double {
+        return sixthLayerLineY
     }
 
     data class EndPointProperties(val name: String, val iconName: String)

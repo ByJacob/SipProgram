@@ -6,6 +6,7 @@ import javafx.animation.KeyValue
 import javafx.animation.Timeline
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.event.EventHandler
+import javafx.scene.control.Control
 import javafx.scene.text.Text
 import javafx.util.Duration
 import pl.edu.pwr.weka.sipprogram.gui.view.ScenariosView
@@ -19,6 +20,8 @@ import pl.edu.pwr.weka.sipprogram.util.CanvasResizable
 
 class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int) : CanvasResizable() {
 
+    val prefHeightProperty = SimpleDoubleProperty(0.0)
+
     private var endPointsX = listOf<Double>()
 
     private val arrows = mutableListOf<ArrowProperties>()
@@ -30,6 +33,7 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
 
     init {
         endPointsX = ScenariosView.calculateEndPointsX(countEndPoints, width)
+        this.height = Control.USE_PREF_SIZE
     }
 
     override fun draw() {
@@ -80,7 +84,7 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
         }
         val y = startArrowY + ((arrows.size + animatedArrows.size) * (arrowHeight + spaceBetweenArrows))
         val timeline = Timeline(
-            KeyFrame(Duration.seconds(3.0), KeyValue(x, toX))
+            KeyFrame(Duration.seconds(1.0), KeyValue(x, toX))
         )
         val timer = object : AnimationTimer() {
             override fun handle(now: Long) {
@@ -98,7 +102,7 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
         animatedArrows.add(arrowAnimationProperties)
     }
 
-    fun clearCanvas(){
+    fun clearCanvas() {
         animatedArrows.forEach {
             it.timer.stop()
             it.timeline.stop()
@@ -106,6 +110,7 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
         arrows.clear()
         animatedArrows.clear()
         gc.clearRect(0.0, 0.0, width, height)
+        prefHeightProperty.value = minHeight(0.0)
     }
 
     private fun drawArrow(fromX: Double, toX: Double, y: Double, message: String) {
@@ -151,9 +156,9 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
 
         val textY = y + arrowHeight / 4
         val textX = if (isRight) {
-            tFromX + ((tToX-tFromX)/2)
+            tFromX + ((tToX - tFromX) / 2)
         } else {
-            tToX + ((tFromX-tToX)/2)
+            tToX + ((tFromX - tToX) / 2)
         }
         val oldDash = gc.lineDashes
         val oldLineWidth = gc.lineWidth
@@ -182,8 +187,17 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
         }
         val text = Text(message)
         text.applyCss()
-        val correctTextX = text.layoutBounds.width/2
-        gc.fillText(message, textX-correctTextX, textY)
+        val correctTextX = text.layoutBounds.width / 2
+        gc.fillText(message, textX - correctTextX, textY)
+        prefHeightProperty.value = minHeight(0.0)
+    }
+
+    override fun minHeight(width: Double): Double {
+        return startArrowY + ((arrows.size + animatedArrows.size) * (arrowHeight + spaceBetweenArrows)) + (arrowHeight * 2)
+    }
+
+    override fun prefHeight(width: Double): Double {
+        return minHeight(width)
     }
 
     data class ArrowAnimationProperties(

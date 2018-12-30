@@ -1,0 +1,191 @@
+{
+  "name": "Połączenie pomiędzy serwerami Proxy",
+  "description": "Scenariusz obejmuje poprawne połączenie pomiędzy dwoma serwerami proxy.",
+  "documentationUrl": "",
+  "endpoints": [
+    {
+      "name": "Tel 1",
+      "iconName": "oldPhone.png"
+    },{
+      "name": "Proxy 1",
+      "iconName": "proxy.png"
+    },{
+      "name": "Proxy 2",
+      "iconName": "proxy.png"
+    },{
+      "name": "Tel 2",
+      "iconName": "oldPhone.png"
+    }
+  ],
+  "arrows": [
+    {
+      "from": 0,
+      "to": 1,
+      "name": "INVITE",
+      "title": "INVITE - 1",
+      "description": "",
+      "example": ""
+    },{
+      "from": 1,
+      "to": 0,
+      "name": "407",
+      "title": "407 Proxy Authentication Required",
+      "description": "",
+      "example": ""
+    },{
+      "from": 0,
+      "to": 1,
+      "name": "ACK",
+      "title": "ACK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 0,
+      "to": 1,
+      "name": "INVITE",
+      "title": "INVITE - 2",
+      "description": "",
+      "example": ""
+    },{
+      "from": 1,
+      "to": 0,
+      "name": "100",
+      "title": "100 Trying",
+      "description": "",
+      "example": ""
+    },{
+      "from": 1,
+      "to": 2,
+      "name": "INVITE",
+      "title": "INVITE - 3",
+      "description": "",
+      "example": ""
+    },{
+      "from": 2,
+      "to": 1,
+      "name": "100",
+      "title": "100 Trying",
+      "description": "",
+      "example": ""
+    },{
+      "from": 2,
+      "to": 3,
+      "name": "INVITE",
+      "title": "INVITE - 4",
+      "description": "",
+      "example": ""
+    },{
+      "from": 3,
+      "to": 2,
+      "name": "180",
+      "title": "180 Ringing",
+      "description": "",
+      "example": ""
+    },{
+      "from": 2,
+      "to": 1,
+      "name": "180",
+      "title": "180 Ringing",
+      "description": "",
+      "example": ""
+    },{
+      "from": 1,
+      "to": 0,
+      "name": "180",
+      "title": "180 Ringing",
+      "description": "",
+      "example": ""
+    },{
+      "from": 3,
+      "to": 2,
+      "name": "200",
+      "title": "200 OK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 2,
+      "to": 1,
+      "name": "200",
+      "title": "200 OK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 1,
+      "to": 0,
+      "name": "200",
+      "title": "200 OK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 0,
+      "to": 1,
+      "name": "ACK",
+      "title": "ACK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 1,
+      "to": 2,
+      "name": "ACK",
+      "title": "ACK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 2,
+      "to": 3,
+      "name": "ACK",
+      "title": "ACK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 0,
+      "to": 3,
+      "name": "Transmisja RTP",
+      "title": "Strumień stransmisji RTP",
+      "description": "Tworzone są strumienie transmisji RTP między dwoma użytkownikami. Zawierają one informacje o typie przesyłanych danych, numery sekwencyjne oraz znacnziki czasu. RTP nie gwarantuje jakości usług (QoS).",
+      "example": ""
+    },{
+      "from": 3,
+      "to": 2,
+      "name": "BYE",
+      "title": "BYE",
+      "description": "",
+      "example": ""
+    },{
+      "from": 2,
+      "to": 1,
+      "name": "BYE",
+      "title": "BYE",
+      "description": "",
+      "example": ""
+    },{
+      "from": 1,
+      "to": 0,
+      "name": "BYE",
+      "title": "BYE",
+      "description": "",
+      "example": ""
+    },{
+      "from": 0,
+      "to": 1,
+      "name": "200",
+      "title": "200 OK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 1,
+      "to": 2,
+      "name": "200",
+      "title": "200 OK",
+      "description": "",
+      "example": ""
+    },{
+      "from": 2,
+      "to": 3,
+      "name": "200",
+      "title": "200 OK",
+      "description": "",
+      "example": ""
+    }
+  ]
+}

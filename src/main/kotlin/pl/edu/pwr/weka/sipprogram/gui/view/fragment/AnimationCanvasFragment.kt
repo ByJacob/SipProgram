@@ -1,5 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.gui.view.fragment
 
+import javafx.beans.binding.Bindings
+import javafx.scene.control.ScrollPane
 import javafx.scene.layout.Priority
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
@@ -24,23 +26,36 @@ class AnimationCanvasFragment : Fragment() {
         }
         center {
             vbox {
-                stackpane {
-                    val background = AnimationCanvasBackgroundView(controller.scenario.endpoints)
-                    background.widthProperty().bind(this.widthProperty())
-                    background.heightProperty().bind(this.heightProperty())
-                    add(background)
-                    val arrow = AnimationCanvasArrowsView(
-                        background.sixthLayerLineY,
-                        controller.scenario.endpoints.size
-                    )
-                    arrow.widthProperty().bind(this.widthProperty())
-                    arrow.heightProperty().bind(this.heightProperty())
-                    add(arrow)
-                    subscribe<NextArrowEvent> {
-                        arrow.drawArrowAnimation(it.arrow)
-                    }
-                    subscribe<ClearArrowEvent> {
-                        arrow.clearCanvas()
+                scrollpane {
+                    isFitToWidth = true
+                    stackpane {
+                        this.prefHeightProperty().onChange {
+                            this@scrollpane.vvalue = this@scrollpane.vmax
+                        }
+                        val background = AnimationCanvasBackgroundView(controller.scenario.endpoints)
+                        background.widthProperty().bind(this.widthProperty())
+                        background.heightProperty().bind(this.heightProperty())
+                        add(background)
+                        val arrow = AnimationCanvasArrowsView(
+                            background.sixthLayerLineY,
+                            controller.scenario.endpoints.size
+                        )
+                        arrow.widthProperty().bind(this.widthProperty())
+                        arrow.heightProperty().bind(this.heightProperty())
+                        val vBoxHeight = this@vbox.heightProperty().subtract(20)
+                        val arrowsHeight = arrow.prefHeightProperty
+                        this.prefHeightProperty().bind(
+                            Bindings.`when`(vBoxHeight.greaterThan(arrowsHeight))
+                                .then(vBoxHeight)
+                                .otherwise(arrowsHeight)
+                        )
+                        add(arrow)
+                        subscribe<NextArrowEvent> {
+                            arrow.drawArrowAnimation(it.arrow)
+                        }
+                        subscribe<ClearArrowEvent> {
+                            arrow.clearCanvas()
+                        }
                     }
                     vboxConstraints {
                         vGrow = Priority.ALWAYS
@@ -102,9 +117,11 @@ class AnimationCanvasFragment : Fragment() {
                     }
                 }
                 vbox {
-                    prefWidthProperty().bind(this@textContainer.widthProperty()
-                        .subtract(this@textContainer.paddingLeftProperty)
-                        .subtract(this@textContainer.paddingRightProperty))
+                    prefWidthProperty().bind(
+                        this@textContainer.widthProperty()
+                            .subtract(this@textContainer.paddingLeftProperty)
+                            .subtract(this@textContainer.paddingRightProperty)
+                    )
                     hyperlink(messages["hyperlink_rfc"]) {
                         visibleWhen { controller.model.documentationUrl.isNotBlank() }
                         action {
@@ -135,8 +152,8 @@ class AnimationCanvasFragment : Fragment() {
         }
     }
 
-    class NextArrowEvent(val arrow: AnimationCanvasArrowsView.ArrowProperties): FXEvent()
-    class ClearArrowEvent(): FXEvent()
+    class NextArrowEvent(val arrow: AnimationCanvasArrowsView.ArrowProperties) : FXEvent()
+    class ClearArrowEvent() : FXEvent()
 
     data class ScenariosProperties(
         val name: String,

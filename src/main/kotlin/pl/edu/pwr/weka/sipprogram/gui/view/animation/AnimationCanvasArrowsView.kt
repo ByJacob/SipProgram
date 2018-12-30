@@ -6,14 +6,10 @@ import javafx.animation.KeyValue
 import javafx.animation.Timeline
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.event.EventHandler
-import javafx.geometry.Point2D
 import javafx.scene.text.Text
 import javafx.util.Duration
 import pl.edu.pwr.weka.sipprogram.gui.view.ScenariosView
 import pl.edu.pwr.weka.sipprogram.util.CanvasResizable
-import java.awt.Point
-import kotlin.math.round
-import kotlin.math.roundToInt
 
 /**
  * Project Name: sipprogram
@@ -141,19 +137,49 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
             isRight = false
 
         }
-        val xPoints = mutableListOf(tFromX, tToX)
-        val yPoints = mutableListOf(y + (arrowHeight / 2), y + (arrowHeight / 2))
+        val xLine = listOf(tFromX, tToX)
+        val yLine = listOf(y + (arrowHeight / 2), y + (arrowHeight / 2))
+
+        val yArrowRight = listOf(y, y + (arrowHeight / 2), y + arrowHeight)
+        val xArrowRight = listOf(tToX - dartWidth, tToX + 2, tToX - dartWidth)
+
+        val yArrowLeft = listOf(y, y + (arrowHeight / 2), y + arrowHeight)
+        val xArrowLeft = listOf(tToX + dartWidth, tToX - 2, tToX + dartWidth)
+
+        val yArrowLeft2 = listOf(y, y + (arrowHeight / 2), y + arrowHeight)
+        val xArrowLeft2 = listOf(tFromX + dartWidth, tFromX - 2, tFromX + dartWidth)
+
         val textY = y + arrowHeight / 4
-        val textX: Double
-        yPoints.addAll(listOf(y, y + (arrowHeight / 2), y + arrowHeight))
-        if (isRight) {
-            xPoints.addAll(listOf(tToX - dartWidth, tToX + 2, tToX - dartWidth))
-            textX = tFromX + ((tToX-tFromX)/2)
+        val textX = if (isRight) {
+            tFromX + ((tToX-tFromX)/2)
         } else {
-            xPoints.addAll(listOf(tToX + dartWidth, tToX - 2, tToX + dartWidth))
-            textX = tToX + ((tFromX-tToX)/2)
+            tToX + ((tFromX-tToX)/2)
         }
-        gc.strokePolyline(xPoints.toDoubleArray(), yPoints.toDoubleArray(), 5)
+        val oldDash = gc.lineDashes
+        val oldLineWidth = gc.lineWidth
+        when {
+            message.contains("RTP") -> {
+                gc.strokePolyline(xArrowRight.toDoubleArray(), yArrowRight.toDoubleArray(), xArrowRight.size)
+                gc.strokePolyline(xArrowLeft2.toDoubleArray(), yArrowLeft2.toDoubleArray(), xArrowLeft2.size)
+                gc.setLineDashes(5.0)
+                gc.lineWidth = 3.5
+            }
+            isRight -> {
+                gc.strokePolyline(xArrowRight.toDoubleArray(), yArrowRight.toDoubleArray(), xArrowRight.size)
+                gc.setLineDashes(10.0)
+            }
+            else -> {
+                gc.strokePolyline(xArrowLeft.toDoubleArray(), yArrowLeft.toDoubleArray(), xArrowLeft.size)
+                gc.setLineDashes(10.0)
+            }
+        }
+        gc.strokePolyline(xLine.toDoubleArray(), yLine.toDoubleArray(), xLine.size)
+        gc.lineWidth = oldLineWidth
+        oldDash?.let {
+            gc.setLineDashes(*it)
+        } ?: run {
+            gc.setLineDashes()
+        }
         val text = Text(message)
         text.applyCss()
         val correctTextX = text.layoutBounds.width/2

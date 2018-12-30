@@ -1,6 +1,7 @@
 package pl.edu.pwr.weka.sipprogram.util
 
 import javafx.scene.canvas.Canvas
+import javafx.scene.shape.StrokeLineJoin
 
 /**
  * Project Name: sipprogram
@@ -15,6 +16,7 @@ abstract class CanvasResizable : Canvas() {
         widthProperty().addListener { _, _, _ -> gc.clearRect(0.0, 0.0, width, height); draw() }
         heightProperty().addListener { _, _, _ -> gc.clearRect(0.0, 0.0, width, height); draw() }
         gc.lineWidth = 2.0
+        gc.lineJoin = StrokeLineJoin.ROUND
     }
 
     abstract fun draw()

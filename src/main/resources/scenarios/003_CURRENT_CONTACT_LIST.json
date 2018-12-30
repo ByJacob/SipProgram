@@ -1,0 +1,32 @@
+{
+  "name": "Aktualna lista kontaktów",
+  "description": "Użytkownik chce dostać informację odnośnie aktualnej listy kontaktów użytkownika.\nUżytkownik jest już uwierzytelniony na serwerze i posiada odpowiednie poświadczenie.",
+  "documentationUrl": "https://tools.ietf.org/html/rfc3261#section-8.1.1.8",
+  "endpoints": [
+    {
+      "name": "Telefon",
+      "iconName": "oldPhone.png"
+    },{
+      "name": "Serwer",
+      "iconName": "server.png"
+    }
+  ],
+  "arrows": [
+    {
+      "from": 0,
+      "to": 1,
+      "name": "REGISTER",
+      "title": "REGISTER",
+      "description": "Wysyłana jest wiadomość bez nagłówka Contact, ponieważ użytkownik chce wysyłać zapytanie do serwera o aktualną listę kontaktów.",
+      "example": "REGISTER sips:ss2.biloxi.example.com SIP/2.0\nVia: SIP/2.0/TLS client.biloxi.example.com:5061;branch=z9hG4bKnashds7\nMax-Forwards: 70\nFrom: Bob <sips:bob@biloxi.example.com>;tag=a73kszlfl\nTo: Bob <sips:bob@biloxi.example.com>\nCall-ID: 1j9FpLxk3uxtm8tn@biloxi.example.com\nCSeq: 1 REGISTER\nAuthorization: Digest username=\"bob\", realm=\"atlanta.example.com\",\n nonce=\"df84f1cec4341ae6cbe5ap359a9c8e88\", opaque=\"\",\n uri=\"sips:ss2.biloxi.example.com\",\n response=\"aa7ab4678258377c6f7d4be6087e2f60\"\nContent-Length: 0"
+    },
+    {
+      "from": 1,
+      "to": 0,
+      "name": "200 OK",
+      "title": "200 OK",
+      "description": "Po poprawnym sprawdzeniu poświadczenia serwer SIP zwraca odpowiedź 200 OK do klienta SIP. Odpowiedź zawiera aktualną listę kontaktów użytkownika w nagłówku Contact",
+      "example": "SIP/2.0 200 OK\nVia: SIP/2.0/TLS client.biloxi.example.com:5061;branch=z9hG4bKnashds7\n ;received=192.0.2.201\nFrom: Bob <sips:bob@biloxi.example.com>;tag=a73kszlfl\nTo: Bob <sips:bob@biloxi.example.com>;tag=jqoiweu75\nCall-ID: 1j9FpLxk3uxtm8tn@biloxi.example.com\nCSeq: 1 REGISTER\nContact: <sips:bob@client.biloxi.example.com>;expires=3600\nContact: <mailto:bob@biloxi.example.com>;expires=4294967295\nContent-Length: 0"
+    }
+  ]
+}

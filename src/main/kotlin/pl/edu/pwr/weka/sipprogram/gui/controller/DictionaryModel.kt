@@ -15,7 +15,6 @@ import tornadofx.setValue
 class DictionaryItem(name: String, description: String, urlName: String, url: String,
                      itemType: DictionaryType) {
     constructor(itemType: DictionaryType): this("","","","",itemType)
-    constructor():this("","","","", DictionaryType.OTHER)
 
     val nameProperty = SimpleStringProperty(name)
     var name by nameProperty

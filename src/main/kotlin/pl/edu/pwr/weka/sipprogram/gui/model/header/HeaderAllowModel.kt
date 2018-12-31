@@ -5,9 +5,7 @@ import javafx.collections.FXCollections
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
 
-class HeaderAllow {
-
-}
+class HeaderAllow
 
 class HeaderAllowModel(val headerAllow: HeaderAllow) : ViewModel() {
     constructor() : this(HeaderAllow())

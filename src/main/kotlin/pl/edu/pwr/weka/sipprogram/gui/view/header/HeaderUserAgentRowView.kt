@@ -9,7 +9,7 @@ import tornadofx.*
  * User: Jakub Rosa
  * Date 10.11.2018 16:35
  */
-class HeaderUserAgentRowView() : BaseHeaderView("User-Agent") {
+class HeaderUserAgentRowView : BaseHeaderView("User-Agent") {
     override val controller: HeaderUserAgentController by inject(Scope())
 
     override val root = form {

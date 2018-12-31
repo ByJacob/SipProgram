@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 
-class HeaderContact() {
+class HeaderContact {
     val userProperty = SimpleStringProperty("")
     var user by userProperty
 

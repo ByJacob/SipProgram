@@ -20,7 +20,7 @@ class AnimationCanvasController : Controller() {
 
     init {
         displayItem()
-        model.documentationUrl.value = scenario.documentationUrl
+        model.item.documentationUrl = scenario.documentationUrl
     }
 
     fun controlAnimation(isNext: Boolean) {
@@ -42,13 +42,13 @@ class AnimationCanvasController : Controller() {
 
     private fun displayItem() {
         if (actualCount == 0) {
-            model.title.value = scenario.name
-            model.description.value = scenario.description
-            model.arrowExample.value = ""
+            model.item.title = scenario.name
+            model.item.description = scenario.description
+            model.item.arrowExample = ""
         } else {
-            model.title.value = scenario.arrows[actualCount-1].title
-            model.description.value = scenario.arrows[actualCount-1].description
-            model.arrowExample.value = scenario.arrows[actualCount-1].example
+            model.item.title = scenario.arrows[actualCount-1].title
+            model.item.description = scenario.arrows[actualCount-1].description
+            model.item.arrowExample = scenario.arrows[actualCount-1].example
         }
     }
 

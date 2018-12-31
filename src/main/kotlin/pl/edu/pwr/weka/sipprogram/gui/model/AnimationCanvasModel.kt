@@ -21,9 +21,6 @@ class AnimationCanvas {
     val titleProperty = SimpleStringProperty("")
     var title by titleProperty
 
-    val arrowDescriptionProperty = SimpleStringProperty("")
-    var arrowDescription by arrowDescriptionProperty
-
     val arrowExampleProperty = SimpleStringProperty("")
     var arrowExample by arrowExampleProperty
 
@@ -33,11 +30,10 @@ class AnimationCanvas {
 
 }
 
-class AnimationCanvasModel : ItemViewModel<AnimationCanvas>() {
+class AnimationCanvasModel : ItemViewModel<AnimationCanvas>(AnimationCanvas()) {
     val name = bind(AnimationCanvas::nameProperty, true)
     val description = bind(AnimationCanvas::descriptionProperty, true)
     val title = bind(AnimationCanvas::titleProperty, true)
-    val arrowDescription = bind(AnimationCanvas::arrowDescriptionProperty, true)
     val arrowExample = bind(AnimationCanvas::arrowExampleProperty, true)
     val documentationUrl = bind(AnimationCanvas::documentationUrlProperty, true)
 }

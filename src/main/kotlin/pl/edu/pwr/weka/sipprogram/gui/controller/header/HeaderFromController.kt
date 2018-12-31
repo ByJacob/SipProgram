@@ -8,12 +8,6 @@ import javax.sip.header.Header
 class HeaderFromController: BaseHeaderController() {
     override val model = HeaderFromModel()
 
-    fun initValues(){
-        model.address.value = SipProtocol.ip
-        model.port.value = SipProtocol.port
-
-    }
-
     override fun toSipHeader(): Header {
         return SipProtocol.headerFactory.createFromHeader(
                 SipProtocol.addressFactory.createAddress(

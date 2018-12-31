@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleObjectProperty
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.RequestEnum
 import tornadofx.*
 
-class HeaderCSeq(){
+class HeaderCSeq {
     val numberProperty = SimpleIntegerProperty(0)
     var number by numberProperty
 

@@ -65,6 +65,8 @@ class AnimationCanvasFragment : Fragment() {
         }
         right {
             vbox textContainer@{
+                maxWidth = 400.0
+                prefWidth = maxWidth
                 style {
                     padding = box(10.px)
                 }
@@ -155,7 +157,7 @@ class AnimationCanvasFragment : Fragment() {
     }
 
     class NextArrowEvent(val arrow: AnimationCanvasArrowsView.ArrowProperties) : FXEvent()
-    class ClearArrowEvent() : FXEvent()
+    class ClearArrowEvent : FXEvent()
 
     data class ScenariosProperties(
         val name: String,

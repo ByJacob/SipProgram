@@ -5,9 +5,7 @@ import javafx.collections.FXCollections
 import pl.edu.pwr.weka.sipprogram.sip.headerEnums.SupportedEnum
 import tornadofx.*
 
-class HeaderSupported {
-
-}
+class HeaderSupported
 
 class HeaderSupportedModel(val headerSupported: HeaderSupported) : ViewModel() {
     constructor() : this(HeaderSupported())

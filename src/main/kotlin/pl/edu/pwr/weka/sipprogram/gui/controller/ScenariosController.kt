@@ -16,7 +16,7 @@ class ScenariosController: Controller(){
 
     init {
         val resourceList = getResourceList("/scenarios")
-            .filter { it.takeLast(4).equals("json") }
+            .filter { it.takeLast(4) == "json" }
             .map { this::class.java.getResourceAsStream("/scenarios/$it") }
             .map { Klaxon().parse<AnimationCanvasFragment.ScenariosProperties>(it) }
         resourceList.forEach { scenariosProperties -> scenariosProperties?.let{scenarios.add(it)} }

@@ -1,11 +1,11 @@
 package pl.edu.pwr.weka.sipprogram.gui.view
 
+import com.sun.prism.paint.Color
 import javafx.scene.control.TreeItem
+import javafx.scene.paint.Paint
 import pl.edu.pwr.weka.sipprogram.gui.controller.DictionaryController
 import pl.edu.pwr.weka.sipprogram.gui.controller.DictionaryItem
-import pl.edu.pwr.weka.sipprogram.gui.controller.DictionaryType
 import tornadofx.*
-import java.nio.charset.Charset
 
 /**
  * Project Name: sipprogram
@@ -20,16 +20,17 @@ class DictionaryView : View(FX.messages["dictionary"]) {
         messages = controller.messages
         left {
             val types = controller.dictionaryList
-                    .map { it.itemType }
-                    .distinct().map { DictionaryItem(it) }
-            treeview<DictionaryItem>(TreeItem(DictionaryItem(DictionaryType.ISSUES))) {
+                .filter { it.itemType.isNotEmpty() }
+                .map { it.itemType }
+                .distinct().map { DictionaryItem(it) }
+            treeview<DictionaryItem>(TreeItem(DictionaryItem("Zagadnienia"))) {
                 root.isExpanded = true
                 cellFormat {
-                    text = if (it.name.isEmpty()) messages[it.itemType.toString()]
+                    text = if (it.name.isEmpty()) it.itemType.toString()
                     else it.name
                 }
                 onUserSelect {
-                    if(it.name.isNotEmpty()){
+                    if (it.name.isNotEmpty()) {
                         controller.showSelectedItem(it)
                     }
                 }
@@ -38,8 +39,8 @@ class DictionaryView : View(FX.messages["dictionary"]) {
                         parent == root -> types
                         parent.value.name.isEmpty() ->
                             controller.dictionaryList
-                                    .filter { it.itemType == parent.value.itemType }
-                                    .sortedBy { it.name }
+                                .filter { it.itemType == parent.value.itemType }
+                                .sortedBy { it.name }
                         parent.value.name.isNotEmpty() ->
                             emptyList()
                         else -> null
@@ -59,17 +60,34 @@ class DictionaryView : View(FX.messages["dictionary"]) {
                         fontSize = 25.px
                     }
                 }
-                label {
+                textarea {
                     bind(controller.model.description)
+                    isEditable = false
                     isWrapText = true
                     style {
                         fontSize = 18.px
+                        backgroundColor += Paint.valueOf("#00000000")
+                    }
+                    stylesheet {
+                        Stylesheet.content {
+                            backgroundColor += Paint.valueOf("#00000000")
+                        }
+                        Stylesheet.focused {
+                            backgroundColor += Paint.valueOf("#00000000")
+                        }
                     }
                 }
+//                label {
+//                    bind(controller.model.description)
+//                    isWrapText = true
+//                    style {
+//                        fontSize = 18.px
+//                    }
+//                }
                 textflow {
                     visibleWhen { controller.model.url.isNotBlank() }
                     val test = messages["more_information"]
-                    text(messages["more_information"]){
+                    text(messages["more_information"]) {
                         style {
                             fontSize = 15.px
                         }

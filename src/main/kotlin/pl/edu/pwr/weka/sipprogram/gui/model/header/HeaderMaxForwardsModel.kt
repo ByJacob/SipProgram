@@ -9,7 +9,7 @@ class HeaderMaxForwards {
 
 }
 
-class HeaderMaxForwardsModel(headerMaxForwards: HeaderMaxForwards) : ViewModel() {
+class HeaderMaxForwardsModel(val headerMaxForwards: HeaderMaxForwards) : ViewModel() {
     constructor() : this(HeaderMaxForwards())
 
     val maxForwards = bind(true) { headerMaxForwards.maxForwardsProperty }

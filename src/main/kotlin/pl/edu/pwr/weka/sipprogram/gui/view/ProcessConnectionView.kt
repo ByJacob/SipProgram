@@ -40,36 +40,43 @@ class ProcessConnectionView : View(FX.messages["simulation"]) {
                     }
                 }
                 top {
-                    hbox {
-                        alignment = Pos.CENTER
-                        borderpaneConstraints {
+                    vbox {
+                        label("Ten modół zawiera zbyt wiele błędów, dlatego jest wyłączony. Poniżej jest przedstawiony przykładowy scenariusz symulacji.")
+                        hbox {
                             alignment = Pos.CENTER
-                        }
-                        jfxbutton("Dodaj", JFXButton.ButtonType.RAISED) {
-                            action {
-                                controller.formRequestFragmentList.add(find(Scope()))
-                                fire(OpenFormRequestEvent(controller.formRequestFragmentList.lastIndex))
-                                fire(SelectElementInListEvent(controller.formRequestFragmentList.lastIndex))
+                            borderpaneConstraints {
+                                alignment = Pos.CENTER
                             }
-                        }
-                        jfxbutton("Wyślij ostatni", JFXButton.ButtonType.RAISED) {
-                            action {
-                                controller.startSendLast()
+                            jfxbutton("Dodaj", JFXButton.ButtonType.RAISED) {
+                                action {
+                                    controller.formRequestFragmentList.add(find(Scope()))
+                                    fire(OpenFormRequestEvent(controller.formRequestFragmentList.lastIndex))
+                                    fire(SelectElementInListEvent(controller.formRequestFragmentList.lastIndex))
+                                }
+                                isDisable = true
                             }
-                        }
-                        jfxbutton("Wyślij wszystko", JFXButton.ButtonType.RAISED) {
-                            action {
-                                controller.startSendAll()
+                            jfxbutton("Wyślij ostatni", JFXButton.ButtonType.RAISED) {
+                                action {
+                                    controller.startSendLast()
+                                }
+                                isDisable = true
                             }
-                        }
-                        jfxbutton("Czyść wszystko", JFXButton.ButtonType.RAISED) {
-                            action {
-                                SipProtocol.resetFactory()
-                                controller.formRequestFragmentList.clear()
-                                fire(ClearFormRequestEvent())
+                            jfxbutton("Wyślij wszystko", JFXButton.ButtonType.RAISED) {
+                                action {
+                                    controller.startSendAll()
+                                }
+                                isDisable = true
                             }
+                            jfxbutton("Czyść wszystko", JFXButton.ButtonType.RAISED) {
+                                action {
+                                    SipProtocol.resetFactory()
+                                    controller.formRequestFragmentList.clear()
+                                    fire(ClearFormRequestEvent())
+                                }
+                                isDisable = true
+                            }
+                            paddingAll = 10.0
                         }
-                        paddingAll = 10.0
                     }
                 }
                 paddingAll = 20.0

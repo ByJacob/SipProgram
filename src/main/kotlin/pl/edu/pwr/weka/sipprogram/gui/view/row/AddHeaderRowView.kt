@@ -34,6 +34,7 @@ class AddHeaderRowView : View("AddHeaderRowView") {
                         headersList.remove(selectedHeader.get())
                     }
                 }
+                isDisable = true
             }
         }
     }

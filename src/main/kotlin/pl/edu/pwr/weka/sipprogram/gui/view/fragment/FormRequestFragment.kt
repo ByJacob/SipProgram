@@ -44,6 +44,7 @@ class FormRequestFragment : Fragment("FormRequestFragment") {
                 action {
                     fire(ProcessConnectionController.RemoveFormRequestEvent(this@FormRequestFragment))
                 }
+                isDisable = true
             }
         }
         vbox {

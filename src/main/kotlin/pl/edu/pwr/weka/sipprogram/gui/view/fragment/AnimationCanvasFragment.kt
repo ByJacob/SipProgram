@@ -77,6 +77,7 @@ class AnimationCanvasFragment : Fragment() {
                         fontSize = 2.em
                     }
                     textProperty().bind(controller.model.title)
+                    isWrapText = true
                 }
                 scrollpane {
                     addClass(Styles.scrollBarAnimationDescription)

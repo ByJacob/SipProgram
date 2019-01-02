@@ -1,6 +1,6 @@
 {
   "name": "Poprawna nowa rejestracja",
-  "description": "Bez rejestracji można się komunikować jedynie bezpośrednio do innego użytkownika, ale i w takim przypadku należy znać adres IP użytkownika docelowego. Proces rejestracji usuwa te problemy, i bez przeszkód można się komunikować z innym użytkownikiem.\nREGISTER kojarzy identyfikator użytkownika – AOR (Address of Record) z jedną lub większą ilością lokalizacji. AOR można zarejestrować na wielu urządzeniach. Podczas rejestracji wysyłany jest nagłówek Contact w którym zawarte jest AOR i adres IP.  Nagłówek ten informuje gdzie chcemy otrzymywać żądania.",
+  "description": "Bez rejestracji można się komunikować jedynie bezpośrednio do innego użytkownika, ale i w takim przypadku należy znać adres IP użytkownika docelowego. Proces rejestracji usuwa te problemy i bez przeszkód można się komunikować z innym użytkownikiem.\nREGISTER kojarzy identyfikator użytkownika – AOR (Address of Record) z jedną lub większą ilością lokalizacji. AOR można zarejestrować na wielu urządzeniach. Podczas rejestracji wysyłany jest nagłówek Contact w którym zawarte jest AOR i adres IP.  Nagłówek ten informuje, gdzie chcemy otrzymywać żądania.",
   "documentationUrl": "https://tools.ietf.org/html/rfc3261#section-10.3",
   "endpoints": [
     {
@@ -17,7 +17,7 @@
       "to": 1,
       "name": "REGISTER",
       "title": "REGISTER-1",
-      "description": "Użytkownik wysyła zapytanie REGISTER do rejestratora SIP. Nagłówki From i To powinny zawierać takie samo AOR użytkownika. Użytkownik dodatkowo może określić czas, przez który rejestracja powinna być ważna za pomocą nagłówka Expires. Wartość ta może być później zmodyfikowana przez rejestrator",
+      "description": "Użytkownik wysyła zapytanie REGISTER do rejestratora SIP. Nagłówki From i To powinny zawierać takie samo AOR użytkownika. Użytkownik dodatkowo może określić czas, przez który rejestracja powinna być ważna za pomocą nagłówka Expires. Wartość ta może być później zmodyfikowana przez rejestrator.",
       "example": "REGISTER sips:ss2.biloxi.example.com SIP/2.0\nVia: SIP/2.0/TLS client.biloxi.example.com:5061;branch=z9hG4bKnashds7\nMax-Forwards: 70\nFrom: Bob <sips:bob@biloxi.example.com>;tag=a73kszlfl\nTo: Bob <sips:bob@biloxi.example.com>\nCall-ID: 1j9FpLxk3uxtm8tn@biloxi.example.com\nCSeq: 1 REGISTER\nContact: <sips:bob@client.biloxi.example.com>\nContent-Length: 0"
     },{
       "from": 1,

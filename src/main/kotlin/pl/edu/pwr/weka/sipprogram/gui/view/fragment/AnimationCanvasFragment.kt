@@ -29,6 +29,9 @@ class AnimationCanvasFragment : Fragment() {
                 scrollpane {
                     isFitToWidth = true
                     stackpane {
+                        style {
+                            padding = box(10.px)
+                        }
                         this.prefHeightProperty().onChange {
                             this@scrollpane.vvalue = this@scrollpane.vmax
                         }

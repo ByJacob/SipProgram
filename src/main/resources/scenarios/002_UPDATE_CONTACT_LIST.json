@@ -25,7 +25,7 @@
       "to": 0,
       "name": "200 OK",
       "title": "200 OK",
-      "description": "Po poprawnym sprawdzeniu poświadczenia serwer SIP aktualizuje listę kontaktów uzytkownika i zwraca odpowiedź 200 OK do klienta SIP. Odpowiedź zawiera aktualną listę kontaktów użytkownika w nagłówku Contact",
+      "description": "Po poprawnym sprawdzeniu poświadczenia serwer SIP aktualizuje listę kontaktów użytkownika i zwraca odpowiedź 200 OK do klienta SIP. Odpowiedź zawiera aktualną listę kontaktów użytkownika w nagłówku Contact.",
       "example": "SIP/2.0 200 OK\nVia: SIP/2.0/TLS client.biloxi.example.com:5061;branch=z9hG4bKnashds7\n ;received=192.0.2.201\nFrom: Bob <sips:bob@biloxi.example.com>;tag=a73kszlfl\nTo: Bob <sips:bob@biloxi.example.com>;tag=34095828jh\nCall-ID: 1j9FpLxk3uxtm8tn@biloxi.example.com\nCSeq: 1 REGISTER\nContact: <sips:bob@client.biloxi.example.com>;expires=3600\nContact: <mailto:bob@biloxi.example.com>;expires=4294967295\nContent-Length: 0"
     }
   ]

@@ -41,7 +41,7 @@ class ProcessConnectionView : View(FX.messages["simulation"]) {
                 }
                 top {
                     vbox {
-                        label("Ten modół zawiera zbyt wiele błędów, dlatego jest wyłączony. Poniżej jest przedstawiony przykładowy scenariusz symulacji.")
+                        label("Ten moduł zawiera zbyt wiele błędów, dlatego jest wyłączony. Poniżej jest przedstawiony przykładowy scenariusz symulacji.")
                         hbox {
                             alignment = Pos.CENTER
                             borderpaneConstraints {

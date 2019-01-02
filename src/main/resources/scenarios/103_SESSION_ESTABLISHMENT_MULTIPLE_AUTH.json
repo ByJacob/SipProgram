@@ -1,6 +1,6 @@
 {
   "name": "Wielopoziomowa autoryzacja",
-  "description": "Scenariusz obejmuje poprawne połączenie pomiędzy klientami poprzez 2 serwery proxy. Na obydwu serwerach wymagan jest podwójna autoryzacja. Użytkownik telefonu 1 posiada poprawne dane autoryzacyjne dla serwerów proxy.",
+  "description": "Scenariusz obejmuje poprawne połączenie pomiędzy klientami poprzez 2 serwery proxy. Na obydwu serwerach wymagana jest podwójna autoryzacja. Użytkownik telefonu 1 posiada poprawne dane autoryzacyjne dla serwerów proxy.",
   "documentationUrl": "https://tools.ietf.org/html/rfc3261#section-22.3",
   "endpoints": [
     {
@@ -30,7 +30,7 @@
       "to": 0,
       "name": "407",
       "title": "407 Proxy Authorization Required",
-      "description": "Serwer proxy 1 wymaga autoryzacji i zwraca kod błędu 407 oraz dane niezbędne do autoryzacji",
+      "description": "Serwer proxy 1 wymaga autoryzacji i zwraca kod błędu 407 oraz dane niezbędne do autoryzacji.",
       "example": "SIP/2.0 407 Proxy Authorization Required\nVia: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74b03\n ;received=192.0.2.101\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>;tag=876321\nCall-ID: 2xTb9vxSit55XU7p8@atlanta.example.com\nCSeq: 1 INVITE\nProxy-Authenticate: Digest realm=\"atlanta.example.com\", qop=\"auth\",\n nonce=\"wf84f1cczx41ae6cbeaea9ce88d359\",\n opaque=\"\", stale=FALSE, algorithm=MD5\nContent-Length: 0"
     },{
       "from": 0,
@@ -44,7 +44,7 @@
       "to": 1,
       "name": "INVITE",
       "title": "INVITE",
-      "description": "Ponownie jest wysyłana wiadomość INVITE, dodatkowo są dodane dane autoryzacyjne dla proxy 1",
+      "description": "Ponownie jest wysyłana wiadomość INVITE, dodatkowo są dodane dane autoryzacyjne dla proxy 1.",
       "example": "INVITE sip:bob@biloxi.example.com SIP/2.0\nVia: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74b21\nMax-Forwards: 70\nRoute: <sip:ss1.atlanta.example.com;lr>\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>\nCall-ID: 2xTb9vxSit55XU7p8@atlanta.example.com\nCSeq: 2 INVITE\nContact: <sip:alice@client.atlanta.example.com>\nProxy-Authorization: Digest username=\"alice\",\n realm=\"atlanta.example.com\",\n nonce=\"wf84f1ceczx41ae6cbe5aea9c8e88d359\", opaque=\"\",\n uri=\"sip:bob@biloxi.example.com\",\n response=\"42ce3cef44b22f50c6a6071bc8\"\nContent-Type: application/sdp\nContent-Length: 151\n\nv=0\no=alice 2890844526 2890844526 IN IP4 client.atlanta.example.com\ns=-\nc=IN IP4 192.0.2.101\nt=0 0\nm=audio 49172 RTP/AVP 0\na=rtpmap:0 PCMU/8000"
     },{
       "from": 1,
@@ -58,14 +58,14 @@
       "to": 2,
       "name": "INVITE",
       "title": "INVITE",
-      "description": "Wiadomość INVITE jest przesyłana dalej do proxy 2",
+      "description": "Wiadomość INVITE jest przesyłana dalej do proxy 2.",
       "example": "INVITE sip:bob@biloxi.example.com SIP/2.0\nVia: SIP/2.0/UDP ss1.atlanta.example.com:5060;branch=z9hG4bK230f2.1\nVia: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74b21\n ;received=192.0.2.101\nMax-Forwards: 69\nRecord-Route: <sip:ss1.atlanta.example.com;lr>\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>\nCall-ID: 2xTb9vxSit55XU7p8@atlanta.example.com\nCSeq: 2 INVITE\nContact: <sip:alice@client.atlanta.example.com>\nContent-Type: application/sdp\nContent-Length: 151\n\nv=0\no=alice 2890844526 2890844526 IN IP4 client.atlanta.example.com\ns=-\nc=IN IP4 192.0.2.101\nt=0 0\nm=audio 49172 RTP/AVP 0\na=rtpmap:0 PCMU/8000"
     },{
       "from": 2,
       "to": 1,
       "name": "407",
       "title": "407 Proxy Authorization Required",
-      "description": "Proxy 2 także wymaga autoryzacji i zwraca kod błędu 407 razem z informacjami niezbędnymi do autoryzacji",
+      "description": "Proxy 2 także wymaga autoryzacji i zwraca kod błędu 407 razem z informacjami niezbędnymi do autoryzacji.",
       "example": " SIP/2.0 407 Proxy Authorization Required\nVia: SIP/2.0/UDP ss1.atlanta.example.com:5060;branch=z9hG4bK230f2.1\n ;received=192.0.2.111\nVia: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74b21\n ;received=192.0.2.101\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>;tag=838209\nCall-ID: 2xTb9vxSit55XU7p8@atlanta.example.com\nCSeq: 2 INVITE\nProxy-Authenticate: Digest realm=\"biloxi.example.com\", qop=\"auth\",\n nonce=\"c1e22c41ae6cbe5ae983a9c8e88d359\",\n opaque=\"\", stale=FALSE, algorithm=MD5\nContent-Length: 0"
     },{
       "from": 1,
@@ -93,7 +93,7 @@
       "to": 1,
       "name": "INVITE",
       "title": "INVITE",
-      "description": "Ponownie jest wysyłana wiadomość INVITE z kolejnymi danymi autoryzującymi dla proxy 2",
+      "description": "Ponownie jest wysyłana wiadomość INVITE z kolejnymi danymi autoryzującymi dla proxy 2.",
       "example": "INVITE sip:bob@biloxi.example.com SIP/2.0\nVia: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74bf9\nMax-Forwards: 70\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>\nCall-ID: 2xTb9vxSit55XU7p8@atlanta.example.com\nCSeq: 3 INVITE\nContact: <sip:alice@client.atlanta.example.com>\nProxy-Authorization: Digest username=\"alice\",\n realm=\"atlanta.example.com\",\n nonce=\"wf84f1ceczx41ae6cbe5aea9c8e88d359\", opaque=\"\",\n uri=\"sip:bob@biloxi.example.com\",\n response=\"42ce3cef44b22f50c6a6071bc8\"\nProxy-Authorization: Digest username=\"alice\",\n realm=\"biloxi.example.com\",\n nonce=\"c1e22c41ae6cbe5ae983a9c8e88d359\", opaque=\"\",\n uri=\"sip:bob@biloxi.example.com\", response=\"f44ab22f150c6a56071bce8\"\nContent-Type: application/sdp\nContent-Length: 151\n\nv=0\no=alice 2890844526 2890844526 IN IP4 client.atlanta.example.com\ns=-\nc=IN IP4 192.0.2.101\nt=0 0\nm=audio 49172 RTP/AVP 0\na=rtpmap:0 PCMU/8000"
     },{
       "from": 1,
@@ -149,7 +149,7 @@
       "to": 1,
       "name": "ACK",
       "title": "ACK",
-      "description": "Wysyłana jest wiadomośćACK informująca o poprawnej negocjacji transmisji multimedialnej oraz o poprawnym stworzeniu sesji. Dodatkowo wiadomość posiada wszystkie niezbędne dane do autoryzacji an serwerzxe proxy 1 i proxy 2",
+      "description": "Wysyłana jest wiadomość ACK informująca o poprawnej negocjacji transmisji multimedialnej oraz o poprawnym stworzeniu sesji. Dodatkowo wiadomość posiada wszystkie niezbędne dane do autoryzacji na serwerze proxy 1 i proxy 2.",
       "example": "ACK sip:bob@client.biloxi.example.com SIP/2.0\nVia: SIP/2.0/UDP client.atlanta.example.com:5060;branch=z9hG4bK74b44\nMax-Forwards: 70\nRoute: <sip:ss1.atlanta.example.com;lr>,\n <sip:ss2.biloxi.example.com;lr>\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>;tag=9103874\nCall-ID: 2xTb9vxSit55XU7p8@atlanta.example.com\nCSeq: 3 ACK\nProxy-Authorization: Digest username=\"alice\",\n realm=\"atlanta.example.com\",\n nonce=\"wf84f1ceczx41ae6cbe5aea9c8e88d359\", opaque=\"\",\n uri=\"sip:bob@biloxi.example.com\",\n response=\"42ce3cef44b22f50c6a6071bc8\"\nProxy-Authorization: Digest username=\"alice\",\n realm=\"biloxi.example.com\",\n\tnonce=\"c1e22c41ae6cbe5ae983a9c8e88d359\", opaque=\"\",\n uri=\"sip:bob@biloxi.example.com\", response=\"f44ab22f150c6a56071bce8\"\nContent-Length: 0"
     },{
       "from": 1,

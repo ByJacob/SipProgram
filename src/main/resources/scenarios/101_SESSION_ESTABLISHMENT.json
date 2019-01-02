@@ -1,6 +1,6 @@
 {
   "name": "Poprawne ustanowienie sesji",
-  "description": "Połączenia są ustalane za pomocą metody INVITE razem z protokołem Session Description Protocol. SDP zawiera niezbędne informacje do inicjalizacji mediów strumieniowych. Po wysłaniu wiadomości od odbiorcy jest otrzymywana wiadomość Ringing w celu wskazania że docelowy terminal dzwoni. Wiadomość ta jest wysyłana, aby zapobiec niepotrzebnej retransmisji wiadomości od nadawcy. Osoba docelowa może zaakceptować nasze nasze połączenie poprzez wysłanie wiadomości OK lub odrzucić je z błędem. W każdej chwili można przerwać połączenie wysyłając komunikat CANCEL.\nUżytkownik jest już uwierzytelniony na serwerze i posiada odpowiednie poświadczenie.",
+  "description": "Połączenia są ustalane za pomocą metody INVITE razem z protokołem Session Description Protocol. SDP zawiera niezbędne informacje do inicjalizacji mediów strumieniowych. Po wysłaniu wiadomości od odbiorcy jest otrzymywana wiadomość Ringing w celu wskazania, że docelowy terminal dzwoni. Wiadomość ta jest wysyłana, aby zapobiec niepotrzebnej retransmisji wiadomości od nadawcy. Osoba docelowa może zaakceptować nasze połączenie poprzez wysłanie wiadomości OK lub odrzucić je z błędem. W każdej chwili można przerwać połączenie wysyłając komunikat CANCEL.\nUżytkownik jest już uwierzytelniony na serwerze i posiada odpowiednie poświadczenie.",
   "documentationUrl": "https://tools.ietf.org/html/rfc3261#section-13.2.1",
   "endpoints": [
     {
@@ -17,28 +17,28 @@
       "to": 1,
       "name": "INVITE",
       "title": "INVITE",
-      "description": "Wysyłana jest metoda INVITE wraz z wybieranym numerem. Wiadomość zawiera informacjię, że dodatkowo będą wysyłane parametry multimediów w postaci SDP, oraz jest podana ich długość",
+      "description": "Wysyłana jest metoda INVITE wraz z wybieranym numerem. Wiadomość zawiera informację, że dodatkowo będą wysyłane parametry multimediów w postaci SDP, oraz jest podana ich długość.",
       "example": "INVITE sip:bob@biloxi.example.com SIP/2.0\nVia: SIP/2.0/TCP client.atlanta.example.com:5060;branch=z9hG4bK74bf9\nMax-Forwards: 70\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>\nCall-ID: 3848276298220188511@atlanta.example.com\nCSeq: 1 INVITE\nContact: <sip:alice@client.atlanta.example.com;transport=tcp>\nContent-Type: application/sdp\nContent-Length: 151\n\nv=0\no=alice 2890844526 2890844526 IN IP4 client.atlanta.example.com\ns=-\nc=IN IP4 192.0.2.101\nt=0 0\nm=audio 49172 RTP/AVP 0\na=rtpmap:0 PCMU/8000"
     },{
       "from": 1,
       "to": 0,
       "name": "100 Trying",
       "title": "100 Trying",
-      "description": "Serwer natychmiast odpowiada za pomocą metody Trying, aby wskazać że wiadomość została odebrana i uniknąć ponownych transmisji od klienta.",
+      "description": "Serwer natychmiast odpowiada za pomocą metody Trying, aby wskazać, że wiadomość została odebrana i uniknąć ponownych transmisji od klienta.",
       "example": "SIP/2.0 100 trying\nVia: SIP/2.0/TCP client.atlanta.example.com:5060;branch=z9hG4bK74bf9\n ;received=192.0.2.101\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>;tag=8321234356\nCall-ID: 3848276298220188511@atlanta.example.com\nCSeq: 1 INVITE\nContent-Length: 0"
     },{
       "from": 1,
       "to": 0,
       "name": "180 Ringing",
       "title": "180 Ringing",
-      "description": "Odbiorca wskazuje że jego terminal dzwoni.",
+      "description": "Odbiorca wskazuje, że jego terminal dzwoni.",
       "example": "SIP/2.0 180 Ringing\nVia: SIP/2.0/TCP client.atlanta.example.com:5060;branch=z9hG4bK74bf9\n ;received=192.0.2.101\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>;tag=8321234356\nCall-ID: 3848276298220188511@atlanta.example.com\nCSeq: 1 INVITE\nContact: <sip:bob@client.biloxi.example.com;transport=tcp>\nContent-Length: 0"
     },{
       "from": 1,
       "to": 0,
       "name": "200 OK",
       "title": "200 OK",
-      "description": "Po zaakceptowaniu połączenai wysyłany jest komunikat 200 razem z informacjami odnośnie inicjalizacji multimediów.",
+      "description": "Po zaakceptowaniu połączenia wysyłany jest komunikat 200 razem z informacjami odnośnie inicjalizacji multimediów.",
       "example": "SIP/2.0 200 OK\nVia: SIP/2.0/TCP client.atlanta.example.com:5060;branch=z9hG4bK74bf9\n ;received=192.0.2.101\nFrom: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nTo: Bob <sip:bob@biloxi.example.com>;tag=8321234356\nCall-ID: 3848276298220188511@atlanta.example.com\nCSeq: 1 INVITE\nContact: <sip:bob@client.biloxi.example.com;transport=tcp>\nContent-Type: application/sdp\nContent-Length: 147\n\nv=0\no=bob 2890844527 2890844527 IN IP4 client.biloxi.example.com\ns=-\nc=IN IP4 192.0.2.201\nt=0 0\nm=audio 3456 RTP/AVP 0\na=rtpmap:0 PCMU/8000"
     },{
       "from": 0,
@@ -52,21 +52,21 @@
       "to": 1,
       "name": "Transmisja RTP",
       "title": "Strumień stransmisji RTP",
-      "description": "Tworzone są strumienie transmisji RTP między dwoma użytkownikami. Zawierają one informacje o typie przesyłanych danych, numery sekwencyjne oraz znacnziki czasu. RTP nie gwarantuje jakości usług (QoS).",
+      "description": "Tworzone są strumienie transmisji RTP między dwoma użytkownikami. Zawierają one informacje o typie przesyłanych danych, numery sekwencyjne oraz znaczniki czasu. RTP nie gwarantuje jakości usług (QoS).",
       "example": ""
     },{
       "from": 1,
       "to": 0,
       "name": "BYE",
       "title": "BYE",
-      "description": "Drugi użytkownik wysyłą wiadomość zakończenia połączenia. Licznik CSeq ma wartość 1 a nie 2, ponieważ uzytkownicy utrzymują swoje niezależne liczby CSeq.",
+      "description": "Drugi użytkownik wysyła wiadomość zakończenia połączenia. Licznik CSeq ma wartość 1 a nie 2, ponieważ użytkownicy utrzymują swoje niezależne liczby CSeq.",
       "example": "BYE sip:alice@client.atlanta.example.com SIP/2.0\nVia: SIP/2.0/TCP client.biloxi.example.com:5060;branch=z9hG4bKnashds7\nMax-Forwards: 70\nFrom: Bob <sip:bob@biloxi.example.com>;tag=8321234356\nTo: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nCall-ID: 3848276298220188511@atlanta.example.com\nCSeq: 1 BYE\nContent-Length: 0"
     },{
       "from": 0,
       "to": 1,
       "name": "200 OK",
       "title": "200 OK",
-      "description": "Pierwszy użytkownik wysyła wiadomość że poprawnie zakończył połączenie.",
+      "description": "Pierwszy użytkownik wysyła wiadomość, że poprawnie zakończył połączenie.",
       "example": "SIP/2.0 200 OK\nVia: SIP/2.0/TCP client.biloxi.example.com:5060;branch=z9hG4bKnashds7\n ;received=192.0.2.201\nFrom: Bob <sip:bob@biloxi.example.com>;tag=8321234356\nTo: Alice <sip:alice@atlanta.example.com>;tag=9fxced76sl\nCall-ID: 3848276298220188511@atlanta.example.com\nCSeq: 1 BYE\nContent-Length: 0"
     }
   ]

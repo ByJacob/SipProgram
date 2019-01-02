@@ -25,7 +25,7 @@ class DictionaryController : Controller() {
     }
 
     private fun initDictionary() {
-        val bufferedReader = BufferedReader(InputStreamReader(javaClass.getResourceAsStream("/Dictionary.csv")))
+        val bufferedReader = BufferedReader(InputStreamReader(javaClass.getResourceAsStream("/Dictionary.csv"),"UTF-8"))
         val mappingStrategy = ColumnPositionMappingStrategy<DictionaryItem>()
         mappingStrategy.type = DictionaryItem::class.java
         mappingStrategy.setColumnMapping("itemType","name","urlName","url","description")

@@ -65,7 +65,8 @@ class ScenariosView : View(FX.messages["animation"]) {
         }
         center {
             vbox {
-                replaceChildren(find<AnimationCanvasFragment>("scenario" to controller.scenarios[0]))
+                if (controller.scenarios.size > 0)
+                    replaceChildren(find<AnimationCanvasFragment>("scenario" to controller.scenarios[0]))
                 subscribe<OpenScenario> {
                     replaceChildren(find<AnimationCanvasFragment>("scenario" to it.scenario))
                 }

@@ -5,10 +5,7 @@ import java.net.InetAddress
 import java.net.Socket
 import java.net.SocketException
 import java.util.*
-import javax.sip.ListeningPoint
-import javax.sip.SipFactory
-import javax.sip.SipProvider
-import javax.sip.SipStack
+import javax.sip.*
 import javax.sip.address.AddressFactory
 import javax.sip.header.HeaderFactory
 import javax.sip.message.MessageFactory
@@ -24,7 +21,7 @@ import javax.sip.message.MessageFactory
 object SipProtocol {
     val ip: String = getLocalAddress()
     val protocol = "udp"
-    val port: Int = getLocalPort()
+    var port: Int = getLocalPort()
 
     private val sipFactory: SipFactory = SipFactory.getInstance()
     private lateinit var sipStack: SipStack
@@ -51,7 +48,12 @@ object SipProtocol {
         messageFactory = sipFactory.createMessageFactory()
         headerFactory = sipFactory.createHeaderFactory()
         addressFactory = sipFactory.createAddressFactory()
-        sipProvider = sipStack.createSipProvider(sipStack.createListeningPoint(ip, port, protocol))
+        try {
+            sipProvider = sipStack.createSipProvider(sipStack.createListeningPoint(ip, port, protocol))
+        } catch (e: InvalidArgumentException){
+            port++
+            resetFactory()
+        }
         sipProvider.addSipListener(sipClient)
     }
 

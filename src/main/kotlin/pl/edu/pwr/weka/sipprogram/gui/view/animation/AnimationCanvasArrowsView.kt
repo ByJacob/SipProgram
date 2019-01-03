@@ -125,9 +125,9 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
             tToX -= 5
             gc.clearRect(
                 0.0,
-                y - 4,
+                y - 8,
                 width,
-                arrowHeight + 8
+                arrowHeight + 16
             )
             if (tFromX > tToX)
                 tToX = tFromX
@@ -136,9 +136,9 @@ class AnimationCanvasArrowsView(sixthLayerLineY: Double, val countEndPoints: Int
             tToX += 5
             gc.clearRect(
                 0.0,
-                y - 4,
+                y - 8,
                 width,
-                arrowHeight + 8
+                arrowHeight + 16
             )
             if (tFromX < tToX)
                 tFromX = tToX

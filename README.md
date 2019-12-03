@@ -1,18 +1,18 @@
-### POLITECHNIKA WROCŁAWSKA
+### POLITECHNIKA WROCŁAWSKA  
 ### WYDZIAŁ ELEKTRONIKI
 ---
-KIERUNEK: Telekomunikacja
-SPECJALNOŚĆ: Sieci teleinformatyczne
+KIERUNEK: Telekomunikacja  
+SPECJALNOŚĆ: Sieci teleinformatyczne  
 
 ## PRACA DYPLOMOWA INŻYNIERSKA
 
-**Temat:** Projekt i uruchomienie edukacyjnego programu komputerowego prezentującego zasady funkcjonowania komunikacji w środowisku SIP.
-**Theme:** Project and implementation ofeducational software application for presentation of communication rules in SIP environment.
+**Temat:** Projekt i uruchomienie edukacyjnego programu komputerowego prezentującego zasady funkcjonowania komunikacji w środowisku SIP.  
+**Theme:** Project and implementation ofeducational software application for presentation of communication rules in SIP environment.  
 
-**AUTOR:**
+**AUTOR:**  
 Jakub Rosa
 
-**PROWADZĄCY PRACĘ:**
+**PROWADZĄCY PRACĘ:**  
 dr inż. Janusz Klink, KTT
 
 
